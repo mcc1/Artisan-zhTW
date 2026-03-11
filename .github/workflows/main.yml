@@ -80,6 +80,9 @@ jobs:
       ARTIFACT_PATTERN: Artisan-4.0.3.46-cn-*
       DEV_ASSET_NAME: Artisan-dev.zip
     steps:
+      - name: Checkout Consumer Repo
+        uses: actions/checkout@v4
+
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
