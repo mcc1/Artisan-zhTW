@@ -1,0 +1,15 @@
+diff --git a/Artisan/Artisan/Artisan.csproj b/Artisan/Artisan/Artisan.csproj
+index d9a7f4c..ab1ef31 100644
+--- a/Artisan/Artisan/Artisan.csproj
++++ b/Artisan/Artisan/Artisan.csproj
+@@ -47,6 +47,10 @@
+   <PropertyGroup>
+     <DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
+   </PropertyGroup>
++	
++	<PropertyGroup Condition="'$(OS)' != 'Windows_NT' OR '$(CI)' == 'true'">
++		<DalamudLibPath>$(DALAMUD_HOME)/</DalamudLibPath>
++	</PropertyGroup>
+ 	
+   <ItemGroup>
+     <None Include="..\.editorconfig" Link=".editorconfig" />
