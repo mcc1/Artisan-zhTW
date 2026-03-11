@@ -5,6 +5,15 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
     inputs:
+      workflow_mode:
+        description: Workflow mode
+        required: true
+        default: build
+        type: choice
+        options:
+          - extract
+          - build
+          - sync
       publish_release:
         description: Publish a GitHub Release asset
         required: true
@@ -24,6 +33,7 @@ jobs:
     uses: mcc1/dalamud-mod-localizer/.github/workflows/reusable-build-mod.yml@main
     secrets: inherit
     with:
+      workflow_mode: ${{ github.event_name == 'schedule' && 'build' || inputs.workflow_mode }}
       mod_name: Artisan
       mod_version: "4.0.3.46-cn"
       mod_repo_url: https://github.com/MeowZWR/Artisan.git
@@ -53,13 +63,13 @@ jobs:
         ImGuiScene.dll
         InteropGenerator.Runtime.dll
         FFXIVClientStructs.dll
-      commit_changes: true
+      commit_changes: ${{ github.event_name == 'workflow_dispatch' && inputs.workflow_mode == 'sync' }}
       publish_release: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_release }}
 
   publish-dev:
     name: Publish Fixed Dev Prerelease
     needs: artisan
-    if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.publish_dev_release) }}
+    if: ${{ (github.event_name == 'schedule') || (github.event_name == 'workflow_dispatch' && inputs.publish_dev_release && inputs.workflow_mode != 'extract') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
