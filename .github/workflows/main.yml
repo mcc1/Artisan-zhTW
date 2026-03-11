@@ -1,0 +1,125 @@
+name: Auto Localize Artisan
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      publish_release:
+        description: Publish a GitHub Release asset
+        required: true
+        default: false
+        type: boolean
+      publish_dev_release:
+        description: Update the fixed dev prerelease asset
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  artisan:
+    uses: mcc1/dalamud-mod-localizer/.github/workflows/reusable-build-mod.yml@main
+    secrets: inherit
+    with:
+      mod_name: Artisan
+      mod_version: "4.0.3.46-cn"
+      mod_repo_url: https://github.com/MeowZWR/Artisan.git
+      mod_ref: 8bd94a8d41817ae5263a99309edaf54adfd9d794
+      mod_repo_dir: Artisan
+      localizer_source_subpaths: Artisan
+      localizer_dict_path: zh-TW.json
+      build_project_path: Artisan/Artisan/Artisan.csproj
+      package_build_dir: Artisan/Artisan/bin/Release
+      artifact_basename: Artisan
+      release_tag_prefix: artisan-v
+      package_include_patterns: |
+        *.dll
+        *.json
+        *.pdb
+        *.exe
+        Images/*.png
+        Sounds/*.mp3
+      dalamud_asset_url: https://github.com/yanmucorp/Dalamud/releases/download/25-12-26-01/latest.7z
+      dalamud_assets_json_url: https://raw.githubusercontent.com/yanmucorp/DalamudAssets/master/assetCN.json
+      dalamud_required_files: |
+        Dalamud.dll
+        Dalamud.Common.dll
+        ImGui.NET.dll
+        Lumina.dll
+        Lumina.Excel.dll
+        ImGuiScene.dll
+        InteropGenerator.Runtime.dll
+        FFXIVClientStructs.dll
+      commit_changes: true
+      publish_release: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_release }}
+
+  publish-dev:
+    name: Publish Fixed Dev Prerelease
+    needs: artisan
+    if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.publish_dev_release) }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      DEV_TAG: artisan-dev
+      DEV_TITLE: Artisan-zhTW dev
+      DEV_NOTES: Latest automated dev build for in-game testing install.
+      ARTIFACT_PATTERN: Artisan-4.0.3.46-cn-*
+      DEV_ASSET_NAME: Artisan-dev.zip
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          pattern: ${{ env.ARTIFACT_PATTERN }}
+          path: dist
+          merge-multiple: true
+
+      - name: Prepare Dev Package
+        run: |
+          python - <<'PY'
+          import json
+          import zipfile
+          from pathlib import Path
+
+          zip_candidates = sorted(Path("dist").glob("*.zip"))
+          if not zip_candidates:
+              raise SystemExit("No packaged zip found in dist/")
+          zip_path = zip_candidates[0]
+          temp_dir = Path("dist/unpacked")
+          temp_dir.mkdir(parents=True, exist_ok=True)
+
+          with zipfile.ZipFile(zip_path) as zf:
+              zf.extractall(temp_dir)
+
+          manifest_path = temp_dir / "Artisan.json"
+          manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+          manifest["AssemblyVersion"] = "4.0.3.46-dev"
+          manifest["Changelog"] = (
+              "Dev testing channel. This prerelease tag is continuously updated "
+              "by automation with the latest Artisan-zhTW build."
+          )
+          manifest_path.write_text(
+              json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+
+          dev_zip = Path("dist") / "Artisan-dev.zip"
+          with zipfile.ZipFile(dev_zip, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+              for path in sorted(temp_dir.rglob("*")):
+                  if path.is_file():
+                      zf.write(path, path.relative_to(temp_dir).as_posix())
+          PY
+
+      - name: Create or Update Fixed Dev Prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$DEV_TAG" >/dev/null 2>&1; then
+            gh release upload "$DEV_TAG" "dist/$DEV_ASSET_NAME" --clobber
+            gh release edit "$DEV_TAG" --prerelease --title "$DEV_TITLE" --notes "$DEV_NOTES"
+          else
+            gh release create "$DEV_TAG" "dist/$DEV_ASSET_NAME" --prerelease --title "$DEV_TITLE" --notes "$DEV_NOTES"
+          fi
