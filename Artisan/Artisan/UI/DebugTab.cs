@@ -54,10 +54,12 @@ namespace Artisan.UI
 
         private static string BuildQuestMappingText(QuestManager* qm)
         {
-            var lines = qm->DailyQuests
-                .Where(q => q.QuestId != 0)
-                .Select(q => FormatQuestDebugLine(q.QuestId, q.Flags))
-                .ToList();
+            var lines = new System.Collections.Generic.List<string>();
+            foreach (var quest in qm->DailyQuests)
+            {
+                if (quest.QuestId != 0)
+                    lines.Add(FormatQuestDebugLine(quest.QuestId, quest.Flags));
+            }
 
             if (lines.Count == 0)
                 return "No active daily quests.";
