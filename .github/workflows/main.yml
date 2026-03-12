@@ -97,6 +97,13 @@ jobs:
           import zipfile
           from pathlib import Path
 
+          def to_dev_version(version: str) -> str:
+              parts = version.split(".")
+              if len(parts) != 4 or not all(part.isdigit() for part in parts):
+                  raise SystemExit(f"Unsupported base version format for dev packaging: {version}")
+              parts[-1] = f"{parts[-1]}01"
+              return ".".join(parts)
+
           zip_candidates = sorted(Path("dist").glob("*.zip"))
           if not zip_candidates:
               raise SystemExit("No packaged zip found in dist/")
@@ -109,7 +116,7 @@ jobs:
 
           manifest_path = temp_dir / "Artisan.json"
           manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
-          manifest["AssemblyVersion"] = "4.0.3.4601"
+          manifest["AssemblyVersion"] = to_dev_version(manifest["AssemblyVersion"])
           manifest["Changelog"] = (
               "Dev testing channel. This prerelease tag is continuously updated "
               "by automation with the latest Artisan-zhTW build."
