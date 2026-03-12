@@ -199,7 +199,6 @@ jobs:
       - publish-dev
     if: >-
       ${{
-        secrets.PLUGIN_SOURCE_SYNC_TOKEN != '' &&
         (
           github.event_name == 'schedule' ||
           (
@@ -220,6 +219,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PLUGIN_SOURCE_SYNC_TOKEN }}
         run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "PLUGIN_SOURCE_SYNC_TOKEN is not configured; skipping plugin source sync."
+            exit 0
+          fi
           gh api \
             --method POST \
             -H "Accept: application/vnd.github+json" \
