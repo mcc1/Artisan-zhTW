@@ -39,6 +39,32 @@ namespace Artisan.UI
         public static int DebugValue = 1;
         static int NQMats, HQMats = 0;
 
+        private static string FormatQuestDebugLine(ushort questId, byte flags)
+        {
+            if (questId == 0)
+                return $"Quest ID: 0, Sequence: 0, Name: , Flags: {flags}";
+
+            var digits = questId.ToString().Length;
+            var questRow = LuminaSheets.QuestSheet?
+                .FirstOrDefault(x => Convert.ToInt32(x.Value.Id.ToString().GetLast(digits)) == questId);
+            var rowId = questRow?.Key ?? 0;
+            var fullQuestId = questRow?.Value.Id.ToString() ?? "";
+            return $"Quest ID: {questId}, RowId: {rowId}, Full ID: {fullQuestId}, Sequence: {QuestManager.GetQuestSequence(questId)}, Name: {questId.NameOfQuest()}, Flags: {flags}";
+        }
+
+        private static string BuildQuestMappingText(QuestManager* qm)
+        {
+            var lines = qm->DailyQuests
+                .Where(q => q.QuestId != 0)
+                .Select(q => FormatQuestDebugLine(q.QuestId, q.Flags))
+                .ToList();
+
+            if (lines.Count == 0)
+                return "No active daily quests.";
+
+            return string.Join(Environment.NewLine, lines);
+        }
+
         internal static void Draw()
         {
             try
@@ -245,14 +271,13 @@ namespace Artisan.UI
                 {
                     QuestManager* qm = QuestManager.Instance();
                     ImGui.TextWrapped($"Client Language: {Svc.ClientState.ClientLanguage}");
+                    if (ImGui.Button("複製任務對照"))
+                    {
+                        ImGui.SetClipboardText(BuildQuestMappingText(qm));
+                    }
                     foreach (var quest in qm->DailyQuests)
                     {
-                        var digits = quest.QuestId.ToString().Length;
-                        var questRow = LuminaSheets.QuestSheet?
-                            .FirstOrDefault(x => Convert.ToInt32(x.Value.Id.ToString().GetLast(digits)) == quest.QuestId);
-                        var rowId = questRow?.Key ?? 0;
-                        var fullQuestId = questRow?.Value.Id.ToString() ?? "";
-                        ImGui.TextWrapped($"Quest ID: {quest.QuestId}, RowId: {rowId}, Full ID: {fullQuestId}, Sequence: {QuestManager.GetQuestSequence(quest.QuestId)}, Name: {quest.QuestId.NameOfQuest()}, Flags: {quest.Flags}");
+                        ImGui.TextWrapped(FormatQuestDebugLine(quest.QuestId, quest.Flags));
                     }
 
                 }

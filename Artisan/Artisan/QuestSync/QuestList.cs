@@ -340,6 +340,8 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
+                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
+                        return ""; // TODO(TW): 2295 / BanMog202_02295
                     case Dalamud.Game.ClientLanguage.English:
                         return "free kupo nuts";
                     case Dalamud.Game.ClientLanguage.French:
@@ -355,6 +357,8 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
+                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
+                        return ""; // TODO(TW): 3909
                     case Dalamud.Game.ClientLanguage.French:
                     case Dalamud.Game.ClientLanguage.English:
                         return "lali-ho";
@@ -368,6 +372,8 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
+                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
+                        return ""; // TODO(TW): 4700
                     case Dalamud.Game.ClientLanguage.English:
                         return "dream bigger";
                     case Dalamud.Game.ClientLanguage.Japanese:
@@ -382,6 +388,8 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
+                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
+                        return ""; // TODO(TW): 1497
                     case Dalamud.Game.ClientLanguage.English:
                         return "With the Wind";
                     case Dalamud.Game.ClientLanguage.French:
@@ -396,6 +404,8 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
+                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
+                        return ""; // TODO(TW): 3104
                     case Dalamud.Game.ClientLanguage.English:
                         return "his whiskers";
                     case Dalamud.Game.ClientLanguage.French:
@@ -410,6 +420,8 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
+                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
+                        return ""; // TODO(TW): 1515
                     case Dalamud.Game.ClientLanguage.English:
                         return "Now Fall";
                     case Dalamud.Game.ClientLanguage.French:
@@ -424,6 +436,8 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
+                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
+                        return ""; // TODO(TW): 1507
                     case Dalamud.Game.ClientLanguage.English:
                         return "High as Honor";
                     case Dalamud.Game.ClientLanguage.French:
@@ -438,6 +452,8 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
+                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
+                        return ""; // TODO(TW): 1501
                     case Dalamud.Game.ClientLanguage.English:
                         return "Wings Unbending";
                     case Dalamud.Game.ClientLanguage.French:
@@ -452,6 +468,8 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
+                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
+                        return ""; // TODO(TW): 1568
                     case Dalamud.Game.ClientLanguage.English:
                         return "Amid the Flowers";
                     case Dalamud.Game.ClientLanguage.French:
