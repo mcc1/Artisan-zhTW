@@ -91,18 +91,61 @@ jobs:
           merge-multiple: true
 
       - name: Prepare Dev Package
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           python - <<'PY'
           import json
+          import subprocess
           import zipfile
           from pathlib import Path
 
-          def to_dev_version(version: str) -> str:
+          def first_dev_version(version: str) -> str:
               parts = version.split(".")
               if len(parts) != 4 or not all(part.isdigit() for part in parts):
                   raise SystemExit(f"Unsupported base version format for dev packaging: {version}")
               parts[-1] = f"{parts[-1]}01"
               return ".".join(parts)
+
+          def increment_dev_version(version: str) -> str:
+              parts = version.split(".")
+              if len(parts) != 4 or not all(part.isdigit() for part in parts):
+                  raise SystemExit(f"Unsupported existing dev version format: {version}")
+              parts[-1] = str(int(parts[-1]) + 1)
+              return ".".join(parts)
+
+          def read_existing_dev_version() -> str | None:
+              existing_dir = Path("dist/existing-dev")
+              existing_dir.mkdir(parents=True, exist_ok=True)
+              try:
+                  subprocess.run(
+                      [
+                          "gh",
+                          "release",
+                          "download",
+                          "artisan-dev",
+                          "--pattern",
+                          "Artisan-dev.zip",
+                          "--dir",
+                          str(existing_dir),
+                          "--repo",
+                          "${{ github.repository }}",
+                      ],
+                      check=True,
+                      capture_output=True,
+                      text=True,
+                  )
+              except subprocess.CalledProcessError:
+                  return None
+
+              zip_path = existing_dir / "Artisan-dev.zip"
+              if not zip_path.exists():
+                  return None
+
+              with zipfile.ZipFile(zip_path) as zf:
+                  with zf.open("Artisan.json") as fp:
+                      manifest = json.load(fp)
+              return manifest.get("AssemblyVersion")
 
           zip_candidates = sorted(Path("dist").glob("*.zip"))
           if not zip_candidates:
@@ -116,7 +159,12 @@ jobs:
 
           manifest_path = temp_dir / "Artisan.json"
           manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
-          manifest["AssemblyVersion"] = to_dev_version(manifest["AssemblyVersion"])
+          existing_version = read_existing_dev_version()
+          manifest["AssemblyVersion"] = (
+              increment_dev_version(existing_version)
+              if existing_version
+              else first_dev_version(manifest["AssemblyVersion"])
+          )
           manifest["Changelog"] = (
               "Dev testing channel. This prerelease tag is continuously updated "
               "by automation with the latest Artisan-zhTW build."
