@@ -79,7 +79,7 @@ namespace Artisan.CraftingLists
 
             Svc.Log.Debug($"{baseUrl}{base64}");
             ImGui.SetClipboardText($"{baseUrl}{base64}");
-            Notify.Success("链接已复制到剪贴板");
+            Notify.Success("連結已複製到剪貼簿");
         }
 
         private static void ExtractRecipes(List<ListItem> sublist, Recipe recipe)
@@ -116,7 +116,7 @@ namespace Artisan.CraftingLists
 
             ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(0.2f, 0.1f, 0.2f, 1f));
             ImGui.SetNextWindowSize(new Vector2(1, 1), ImGuiCond.Appearing);
-            if (ImGui.Begin("Teamcraft 导入###TCImport", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.AlwaysAutoResize))
+            if (ImGui.Begin("Teamcraft 匯入###TCImport", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.AlwaysAutoResize))
             {
                 ImGui.Text("清單名稱");
                 ImGui.SameLine();
@@ -160,7 +160,7 @@ namespace Artisan.CraftingLists
                         }
                         else
                         {
-                            Notify.Error("此导入清单没有物品，请检查并重试。");
+                            Notify.Error("此匯入清單沒有物品，請檢查後再試一次。");
                         }
 
                     }

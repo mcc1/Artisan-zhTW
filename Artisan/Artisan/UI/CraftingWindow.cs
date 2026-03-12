@@ -131,7 +131,7 @@ namespace Artisan.UI
             }
 
             if (P.Config.CraftingX && Endurance.Enable)
-                ImGui.Text($"剩余制作：{P.Config.CraftX}");
+                ImGui.Text($"剩餘製作：{P.Config.CraftX}");
 
             if (_estimatedCraftEnd != default)
             {
@@ -163,7 +163,7 @@ namespace Artisan.UI
             if (!P.Config.DisableToasts)
             {
                 QuestToastOptions options = new() { IconId = action.IconOfAction(CharacterInfo.JobID) };
-                Svc.Toasts.ShowQuest($"使用{action.NameOfAction()}", options);
+                Svc.Toasts.ShowQuest($"使用 {action.NameOfAction()}", options);
             }
         }
 
@@ -179,7 +179,7 @@ namespace Artisan.UI
 
         private void OnSolverFailed(Lumina.Excel.Sheets.Recipe recipe, string reason)
         {
-            var text = $"{reason}. Artisan不会继续。";
+            var text = $"{reason}。Artisan 不會繼續。";
             Svc.Toasts.ShowError(text);
             DuoLog.Error(text);
         }

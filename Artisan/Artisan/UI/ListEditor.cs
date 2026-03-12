@@ -893,7 +893,7 @@ internal class ListEditor : Window, IDisposable
 
         ImGui.Checkbox($"僅顯示HQ製作", ref HQSubcraftsOnly);
 
-        ImGuiComponents.HelpMarker($"对于可以制作的素材，這將只显示HQ物品在背包{(RetainerInfo.ATools ? "和雇员" : "")} 的计数。");
+        ImGuiComponents.HelpMarker($"對於可製作的素材，這裡只會顯示 HQ 物品在背包{(RetainerInfo.ATools ? "和雇員" : "")}中的數量。");
 
         ImGui.SameLine();
         ImGui.Checkbox("啟用顏色驗證", ref ColourValidation);
@@ -963,7 +963,7 @@ internal class ListEditor : Window, IDisposable
             ImGui.PopStyleColor();
             ImGui.SameLine();
             ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 7);
-            ImGui.Text($"- 库存中拥有所有所需物品，{(SelectedList.SkipIfEnough && SelectedList.SkipLiteral ? "" : "或因拥有使用此材料的成品而不需要")}");
+            ImGui.Text($"- 背包中已擁有所有所需物品，{(SelectedList.SkipIfEnough && SelectedList.SkipLiteral ? "" : "或因已擁有會使用到此材料的成品而不再需要")}");
 
             if (RetainerInfo.ATools)
             {
@@ -974,7 +974,7 @@ internal class ListEditor : Window, IDisposable
                 ImGui.PopStyleColor();
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 7);
-                ImGui.Text($"- 雇员+背包包含所有必需的物品。");
+                ImGui.Text($"- 雇員 + 背包中包含所有必需物品。");
             }
 
             ImGui.PushStyleColor(ImGuiCol.Button, ImGuiColors.ParsedBlue);
@@ -984,7 +984,7 @@ internal class ListEditor : Window, IDisposable
             ImGui.PopStyleColor();
             ImGui.SameLine();
             ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 7);
-            ImGui.Text($"- 背包+可制作物品包含所有必需的物品。");
+            ImGui.Text($"- 背包 + 可製作物品中包含所有必需物品。");
         }
 
 
@@ -1296,7 +1296,7 @@ internal class ListEditor : Window, IDisposable
         ImGui.SameLine();
         using var style = ImRaii.PushStyle(ImGuiStyleVar.ItemSpacing, new Vector2(0, ImGui.GetStyle().ItemSpacing.Y));
         ImGui.SameLine(137.6f.Scale());
-        ImGui.TextWrapped($"制作力：{craft.CraftProgress} | 耐久度：{craft.CraftDurability} | 品质：{(craft.CraftCollectible ? craft.CraftQualityMin3 : craft.CraftQualityMax)}");
+        ImGui.TextWrapped($"製作力：{craft.CraftProgress} | 耐久度：{craft.CraftDurability} | 品質：{(craft.CraftCollectible ? craft.CraftQualityMin3 : craft.CraftQualityMax)}");
         ImGuiComponents.HelpMarker($"顯示製作要求：完成製作所需的製作力、配方的耐久度，以及達到最高品質等級所需的品質目標（在收藏品的情況下）。您可以使用這些資訊來選擇合適的巨集。");
 
         ImGui.Checkbox($"假設最大起始品質（用於模擬器）", ref hqSim);

@@ -300,10 +300,10 @@ namespace Artisan.UI
             });
             ImGui.Spacing();
 
-            ImGuiEx.TextWrapped($"Artisan具有\"自動製作模式\"該模式僅接受內建解算器給出的建議並且代替你自動操作。" +
-"預設情况下，它會以游戏允许的间隔速度使用制作技能，這比使用游戏内的宏更快。" +
-"使用它並沒有绕过任何形式的游戏限制，但如果你打算制作速度慢一些，你可以設定延迟。" +
-"啟用此选项不影响Artisan預設使用的建議生成过程。");
+            ImGuiEx.TextWrapped($"Artisan 具有\"自動製作模式\"，該模式僅接受內建解算器給出的建議，並代替你自動操作。" +
+"預設情況下，它會以遊戲允許的間隔速度使用製作技能，這比使用遊戲內的巨集更快。" +
+"使用它並沒有繞過任何形式的遊戲限制，但如果你打算讓製作速度慢一些，也可以設定延遲。" +
+"啟用此選項不影響 Artisan 預設使用的建議生成過程。");
 
             var automode = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/AutoMode.png");
 
@@ -316,7 +316,7 @@ namespace Artisan.UI
             }
 
             ImGuiEx.TextWrapped($"若未啟用自動模式，你還可以使用另外兩種模式：「半自動模式」與「全手動模式」。" +
-                                $"\"半自動模式\"將在你開始制作作业時，出现在一個弹出的小視窗中。");
+                                $"\"半自動模式\"將在你開始製作作業時，出現在一個彈出的小視窗中。");
 
             var craftWindowExample = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/ThemeCraftingWindowExample.png");
 
@@ -329,9 +329,9 @@ namespace Artisan.UI
             }
 
             ImGuiEx.TextWrapped($"點擊「執行建議的操作」按鈕後，便會使用插件目前建議的製作技能。" +
-                $"這被认為是半自動的，因為你仍然需要每一步點擊一次操作按鈕，但不必去快速鍵欄上找到相应的技能。" +
-                $"\"全手動模式\"是通过正常按下快速鍵欄上的技能来执行的。" +
-                $"預設情况下，你將得到辅助，如果你將技能放在了快速鍵欄上，Artisan 會对相应技能进行高亮提示（可以在設定中禁用）。");
+                $"這被認為是半自動的，因為你仍然需要每一步點擊一次操作按鈕，但不必去快速鍵欄上找到相應的技能。" +
+                $"\"全手動模式\"是透過正常按下快速鍵欄上的技能來執行的。" +
+                $"預設情況下，你將得到輔助；如果你將技能放在快速鍵欄上，Artisan 也會對相應技能進行高亮提示（可在設定中停用）。");
 
             var outlineExample = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/OutlineExample.png");
 
@@ -685,7 +685,7 @@ namespace Artisan.UI
 
                 ImGui.TextWrapped($"{Skills.PreparatoryTouch.NameOfAction()} - 最大{Buffs.InnerQuiet.NameOfBuff()}層数");
                 ImGui.SameLine();
-                ImGuiComponents.HelpMarker($"將僅使用{Skills.PreparatoryTouch.NameOfAction()}来提高{Buffs.InnerQuiet.NameOfBuff()}的層数。這有助于调整制作力用量。");
+                ImGuiComponents.HelpMarker($"將僅使用 {Skills.PreparatoryTouch.NameOfAction()} 來提高 {Buffs.InnerQuiet.NameOfBuff()} 的層數。這有助於調整製作力用量。");
                 if (ImGui.SliderInt($"###MaxIQStacksPrepTouch", ref P.Config.MaxIQPrepTouch, 0, 10))
                     P.Config.Save();
 
