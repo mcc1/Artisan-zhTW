@@ -5,6 +5,7 @@ using Artisan.CraftingLogic.Solvers;
 using Artisan.GameInterop;
 using Artisan.GameInterop.CSExt;
 using Artisan.IPC;
+using Artisan.QuestSync;
 using Artisan.RawInformation;
 using Artisan.RawInformation.Character;
 using Dalamud.Interface.Utility.Raii;
@@ -63,6 +64,15 @@ namespace Artisan.UI
 
             if (lines.Count == 0)
                 return "No active daily quests.";
+
+            return string.Join(Environment.NewLine, lines);
+        }
+
+        private static string BuildSupportedQuestMappingText()
+        {
+            var lines = QuestList.GetSupportedQuestIds()
+                .Select(id => FormatQuestDebugLine(id, 0))
+                .ToList();
 
             return string.Join(Environment.NewLine, lines);
         }
@@ -276,6 +286,11 @@ namespace Artisan.UI
                     if (ImGui.Button("複製任務對照"))
                     {
                         ImGui.SetClipboardText(BuildQuestMappingText(qm));
+                    }
+                    ImGui.SameLine();
+                    if (ImGui.Button("複製所有支援任務"))
+                    {
+                        ImGui.SetClipboardText(BuildSupportedQuestMappingText());
                     }
                     foreach (var quest in qm->DailyQuests)
                     {

@@ -10,6 +10,11 @@ namespace Artisan.QuestSync
 {
     internal class QuestList
     {
+        public static readonly ushort[] SayQuests =
+        {
+            2295, 3909, 4700, 1497, 3104, 1515, 1507, 1501, 1568,
+        };
+
         public static readonly Dictionary<uint, RecipeConverter> Quests = new()
         {
             //Ixal Quests
@@ -173,6 +178,16 @@ namespace Artisan.QuestSync
             { 9998, new() { NPCDataId = 1017624, Emote = "/psych" } }, //2318
             { 9999, new() { NPCDataId = 1017625, Emote = "/slap" } }, //2318
         };
+
+        public static IEnumerable<ushort> GetSupportedQuestIds()
+        {
+            return Quests.Keys
+                .Select(x => (ushort)x)
+                .Concat(SayQuests)
+                .Concat(EmoteQuests.Keys.Select(x => (ushort)x))
+                .Distinct()
+                .OrderBy(x => x);
+        }
 
         public unsafe static bool HasIngredientsForAny()
         {
