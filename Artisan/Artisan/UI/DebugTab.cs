@@ -247,7 +247,12 @@ namespace Artisan.UI
                     ImGui.TextWrapped($"Client Language: {Svc.ClientState.ClientLanguage}");
                     foreach (var quest in qm->DailyQuests)
                     {
-                        ImGui.TextWrapped($"Quest ID: {quest.QuestId}, Sequence: {QuestManager.GetQuestSequence(quest.QuestId)}, Name: {quest.QuestId.NameOfQuest()}, Flags: {quest.Flags}");
+                        var digits = quest.QuestId.ToString().Length;
+                        var questRow = LuminaSheets.QuestSheet?
+                            .FirstOrDefault(x => Convert.ToInt32(x.Value.Id.ToString().GetLast(digits)) == quest.QuestId);
+                        var rowId = questRow?.Key ?? 0;
+                        var fullQuestId = questRow?.Value.Id.ToString() ?? "";
+                        ImGui.TextWrapped($"Quest ID: {quest.QuestId}, RowId: {rowId}, Full ID: {fullQuestId}, Sequence: {QuestManager.GetQuestSequence(quest.QuestId)}, Name: {quest.QuestId.NameOfQuest()}, Flags: {quest.Flags}");
                     }
 
                 }
