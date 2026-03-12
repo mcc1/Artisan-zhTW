@@ -638,7 +638,10 @@ namespace Artisan.UI
                     P.Config.UseTricksExcellent = useTricksExcellent;
                     P.Config.Save();
                 }
-                ImGuiComponents.HelpMarker($"這两個选项允许你在出现「{LuminaSheets.AddonSheet[227].Text.ToString}」或「{LuminaSheets.AddonSheet[228].Text.ToString}」状态時优先使用「{Skills.TricksOfTrade.NameOfAction()}」。 這將替代{Skills.PreciseTouch.NameOfAction()}和{Skills.IntensiveSynthesis.NameOfAction()}的使用時机。 不管如何設定，在学會前或特定状况下仍將使用{Skills.TricksOfTrade.NameOfAction()}。");
+                ImGuiComponents.HelpMarker(
+                    $"這兩個選項允許你在出現「{LuminaSheets.AddonSheet[227].Text.ToString()}」或「{LuminaSheets.AddonSheet[228].Text.ToString()}」狀態時，優先使用「{Skills.TricksOfTrade.NameOfAction()}」。" +
+                    $"這會取代「{Skills.PreciseTouch.NameOfAction()}」與「{Skills.IntensiveSynthesis.NameOfAction()}」的使用時機。" +
+                    $"無論如何設定，在尚未學會前或特定狀況下，仍會使用「{Skills.TricksOfTrade.NameOfAction()}」。");
                 if (ImGui.Checkbox("使用專家技能", ref useSpecialist))
                 {
                     P.Config.UseSpecialist = useSpecialist;
