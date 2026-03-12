@@ -109,6 +109,8 @@ jobs:
 
           manifest_path = temp_dir / "Artisan.json"
           manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+          manifest["Name"] = "Artisan Dev"
+          manifest["InternalName"] = "ArtisanDev"
           manifest["AssemblyVersion"] = "4.0.3.46-dev"
           manifest["Changelog"] = (
               "Dev testing channel. This prerelease tag is continuously updated "
