@@ -40,18 +40,18 @@ namespace Artisan.UI.Tables
         private static float _numberForSaleWidth = 100;
 
         public readonly IdColumn _idColumn = new() { Label = "ID" };
-        public readonly NameColumn _nameColumn = new() { Label = "物品名称" };
-        public readonly RequiredColumn _requiredColumn = new() { Label = "所需数量" };
-        public readonly InventoryCountColumn _inventoryColumn = new() { Label = "库存" };
-        public readonly RetainerCountColumn _retainerColumn = new() { Label = "雇员" };
-        public readonly RemaingCountColumn _remainingColumn = new() { Label = "剩余需求" };
-        public readonly CraftableColumn _craftableColumn = new() { Label = "来源" };
-        public readonly CraftableCountColumn _craftableCountColumn = new() { Label = "可制作数量" };
-        public readonly CraftItemsColumn _craftItemsColumn = new() { Label = "用于制作" };
-        public readonly ItemCategoryColumn _itemCategoryColumn = new() { Label = "分类" };
-        public readonly GatherItemLocationColumn _gatherItemLocationColumn = new() { Label = "采集区域" };
-        public readonly CheapestServerColumn _cheapestServerColumn = new() { Label = "最佳购买服务器" };
-        public readonly NumberForSaleColumn _numberForSaleColumn = new() { Label = "出售数量（所有服务器）" };
+        public readonly NameColumn _nameColumn = new() { Label = "物品名稱" };
+        public readonly RequiredColumn _requiredColumn = new() { Label = "所需數量" };
+        public readonly InventoryCountColumn _inventoryColumn = new() { Label = "庫存" };
+        public readonly RetainerCountColumn _retainerColumn = new() { Label = "雇員" };
+        public readonly RemaingCountColumn _remainingColumn = new() { Label = "剩餘需求" };
+        public readonly CraftableColumn _craftableColumn = new() { Label = "來源" };
+        public readonly CraftableCountColumn _craftableCountColumn = new() { Label = "可製作數量" };
+        public readonly CraftItemsColumn _craftItemsColumn = new() { Label = "用於製作" };
+        public readonly ItemCategoryColumn _itemCategoryColumn = new() { Label = "分類" };
+        public readonly GatherItemLocationColumn _gatherItemLocationColumn = new() { Label = "採集區域" };
+        public readonly CheapestServerColumn _cheapestServerColumn = new() { Label = "最佳購買伺服器" };
+        public readonly NumberForSaleColumn _numberForSaleColumn = new() { Label = "出售數量（所有伺服器）" };
 
         private static bool GatherBuddy =>
             DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var _, false, true);
@@ -340,7 +340,7 @@ namespace Artisan.UI.Tables
 
             public override string ToName(Ingredient item)
             {
-                if (item.Remaining == 0) return $"无需购买";
+                if (item.Remaining == 0) return "無需購買";
                 if (item.MarketboardData != null && !CheapestListings.ContainsKey(item.Data.RowId))
                 {
                     double totalCost = 0;
@@ -379,11 +379,11 @@ namespace Artisan.UI.Tables
                 {
                     var listing = CheapestListings[item.Data.RowId];
 
-                    return $"{listing.World} - 价格 {listing.Cost.ToString("N0")}, 数量 {listing.Qty}";
+                    return $"{listing.World} - 價格 {listing.Cost.ToString("N0")}，數量 {listing.Qty}";
 
                 }
 
-                return "错误 - 无物品列表（可能是 Universalis 连接问题）";
+                return "錯誤 - 無物品列表（可能是 Universalis 連線問題）";
             }
 
             public override void DrawColumn(Ingredient item, int _)
@@ -468,7 +468,7 @@ namespace Artisan.UI.Tables
             {
                 Flags -= ImGuiTableColumnFlags.NoResize;
                 SetFlags(ItemFilter.GatherZone, ItemFilter.NoGatherZone, ItemFilter.TimedNode, ItemFilter.NonTimedNode);
-                SetNames("采集区域", "无采集区域", "定时节点", "非定时节点");
+                SetNames("採集區域", "無採集區域", "限時採集點", "非限時採集點");
 
             }
             public override float Width

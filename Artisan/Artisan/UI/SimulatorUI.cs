@@ -60,7 +60,7 @@ namespace Artisan.UI
                         string name = val.NameString;
                         bool materiaDiff = gs->Value.Items.ToArray().Any(x => x.Flags.HasFlag(GearsetItemFlag.MateriaDiffers));
 
-                        return $"{name} (ilvl {val.ItemLevel}){(materiaDiff ? " Warning: Detected Materia difference. Please update gearset" : "")}";
+                        return $"{name} (ilvl {val.ItemLevel}){(materiaDiff ? " 警告：偵測到魔晶石配置差異，請更新裝備套裝" : "")}";
                     }
                 }
             }
@@ -164,7 +164,7 @@ namespace Artisan.UI
 
         private static void DrawIntro()
         {
-            ImGuiEx.TextWrapped($"在這個模擬器中，你可以根据配方测试不同的解算器，並分析它们的性能。你可以設定你的HQ素材配比，設定消耗品，甚至使用哪個装备套装。模擬器可以配置為随机化条件或僅使用\"Normal\"「正常」条件，因此实操效果可能會有所不同。");
+            ImGuiEx.TextWrapped("在這個模擬器中，你可以依配方測試不同的解算器，並分析它們的表現。你可以設定 HQ 素材比例、消耗品，甚至指定要使用的裝備套裝。模擬器也可以設為隨機條件，或僅使用「Normal／通常」條件，因此與實際操作的結果可能略有差異。");
         }
 
         private static void DrawSolverMode()
@@ -887,7 +887,7 @@ namespace Artisan.UI
                     ImGuiEx.Text($"套裝");
                     ImGui.SameLine(120f);
                     ImGuiEx.SetNextItemFullWidth();
-                    ImGuiEx.Text($"{name} (ilvl {SimGS?.ItemLevel}){(materiaDiff ? " Warning: Detected Materia difference. Please update gearset" : "")}");
+                    ImGuiEx.Text($"{name} (ilvl {SimGS?.ItemLevel}){(materiaDiff ? " 警告：偵測到魔晶石配置差異，請更新裝備套裝" : "")}");
                     return;
                 }
 
@@ -912,7 +912,7 @@ namespace Artisan.UI
 
                     string name = gs.NameString;
                     bool materiaDiff = gs.Items.ToArray().Any(x => x.Flags.HasFlag(GearsetItemFlag.MateriaDiffers));
-                    var selected = ImGui.Selectable($"{name} (ilvl {gs.ItemLevel}){(materiaDiff ? " Warning: Detected Materia difference. Please update gearset" : "")}##GS{gs.Id}");
+                    var selected = ImGui.Selectable($"{name} (ilvl {gs.ItemLevel}){(materiaDiff ? " 警告：偵測到魔晶石配置差異，請更新裝備套裝" : "")}##GS{gs.Id}");
 
                     if (selected)
                     {
@@ -967,7 +967,7 @@ namespace Artisan.UI
 
                 ImGuiEx.ImGuiLineCentered("StartingQuality", () =>
                 {
-                    ImGuiEx.Text($"起手品质：{startingQuality} / {max} （{hqChance}% HQ 机會, {percentage.ToString("N0")}% 品质）");
+                    ImGuiEx.Text($"起手品質：{startingQuality} / {max}（HQ 機率 {hqChance}%，品質 {percentage.ToString("N0")}%）");
                 });
                 ImGuiEx.ImGuiLineCentered("ExpertInfo", () =>
                 {
