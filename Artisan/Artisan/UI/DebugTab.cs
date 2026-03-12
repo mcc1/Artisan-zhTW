@@ -244,6 +244,7 @@ namespace Artisan.UI
                 if (ImGui.CollapsingHeader("Quests"))
                 {
                     QuestManager* qm = QuestManager.Instance();
+                    ImGui.TextWrapped($"Client Language: {Svc.ClientState.ClientLanguage}");
                     foreach (var quest in qm->DailyQuests)
                     {
                         ImGui.TextWrapped($"Quest ID: {quest.QuestId}, Sequence: {QuestManager.GetQuestSequence(quest.QuestId)}, Name: {quest.QuestId.NameOfQuest()}, Flags: {quest.Flags}");
