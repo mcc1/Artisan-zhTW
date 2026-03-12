@@ -120,6 +120,7 @@ jobs:
               json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
               encoding="utf-8",
           )
+          manifest_path.rename(temp_dir / "ArtisanDev.json")
 
           dev_zip = Path("dist") / "Artisan-dev.zip"
           with zipfile.ZipFile(dev_zip, "w", compression=zipfile.ZIP_DEFLATED) as zf:
