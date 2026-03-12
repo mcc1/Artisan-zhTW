@@ -191,3 +191,39 @@ jobs:
           else
             gh release create "$DEV_TAG" "dist/$DEV_ASSET_NAME" --prerelease --title "$DEV_TITLE" --notes "$DEV_NOTES"
           fi
+
+  sync-plugin-source:
+    name: Sync DalamudPlugins-zhTW
+    needs:
+      - artisan
+      - publish-dev
+    if: >-
+      ${{
+        secrets.PLUGIN_SOURCE_SYNC_TOKEN != '' &&
+        (
+          github.event_name == 'schedule' ||
+          (
+            github.event_name == 'workflow_dispatch' &&
+            inputs.workflow_mode != 'extract' &&
+            (inputs.publish_dev_release || inputs.publish_release)
+          )
+        ) &&
+        needs.artisan.result == 'success' &&
+        (needs.publish-dev.result == 'success' || needs.publish-dev.result == 'skipped')
+      }}
+    runs-on: ubuntu-latest
+    permissions: {}
+    env:
+      TARGET_REPO: mcc1/DalamudPlugins-zhTW
+    steps:
+      - name: Trigger Plugin Source Sync
+        env:
+          GH_TOKEN: ${{ secrets.PLUGIN_SOURCE_SYNC_TOKEN }}
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/$TARGET_REPO/dispatches" \
+            -f event_type='sync-plugin-source' \
+            -F client_payload[source_repo]="$GITHUB_REPOSITORY" \
+            -F client_payload[source_run_id]="$GITHUB_RUN_ID"
