@@ -109,8 +109,6 @@ jobs:
 
           manifest_path = temp_dir / "Artisan.json"
           manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
-          manifest["Name"] = "Artisan Dev"
-          manifest["InternalName"] = "ArtisanDev"
           manifest["AssemblyVersion"] = "4.0.3.46-dev"
           manifest["Changelog"] = (
               "Dev testing channel. This prerelease tag is continuously updated "
@@ -120,7 +118,6 @@ jobs:
               json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
               encoding="utf-8",
           )
-          manifest_path.rename(temp_dir / "ArtisanDev.json")
 
           dev_zip = Path("dist") / "Artisan-dev.zip"
           with zipfile.ZipFile(dev_zip, "w", compression=zipfile.ZIP_DEFLATED) as zf:
