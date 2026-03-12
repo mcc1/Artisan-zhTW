@@ -1,4 +1,4 @@
-﻿using Artisan.QuestSync;
+using Artisan.QuestSync;
 using Artisan.RawInformation;
 using Dalamud.Interface.Components;
 using ECommons;
@@ -44,30 +44,30 @@ namespace Artisan.CraftingLists
 
         public static void Draw()
         {
-            ImGui.TextWrapped($@"此部分主要是基于特定标准来构建清单，而非逐个添加。请为你的清单命名，然后在下方调整你的标准，最后点击“构建清单”，插件会自动生成符合标准的物品清单。如果你不勾选任何复选框，则该类别将会被视为“任意”或“所有”。");
-            ImGuiEx.TextWrapped($"职业缩写对照：CRP - 刻木匠；ARM - 铸甲匠；LTW - 制革匠；ALC - 炼金术士；BSM - 锻铁匠；GSM - 雕金匠；WVR - 裁衣匠；CUL - 烹调师。");
+            ImGui.TextWrapped($@"此區塊主要用於依條件建立清單，而非逐一加入物品。請先為清單命名，再於下方調整條件，最後點擊「建立清單」，插件便會自動產生符合條件的物品清單。如果未勾選任何核取方塊，則該類別會被視為「任意」或「全部」。");
+            ImGuiEx.TextWrapped($"職業縮寫對照：CRP - 刻木匠；ARM - 鑄甲匠；LTW - 製革匠；ALC - 鍊金術士；BSM - 鍛鐵匠；GSM - 雕金匠；WVR - 裁衣匠；CUL - 烹調師。");
 
             ImGui.Separator();
 
-            ImGui.TextWrapped("清单名称");
+            ImGui.TextWrapped("清單名稱");
             ImGui.PushItemWidth(ImGui.GetContentRegionAvail().X / 2);
             ImGui.InputText("###NameInput", ref listName, 300);
 
             ImGui.Columns(6, null, false);
 
-            ImGui.TextWrapped("选择职业");
+            ImGui.TextWrapped("選擇職業");
 
             // 职业缩写到中文名称的映射
             Dictionary<string, string> jobNameMap = new()
             {
                 { "CRP", "刻木" },
-                { "ARM", "铸甲" },
-                { "LTW", "制革" },
-                { "ALC", "炼金" },
-                { "BSM", "锻铁" },
+                { "ARM", "鑄甲" },
+                { "LTW", "製革" },
+                { "ALC", "煉金" },
+                { "BSM", "鍛鐵" },
                 { "GSM", "雕金" },
                 { "WVR", "裁衣" },
-                { "CUL", "烹调" }
+                { "CUL", "烹調" }
             };
 
             if (ImGui.BeginListBox("###JobSelectListBox", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 110)))
@@ -93,7 +93,7 @@ namespace Artisan.CraftingLists
             }
 
 
-            ImGui.TextWrapped($"已制作好的配方");
+            ImGui.TextWrapped($"已製作好的配方");
             if (ImGui.BeginListBox("###AlreadyCraftedRecipes", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 32f.Scale())))
             {
                 ImGui.Columns(2, null, false);
@@ -149,7 +149,7 @@ namespace Artisan.CraftingLists
                 DurY = ImGui.GetCursorPosY();
             }
 
-            ImGui.TextWrapped($"基于等级的配方");
+            ImGui.TextWrapped($"基於等級的配方");
             if (ImGui.BeginListBox("###IsLevelBasedRecipe", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 32f.Scale())))
             {
                 ImGui.Columns(2, null, false);
@@ -169,7 +169,7 @@ namespace Artisan.CraftingLists
             }
 
 
-            ImGui.TextWrapped($"可高品质的配方");
+            ImGui.TextWrapped($"可高品質的配方");
             if (ImGui.BeginListBox("###HQRecipes", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 32f.Scale())))
             {
                 ImGui.Columns(2, null, false);
@@ -189,14 +189,14 @@ namespace Artisan.CraftingLists
             }
 
             ImGui.NextColumn();
-            ImGui.TextWrapped("最低职业等级");
+            ImGui.TextWrapped("最低職業等級");
             ImGui.PushItemWidth(ImGui.GetContentRegionAvail().X);
             ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, ImGui.GetStyle().FramePadding with { Y = 5 });
             ImGui.SliderInt("###SpecialListMinLevel", ref minLevel, 1, 100);
             ImGui.PopStyleVar();
 
             ImGui.PushItemWidth(ImGui.GetContentRegionAvail().X);
-            ImGui.TextWrapped($"来自秘籍中的配方");
+            ImGui.TextWrapped($"來自秘笈中的配方");
             if (ImGui.BeginListBox("###UnlockableRecipe", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 32f.Scale())))
             {
                 ImGui.Columns(2, null, false);
@@ -214,7 +214,7 @@ namespace Artisan.CraftingLists
                 ImGui.EndListBox();
             }
 
-            ImGui.TextWrapped($"仅任务配方");
+            ImGui.TextWrapped($"僅任務配方");
             if (ImGui.BeginListBox("###QuestRecipe", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 32f.Scale())))
             {
                 ImGui.Columns(2, null, false);
@@ -233,8 +233,8 @@ namespace Artisan.CraftingLists
             }
 
 
-            ImGui.TextWrapped($"名称包含");
-            ImGuiComponents.HelpMarker("支持正则表达式。");
+            ImGui.TextWrapped($"名稱包含");
+            ImGuiComponents.HelpMarker("支援正則表達式。");
             ImGuiEx.SetNextItemFullWidth();
             ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, ImGui.GetStyle().FramePadding with { Y = 5 });
             ImGui.InputText($"###NameContains", ref Contains, 100);
@@ -242,13 +242,13 @@ namespace Artisan.CraftingLists
             ImGui.PopStyleVar();
             ImGui.NextColumn();
 
-            ImGui.TextWrapped("最大职业等级");
+            ImGui.TextWrapped("最大職業等級");
             ImGui.PushItemWidth(ImGui.GetContentRegionAvail().X);
             ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, ImGui.GetStyle().FramePadding with { Y = 5});
             ImGui.SliderInt("###SpecialListMaxLevel", ref maxLevel, 1, 100);
             ImGui.PopStyleVar();
             ImGui.PushItemWidth(ImGui.GetContentRegionAvail().X);
-            ImGui.TextWrapped($"高难度配方");
+            ImGui.TextWrapped($"高難度配方");
             if (ImGui.BeginListBox("###ExpertRecipe", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 32f.Scale())))
             {
                 ImGui.Columns(2, null, false);
@@ -266,7 +266,7 @@ namespace Artisan.CraftingLists
                 ImGui.EndListBox();
             }
 
-            ImGui.TextWrapped($"辅助配方");
+            ImGui.TextWrapped($"輔助配方");
             if (ImGui.BeginListBox("###SecondaryRecipes", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 32f.Scale())))
             {
                 ImGui.Columns(2, null, false);
@@ -287,11 +287,11 @@ namespace Artisan.CraftingLists
             ImGui.NextColumn();
 
             ImGui.PushItemWidth(ImGui.GetContentRegionAvail().X);
-            ImGui.TextWrapped($"最小作业精度");
+            ImGui.TextWrapped($"最小作業精度");
             ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, ImGui.GetStyle().FramePadding with { Y = 5 });
             ImGui.SliderInt($"###MinCraftsmanship", ref minCraftsmanship, LuminaSheets.RecipeSheet.Values.Min(x => x.RequiredCraftsmanship), LuminaSheets.RecipeSheet.Values.Max(x => x.RequiredCraftsmanship));
             ImGui.PopStyleVar();
-            ImGui.TextWrapped("制作产出");
+            ImGui.TextWrapped("製作產出");
             if (ImGui.BeginListBox("###Yields", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 120f.Scale())))
             {
                 ImGui.Columns(2, null, false);
@@ -313,7 +313,7 @@ namespace Artisan.CraftingLists
             ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, ImGui.GetStyle().FramePadding with { Y = 5 });
             ImGui.SliderInt($"###MinControl", ref minControl, LuminaSheets.RecipeSheet.Values.Min(x => x.RequiredControl), LuminaSheets.RecipeSheet.Values.Max(x => x.RequiredControl));
             ImGui.PopStyleVar();
-            ImGui.TextWrapped("星标");
+            ImGui.TextWrapped("星標");
             if (ImGui.BeginListBox("###Stars", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 120f.Scale())))
             {
                 foreach (var star in Stars)
@@ -333,7 +333,7 @@ namespace Artisan.CraftingLists
             ImGui.Columns(1);
             //ImGui.SetCursorPosY(DurY + 10);
             ImGui.SetCursorPosX(ImGui.GetCursorPosX() + 4);
-            ImGui.TextWrapped("基础数据");
+            ImGui.TextWrapped("基礎數據");
             ImGui.SetCursorPosX(ImGui.GetCursorPosX() + 4);
 
             var StatNameTranslations = new Dictionary<string, string>
@@ -344,19 +344,19 @@ namespace Artisan.CraftingLists
                 { "Intelligence", "智力" },
                 { "Mind", "精神" },
                 { "Piety", "信仰" },
-                { "GP", "工匠气力" },
-                { "CP", "制作力" },
-                { "Tenacity", "坚韧" },
-                { "Direct Hit Rate", "直击" },
-                { "Critical Hit", "暴击" },
+                { "GP", "工匠氣力" },
+                { "CP", "製作力" },
+                { "Tenacity", "堅韌" },
+                { "Direct Hit Rate", "直擊" },
+                { "Critical Hit", "暴擊" },
                 { "Determination", "信念" },
                 { "Skill Speed", "技能速度" },
-                { "Spell Speed", "咏唱速度" },
+                { "Spell Speed", "詠唱速度" },
                 { "Blind Resistance", "致盲抗性" },
-                { "Increased Spiritbond Gain", "提升精炼效率" },
-                { "Craftsmanship", "作业精度" },
+                { "Increased Spiritbond Gain", "提升精煉效率" },
+                { "Craftsmanship", "作業精度" },
                 { "Control", "加工精度" },
-                { "Gathering", "采集" },
+                { "Gathering", "採集" },
                 { "Perception", "洞察" }
             };
 
@@ -382,26 +382,26 @@ namespace Artisan.CraftingLists
             ImGui.Columns(1);
 
             ImGui.Spacing();
-            if (ImGui.Button("构建清单", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 0)))
+            if (ImGui.Button("建立清單", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 0)))
             {
                 if (listName.IsNullOrWhitespace())
                 {
-                    Notify.Error("请给清单命名");
+                    Notify.Error("請給清單命名");
                     return;
                 }
 
-                Notify.Info("请稍等，您的清单正在创建。");
+                Notify.Info("請稍候，清單正在建立中。");
                 Task.Run(() => CreateList(false)).ContinueWith(result => NotifySuccess(result));
             }
-            if (ImGui.Button("构建清单（含前置配方）", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 0)))
+            if (ImGui.Button("建立清單（含前置配方）", new System.Numerics.Vector2(ImGui.GetContentRegionAvail().X, 0)))
             {
                 if (listName.IsNullOrWhitespace())
                 {
-                    Notify.Error("请给清单命名");
+                    Notify.Error("請給清單命名");
                     return;
                 }
 
-                Notify.Info("正在为您创建清单，请稍候。");
+                Notify.Info("正在建立清單，請稍候。");
                 Task.Run(() => CreateList(true)).ContinueWith(result => NotifySuccess(result));
             }
         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Artisan.CraftingLogic;
 using Artisan.GameInterop;
 using Artisan.RawInformation;
@@ -37,8 +37,8 @@ namespace Artisan.UI
 
         public static void Draw()
         {
-            ImGuiEx.TextWrapped($"本标签页可根据配方条件，快速为配方批量分配解算器与消耗品。");
-            ImGuiEx.TextWrapped($"职业缩写对照：CRP - 刻木匠；ARM - 铸甲匠；LTW - 制革匠；ALC - 炼金术士；BSM - 锻铁匠；GSM - 雕金匠；WVR - 裁衣匠；CUL - 烹调师。");
+            ImGuiEx.TextWrapped($"本標籤頁可根據配方條件，快速為配方批次分配解算器與消耗品。");
+            ImGuiEx.TextWrapped($"職業縮寫對照：CRP - 刻木匠；ARM - 鑄甲匠；LTW - 製革匠；ALC - 鍊金術士；BSM - 鍛鐵匠；GSM - 雕金匠；WVR - 裁衣匠；CUL - 烹調師。");
             ImGui.Separator();
             ImGui.Spacing();
             DrawCriteria();
@@ -47,7 +47,7 @@ namespace Artisan.UI
 
         private static void DrawCriteria()
         {
-            ImGuiEx.TextCentered($"条件");
+            ImGuiEx.TextCentered($"條件");
             DrawAssignOptions();
         }
 
@@ -68,7 +68,7 @@ namespace Artisan.UI
             DummyConfig.DrawSquadronManual();
             DummyConfig.DrawSolver(c, false, false);
 
-            ImGui.Checkbox("分配配方时显示通知", ref Notification);
+            ImGui.Checkbox("分配配方時顯示通知", ref Notification);
             if (ImGui.Button("全部分配", new Vector2(ImGui.GetContentRegionAvail().X, 25f.Scale())))
             {
                 foreach (var rec in filteredRecipes)

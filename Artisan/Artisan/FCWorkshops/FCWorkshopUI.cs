@@ -1,4 +1,4 @@
-﻿using Artisan.CraftingLists;
+using Artisan.CraftingLists;
 using Artisan.IPC;
 using Artisan.RawInformation;
 using Dalamud.Interface.Colors;
@@ -28,12 +28,12 @@ namespace Artisan.FCWorkshops
                 NumberOfLoops = 1;
             }
 
-            ImGui.TextWrapped($"在此选项卡中, 你可以浏览游戏内所有的部队工房制作项目。 " +
-                $"包含3个部分. 第一部分展示项目信息概览。 " +
-                $"第二部分展示每个部件." +
-                $"第三个部分展示每个阶段。" +
-                $"在每个部分，你可以点击“创建制作清单”按钮来创建一个制作清单，" +
-                $"其中包含制作该部分所需要的一切素材的清单。");
+            ImGui.TextWrapped($"在此分頁中，你可以瀏覽遊戲內所有部隊工房的製作項目。" +
+                $"包含3個部分. 第一部分展示項目資訊概覽。 " +
+                $"第二部分展示每個部件." +
+                $"第三個部分展示每個階段。" +
+                $"在每個部分，你可以點擊“建立製作清單”按鈕來建立一個製作清單，" +
+                $"其中包含製作該部分所需要的一切素材的清單。");
 
 
             ImGui.Separator();
@@ -66,7 +66,7 @@ namespace Artisan.FCWorkshops
             {
                 var project = LuminaSheets.WorkshopSequenceSheet[SelectedProject];
 
-                if (ImGui.CollapsingHeader("项目信息"))
+                if (ImGui.CollapsingHeader("項目資訊"))
                 {
                     if (ImGui.BeginTable($"FCWorkshopProjectContainer", 2, ImGuiTableFlags.Resizable))
                     {
@@ -74,15 +74,15 @@ namespace Artisan.FCWorkshops
 
                         ImGui.TableNextColumn();
 
-                        ImGuiEx.Text($"选中的项目：");
+                        ImGuiEx.Text($"選中的項目：");
                         ImGui.TableNextColumn();
                         ImGui.Text($"{project.ResultItem.Value.Name.ToString()}");
                         ImGui.TableNextColumn();
-                        ImGuiEx.Text($"部件编号：");
+                        ImGuiEx.Text($"部件編號：");
                         ImGui.TableNextColumn();
                         ImGui.Text($"{project.CompanyCraftPart.Where(x => x.RowId > 0).Count()}");
                         ImGui.TableNextColumn();
-                        ImGuiEx.Text($"阶段总数：");
+                        ImGuiEx.Text($"階段總數：");
                         ImGui.TableNextColumn();
                         ImGui.Text($"{project.CompanyCraftPart.Where(x => x.RowId > 0).SelectMany(x => x.Value.CompanyCraftProcess).Where(x => x.RowId > 0).Count()}");
 
@@ -91,9 +91,9 @@ namespace Artisan.FCWorkshops
                     if (ImGui.BeginTable($"###FCWorkshopProjectItemsContainer", RetainerInfo.ATools ? 4 : 3, ImGuiTableFlags.Borders))
                     {
                         ImGui.TableSetupColumn($"物品", ImGuiTableColumnFlags.WidthFixed);
-                        ImGui.TableSetupColumn($"所需总数", ImGuiTableColumnFlags.WidthFixed);
-                        ImGui.TableSetupColumn($"包裹库存", ImGuiTableColumnFlags.WidthFixed);
-                        if (RetainerInfo.ATools) ImGui.TableSetupColumn($"雇员", ImGuiTableColumnFlags.WidthFixed);
+                        ImGui.TableSetupColumn($"所需總數", ImGuiTableColumnFlags.WidthFixed);
+                        ImGui.TableSetupColumn($"包裹庫存", ImGuiTableColumnFlags.WidthFixed);
+                        if (RetainerInfo.ATools) ImGui.TableSetupColumn($"雇員", ImGuiTableColumnFlags.WidthFixed);
 
                         ImGui.TableHeadersRow();
 
@@ -144,19 +144,19 @@ namespace Artisan.FCWorkshops
 
                     ImGui.InputInt("Number of Times###LoopProject", ref NumberOfLoops);
 
-                    if (ImGui.Button($"为此项目创建制作清单", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
+                    if (ImGui.Button($"為此項目建立製作清單", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                     {
-                        Notify.Info($"正在创建清单，请等待...");
-                        Task.Run(() => CreateProjectList(project, false)).ContinueWith((_) => Notify.Success("部队工房清单已创建"));
+                        Notify.Info($"正在建立清單，請等待...");
+                        Task.Run(() => CreateProjectList(project, false)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
                     }
 
-                    if (ImGui.Button($"为此项目创建制作清单（包含前置配方）", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
+                    if (ImGui.Button($"為此項目建立製作清單（包含前置配方）", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                     {
-                        Notify.Info($"正在创建清单，请等待...");
-                        Task.Run(() => CreateProjectList(project, true)).ContinueWith((_) => Notify.Success("部队工房清单已创建"));
+                        Notify.Info($"正在建立清單，請等待...");
+                        Task.Run(() => CreateProjectList(project, true)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
                     }
                 }
-                if (ImGui.CollapsingHeader("项目部件"))
+                if (ImGui.CollapsingHeader("項目部件"))
                 {
                     ImGui.Indent();
                     string partNum = "";
@@ -171,11 +171,11 @@ namespace Artisan.FCWorkshops
                                 ImGui.TableSetupColumn($"###Phases{part.RowId}", ImGuiTableColumnFlags.WidthFixed);
                                 ImGui.TableNextColumn();
 
-                                ImGuiEx.Text($"部件类型：");
+                                ImGuiEx.Text($"部件類型：");
                                 ImGui.TableNextColumn();
                                 ImGui.Text($"{part.CompanyCraftType.Value.Name.ToString()}");
                                 ImGui.TableNextColumn();
-                                ImGuiEx.Text($"阶段数量：");
+                                ImGuiEx.Text($"階段數量：");
                                 ImGui.TableNextColumn();
                                 ImGui.Text($"{part.CompanyCraftProcess.Where(x => x.RowId > 0).Count()}");
                                 ImGui.TableNextColumn();
@@ -185,9 +185,9 @@ namespace Artisan.FCWorkshops
                             if (ImGui.BeginTable($"###FCWorkshopPartItemsContainer{part.RowId}", RetainerInfo.ATools ? 4 : 3, ImGuiTableFlags.Borders))
                             {
                                 ImGui.TableSetupColumn($"物品", ImGuiTableColumnFlags.WidthFixed);
-                                ImGui.TableSetupColumn($"所需总数", ImGuiTableColumnFlags.WidthFixed);
-                                ImGui.TableSetupColumn($"包裹库存", ImGuiTableColumnFlags.WidthFixed);
-                                if (RetainerInfo.ATools) ImGui.TableSetupColumn($"雇员", ImGuiTableColumnFlags.WidthFixed);
+                                ImGui.TableSetupColumn($"所需總數", ImGuiTableColumnFlags.WidthFixed);
+                                ImGui.TableSetupColumn($"包裹庫存", ImGuiTableColumnFlags.WidthFixed);
+                                if (RetainerInfo.ATools) ImGui.TableSetupColumn($"雇員", ImGuiTableColumnFlags.WidthFixed);
                                 ImGui.TableHeadersRow();
 
                                 Dictionary<uint, int> TotalItems = new Dictionary<uint, int>();
@@ -235,26 +235,26 @@ namespace Artisan.FCWorkshops
                                 ImGui.EndTable();
                             }
 
-                            ImGui.InputInt("次数###LoopPart", ref NumberOfLoops);
+                            ImGui.InputInt("次數###LoopPart", ref NumberOfLoops);
 
 
-                            if (ImGui.Button($"为此部件创建制作清单", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
+                            if (ImGui.Button($"為此部件建立製作清單", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                             {
-                                Notify.Info($"正在创建清单，请等待...");
-                                Task.Run(() => CreatePartList(part, partNum, false)).ContinueWith((_) => Notify.Success("部队工房清单已创建"));
+                                Notify.Info($"正在建立清單，請等待...");
+                                Task.Run(() => CreatePartList(part, partNum, false)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
                             }
 
-                            if (ImGui.Button($"为此项目创建制作清单（包含前置配方）", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
+                            if (ImGui.Button($"為此項目建立製作清單（包含前置配方）", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                             {
-                                Notify.Info($"正在创建清单，请等待...");
-                                Task.Run(() => CreatePartList(part, partNum, true)).ContinueWith((_) => Notify.Success("部队工房清单已创建"));
+                                Notify.Info($"正在建立清單，請等待...");
+                                Task.Run(() => CreatePartList(part, partNum, true)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
                             }
                         }
                     }
                     ImGui.Unindent();
                 }
 
-                if (ImGui.CollapsingHeader("项目阶段"))
+                if (ImGui.CollapsingHeader("項目階段"))
                 {
                     string pNum = "";
                     foreach (var part in project.CompanyCraftPart.Where(x => x.RowId > 0).Select(x => x.Value))
@@ -264,16 +264,16 @@ namespace Artisan.FCWorkshops
                         pNum = part.CompanyCraftType.Value.Name.ToString();
                         foreach (var phase in part.CompanyCraftProcess.Where(x => x.RowId > 0))
                         {
-                            if (ImGui.CollapsingHeader($"{pNum} - 阶段 {phaseNum}"))
+                            if (ImGui.CollapsingHeader($"{pNum} - 階段 {phaseNum}"))
                             {
                                 if (ImGui.BeginTable($"###FCWorkshopPhaseContainer{phase.RowId}", RetainerInfo.ATools ? 6 : 5, ImGuiTableFlags.Borders))
                                 {
                                     ImGui.TableSetupColumn($"物品", ImGuiTableColumnFlags.WidthFixed);
-                                    ImGui.TableSetupColumn($"每合建需求数量", ImGuiTableColumnFlags.WidthFixed);
-                                    ImGui.TableSetupColumn($"合建次数", ImGuiTableColumnFlags.WidthFixed);
-                                    ImGui.TableSetupColumn($"需求总数量", ImGuiTableColumnFlags.WidthFixed);
-                                    ImGui.TableSetupColumn($"包裹库存", ImGuiTableColumnFlags.WidthFixed);
-                                    if (RetainerInfo.ATools) ImGui.TableSetupColumn($"雇员", ImGuiTableColumnFlags.WidthFixed);
+                                    ImGui.TableSetupColumn($"每合建需求數量", ImGuiTableColumnFlags.WidthFixed);
+                                    ImGui.TableSetupColumn($"合建次數", ImGuiTableColumnFlags.WidthFixed);
+                                    ImGui.TableSetupColumn($"需求總數量", ImGuiTableColumnFlags.WidthFixed);
+                                    ImGui.TableSetupColumn($"包裹庫存", ImGuiTableColumnFlags.WidthFixed);
+                                    if (RetainerInfo.ATools) ImGui.TableSetupColumn($"雇員", ImGuiTableColumnFlags.WidthFixed);
                                     ImGui.TableHeadersRow();
 
                                     foreach (var item in phase.Value.SupplyItems().Where(x => x.SupplyItem.RowId > 0))
@@ -316,18 +316,18 @@ namespace Artisan.FCWorkshops
                                     ImGui.EndTable();
                                 }
 
-                                ImGui.InputInt("次数###LoopPhase", ref NumberOfLoops);
+                                ImGui.InputInt("次數###LoopPhase", ref NumberOfLoops);
 
-                                if (ImGui.Button($"为此阶段创建制作清单###PhaseButton{phaseNum}", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
+                                if (ImGui.Button($"為此階段建立製作清單###PhaseButton{phaseNum}", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                                 {
-                                    Notify.Info($"正在创建清单，请等待...");
-                                    Task.Run(() => CreatePhaseList(phase.Value!, pNum, phaseNum, false)).ContinueWith((_) => Notify.Success("部队工房清单已创建"));
+                                    Notify.Info($"正在建立清單，請等待...");
+                                    Task.Run(() => CreatePhaseList(phase.Value!, pNum, phaseNum, false)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
                                 }
 
-                                if (ImGui.Button($"为此阶段创建制作清单（包含前置配方）###PhaseButtonPC{phaseNum}", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
+                                if (ImGui.Button($"為此階段建立製作清單（包含前置配方）###PhaseButtonPC{phaseNum}", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                                 {
-                                    Notify.Info($"正在创建清单，请等待...");
-                                    Task.Run(() => CreatePhaseList(phase.Value!, pNum, phaseNum, true)).ContinueWith((_) => Notify.Success("部队工房清单已创建"));
+                                    Notify.Info($"正在建立清單，請等待...");
+                                    Task.Run(() => CreatePhaseList(phase.Value!, pNum, phaseNum, true)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
                                 }
 
                             }

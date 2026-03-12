@@ -1,4 +1,4 @@
-﻿using Artisan.Autocraft;
+using Artisan.Autocraft;
 using Artisan.CraftingLists;
 using Artisan.CraftingLogic;
 using Artisan.CraftingLogic.Solvers;
@@ -134,7 +134,7 @@ namespace Artisan.UI
                 }
                 if (ImGui.CollapsingHeader("Recipe Configs"))
                 {
-                    if (ImGui.Button("Clear (Hold Ctrl)") && ImGui.GetIO().KeyCtrl)
+                    if (ImGui.Button("清除（按住 Ctrl）") && ImGui.GetIO().KeyCtrl)
                     {
                         P.Config.RecipeConfigs.Clear();
                         P.Config.Save();
@@ -254,11 +254,11 @@ namespace Artisan.UI
                 if (ImGui.CollapsingHeader("IPC"))
                 {
                     ImGui.Text($"AutoRetainer: {AutoRetainerIPC.IsEnabled()}");
-                    if (ImGui.Button("Suppress"))
+                    if (ImGui.Button("抑制"))
                     {
                         AutoRetainerIPC.Suppress();
                     }
-                    if (ImGui.Button("Unsuppress"))
+                    if (ImGui.Button("取消抑制"))
                     {
                         AutoRetainerIPC.Unsuppress();
                     }

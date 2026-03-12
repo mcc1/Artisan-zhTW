@@ -1,4 +1,4 @@
-﻿using Artisan.RawInformation.Character;
+using Artisan.RawInformation.Character;
 using ECommons;
 using ECommons.DalamudServices;
 using Lumina.Excel.Sheets;

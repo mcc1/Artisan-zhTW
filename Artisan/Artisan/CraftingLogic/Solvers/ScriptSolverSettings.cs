@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System;
 using ImGuiNET;
 using Dalamud.Interface.Utility.Raii;
@@ -62,7 +62,7 @@ public class ScriptSolverSettings
 
     public bool Draw()
     {
-        ImGui.TextWrapped($"这是一个非常进阶的功能，面向希望使用C#创建自己的动态解算器的用户。请访问GitHub源代码并查看Demoscript文件夹以获取示例。对于如何学习C#来做到这一点，我们不会提供任何支持。");
+        ImGui.TextWrapped($"這是一個非常進階的功能，面向希望使用 C# 建立自己的動態解算器的用戶。請前往 GitHub 原始碼頁面並查看 Demoscript 資料夾以取得範例。對於如何學習 C# 來做到這一點，我們不會提供任何支援。");
         ImGui.Separator();
         Script? toDel = null;
         foreach (var s in Scripts)
@@ -85,15 +85,15 @@ public class ScriptSolverSettings
             }
 
             ImGui.SameLine();
-            if (ImGui.Button("删除"))
+            if (ImGui.Button("刪除"))
                 toDel = s;
             ImGui.SameLine();
             ImGui.TextUnformatted($"[{s.ID}] {s.SourcePath}");
         }
 
-        ImGui.InputText("新脚本路径", ref _newPath, 256);
+        ImGui.InputText("新腳本路徑", ref _newPath, 256);
         ImGui.SameLine();
-        if (ImGui.Button("添加") && _newPath.Length > 0 && !Scripts.Any(s => s.SourcePath == _newPath))
+        if (ImGui.Button("加入") && _newPath.Length > 0 && !Scripts.Any(s => s.SourcePath == _newPath))
         {
             AddNewScript(new(_newPath));
             _newPath = "";
@@ -102,7 +102,7 @@ public class ScriptSolverSettings
 
         if (toDel != null)
         {
-            toDel.UpdateCompilation(CompilationState.Deleted, "正在删除", null);
+            toDel.UpdateCompilation(CompilationState.Deleted, "正在刪除", null);
             Scripts.Remove(toDel);
             return true;
         }

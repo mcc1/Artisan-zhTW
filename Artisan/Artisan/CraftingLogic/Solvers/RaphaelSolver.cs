@@ -1,4 +1,4 @@
-﻿using Artisan.GameInterop;
+using Artisan.GameInterop;
 using Artisan.RawInformation;
 using Artisan.UI;
 using Dalamud.Interface.Colors;
@@ -55,7 +55,7 @@ namespace Artisan.CraftingLogic.Solvers
             {
                 P.Config.RaphaelSolverCacheV3.TryRemove(key, out _);
 
-                Svc.Log.Information("启动 Raphael 进程");
+                Svc.Log.Information("啟動 Raphael 程序");
 
                 var manipulation = craft.UnlockedManipulation ? "--manipulation" : "";
                 var itemText = $"--recipe-id {craft.RecipeId}";
@@ -289,14 +289,14 @@ namespace Artisan.CraftingLogic.Solvers
                     if (liveStats && craft.StatCraftsmanship != curStats.Craftsmanship && solverIsRaph)
                     {
                         var craftsmanshipError = curStats.Craftsmanship - craft.StatCraftsmanship > 0 ? $"(超出 {curStats.Craftsmanship - craft.StatCraftsmanship}) " : "";
-                        ImGuiEx.Text(ImGuiColors.DalamudRed, $"您当前的制作力 {craftsmanshipError}与生成的结果不匹配。\n由于可能提前完成，此求解器在匹配之前不会被使用。\n(您可能需要应用正确的增益效果)");
+                        ImGuiEx.Text(ImGuiColors.DalamudRed, $"您目前的製作力 {craftsmanshipError}與產生的結果不符。\n由於可能提前完成，此求解器在匹配之前不會被使用。\n(您可能需要套用正確的增益效果)");
                     }
 
                     if (!solverIsRaph)
                     {
                         if (liveStats)
                         {
-                            ImGuiEx.TextCentered($"已生成 Raphael 解决方案。(点击切换)");
+                            ImGuiEx.TextCentered($"已產生 Raphael 解決方案。（點擊切換查看）");
                             if (ImGui.IsItemClicked())
                             {
                                 config.SolverType = opt?.Def.GetType().FullName!;
@@ -306,7 +306,7 @@ namespace Artisan.CraftingLogic.Solvers
                         }
                         else
                         {
-                            ImGuiEx.TextCentered($"已生成 Raphael 解决方案。");
+                            ImGuiEx.TextCentered($"已產生 Raphael 解決方案。");
                         }
                     }
                 }
@@ -327,13 +327,13 @@ namespace Artisan.CraftingLogic.Solvers
                     ImGui.BeginDisabled();
 
                 if (P.Config.RaphaelSolverConfig.AllowEnsureReliability)
-                    raphChanges |= ImGui.Checkbox($"确保可靠性##{key}Reliability", ref TempConfigs[key].EnsureReliability);
+                    raphChanges |= ImGui.Checkbox($"確保可靠性##{key}Reliability", ref TempConfigs[key].EnsureReliability);
                 if (P.Config.RaphaelSolverConfig.AllowBackloadProgress)
-                    raphChanges |= ImGui.Checkbox($"后置进度##{key}Progress", ref TempConfigs[key].BackloadProgress);
+                    raphChanges |= ImGui.Checkbox($"後置進度##{key}Progress", ref TempConfigs[key].BackloadProgress);
                 if (P.Config.RaphaelSolverConfig.ShowSpecialistSettings && craft.Specialist)
-                    raphChanges |= ImGui.Checkbox($"允许使用专心致志##{key}HS", ref TempConfigs[key].HeartAndSoul);
+                    raphChanges |= ImGui.Checkbox($"允許使用專心致志##{key}HS", ref TempConfigs[key].HeartAndSoul);
                 if (P.Config.RaphaelSolverConfig.ShowSpecialistSettings && craft.Specialist)
-                    raphChanges |= ImGui.Checkbox($"允许使用快速改革##{key}QI", ref TempConfigs[key].QuickInno);
+                    raphChanges |= ImGui.Checkbox($"允許使用快速改革##{key}QI", ref TempConfigs[key].QuickInno);
 
                 changed |= raphChanges;
 
@@ -342,14 +342,14 @@ namespace Artisan.CraftingLogic.Solvers
 
                 if (!inProgress)
                 {
-                    if (ImGui.Button("构建 Raphael 解决方案", new Vector2(ImGui.GetContentRegionAvail().X, 25f.Scale())))
+                    if (ImGui.Button("建立 Raphael 解決方案", new Vector2(ImGui.GetContentRegionAvail().X, 25f.Scale())))
                     {
                         Build(craft, TempConfigs[key]);
                     }
                 }
                 else
                 {
-                    if (ImGui.Button("取消 Raphael 生成", new Vector2(ImGui.GetContentRegionAvail().X, 25f.Scale())))
+                    if (ImGui.Button("取消 Raphael 產生", new Vector2(ImGui.GetContentRegionAvail().X, 25f.Scale())))
                     {
                         Tasks.TryRemove(key, out var task);
                         task.Item1.Cancel();
@@ -359,13 +359,13 @@ namespace Artisan.CraftingLogic.Solvers
                 if (TempConfigs[key].EnsureReliability && ImGui.IsItemHovered())
                 {
                     ImGui.BeginTooltip();
-                    ImGui.Text("已启用确保质量，由于可能造成的问题，启用后不提供任何支持。");
+                    ImGui.Text("已啟用確保品質，由於可能造成的問題，啟用後不提供任何支援。");
                     ImGui.EndTooltip();
                 }
 
                 if (TempConfigs[key].HeartAndSoul || TempConfigs[key].QuickInno)
                 {
-                    ImGui.Text("已启用专家技能，这会显著降低求解器速度。");
+                    ImGui.Text("已啟用專家技能，這會顯著降低求解器速度。");
                 }
 
                 if (inProgress)
@@ -396,41 +396,41 @@ namespace Artisan.CraftingLogic.Solvers
             bool changed = false;
 
             ImGui.Indent();
-            ImGui.TextWrapped($"Raphael 设置会改变性能和系统内存消耗。如果您内存较少，请尽量不要更改设置，建议至少保留 2GB 可用内存");
+            ImGui.TextWrapped($"Raphael 設定會影響效能與系統記憶體耗用。若可用記憶體較少，請盡量不要更動設定，建議至少保留 2GB 可用記憶體。");
 
-            if (ImGui.SliderInt("最大线程数", ref MaximumThreads, 0, Environment.ProcessorCount))
+            if (ImGui.SliderInt("最大執行緒數", ref MaximumThreads, 0, Environment.ProcessorCount))
             {
                 P.Config.Save();
             }
-            ImGuiEx.TextWrapped("默认使用所有可用资源，但在低端机器上您可能需要使用更少的 CPU 以牺牲速度为代价。(0 = 全部)");
+            ImGuiEx.TextWrapped("預設會使用所有可用資源，但在較低階的機器上，你可能需要減少 CPU 使用量來換取較低的運算速度。（0 = 全部）");
 
-            changed |= ImGui.Checkbox("在宏生成中确保 100% 可靠性", ref AllowEnsureReliability);
+            changed |= ImGui.Checkbox("在巨集生成中確保 100% 可靠性", ref AllowEnsureReliability);
             ImGui.PushTextWrapPos(0);
-            ImGui.TextColored(new System.Numerics.Vector4(255, 0, 0, 1), "确保可靠性可能并不总是有效，且非常消耗 CPU 和内存，建议至少保留 16GB+ 可用内存。启用此选项后将不提供任何支持");
+            ImGui.TextColored(new System.Numerics.Vector4(255, 0, 0, 1), "確保可靠性不一定總是有效，且非常耗用 CPU 和記憶體，建議至少保留 16GB 以上的可用記憶體。啟用此選項後將不提供任何支援");
             ImGui.PopTextWrapPos();
-            changed |= ImGui.Checkbox("在宏生成中允许后置进度", ref AllowBackloadProgress);
-            changed |= ImGui.Checkbox("在可用时显示专家选项", ref ShowSpecialistSettings);
-            changed |= ImGui.Checkbox($"如果尚未创建有效解决方案，则自动生成解决方案。", ref AutoGenerate);
+            changed |= ImGui.Checkbox("在巨集生成中允許後置進度", ref AllowBackloadProgress);
+            changed |= ImGui.Checkbox("在可用時顯示專家選項", ref ShowSpecialistSettings);
+            changed |= ImGui.Checkbox($"若尚未建立有效解決方案，則自動產生解決方案。", ref AutoGenerate);
 
             if (AutoGenerate)
             {
                 ImGui.Indent();
-                changed |= ImGui.Checkbox($"在专家配方上生成", ref GenerateOnExperts);
+                changed |= ImGui.Checkbox($"在專家配方上生成", ref GenerateOnExperts);
                 ImGui.Unindent();
             }
 
-            changed |= ImGui.Checkbox($"一旦创建解决方案，自动切换到 Raphael 求解器。", ref AutoSwitch);
+            changed |= ImGui.Checkbox($"一旦建立解決方案，自動切換到 Raphael 求解器。", ref AutoSwitch);
 
             if (AutoSwitch)
             {
                 ImGui.Indent();
-                changed |= ImGui.Checkbox($"应用到所有有效制作", ref AutoSwitchOnAll);
+                changed |= ImGui.Checkbox($"應用到所有有效製作", ref AutoSwitchOnAll);
                 ImGui.Unindent();
             }
 
-            changed |= ImGui.SliderInt("解决方案生成超时", ref TimeOutMins, 1, 15);
+            changed |= ImGui.SliderInt("解決方案生成超時", ref TimeOutMins, 1, 15);
 
-            ImGuiComponents.HelpMarker($"如果解决方案生成时间超过此分钟数，将取消生成任务。");
+            ImGuiComponents.HelpMarker($"若解決方案產生時間超過此分鐘數，將取消產生任務。");
 
             if (ImGui.Button($"清除 raphael 宏缓存 (当前存储 {P.Config.RaphaelSolverCacheV3.Count} 个)"))
             {

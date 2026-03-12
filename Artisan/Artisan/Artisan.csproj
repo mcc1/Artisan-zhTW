@@ -48,6 +48,40 @@
   <PropertyGroup>
     <DalamudLibPath>$(appdata)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
   </PropertyGroup>
+
+	<PropertyGroup Condition="'$(OS)' != 'Windows_NT' OR '$(CI)' == 'true'">
+		<DalamudLibPath>$(DALAMUD_HOME)/</DalamudLibPath>
+	</PropertyGroup>
+	
+	<ItemGroup Condition="'$(OS)' != 'Windows_NT' OR '$(CI)' == 'true'">
+		<Reference Update="Newtonsoft.Json">
+			<HintPath>$(DALAMUD_HOME)/Newtonsoft.Json.dll</HintPath>
+		</Reference>
+		<Reference Update="Dalamud">
+			<HintPath>$(DALAMUD_HOME)/Dalamud.dll</HintPath>
+		</Reference>
+		<Reference Update="FFXIVClientStructs">
+			<HintPath>$(DALAMUD_HOME)/FFXIVClientStructs.dll</HintPath>
+		</Reference>
+		<Reference Update="ImGui.NET">
+			<HintPath>$(DALAMUD_HOME)/ImGui.NET.dll</HintPath>
+		</Reference>
+		<Reference Update="ImGuiScene">
+			<HintPath>$(DALAMUD_HOME)/ImGuiScene.dll</HintPath>
+		</Reference>
+		<Reference Update="Lumina">
+			<HintPath>$(DALAMUD_HOME)/Lumina.dll</HintPath>
+		</Reference>
+		<Reference Update="Lumina.Excel">
+			<HintPath>$(DALAMUD_HOME)/Lumina.Excel.dll</HintPath>
+		</Reference>
+		<Reference Update="Dalamud.Common">
+			<HintPath>$(DALAMUD_HOME)/Dalamud.Common.dll</HintPath>
+		</Reference>
+		<Reference Update="InteropGenerator.Runtime">
+			<HintPath>$(DALAMUD_HOME)/InteropGenerator.Runtime.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 	
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />

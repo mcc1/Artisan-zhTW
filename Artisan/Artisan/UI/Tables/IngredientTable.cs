@@ -1,4 +1,4 @@
-﻿using Artisan.CraftingLists;
+using Artisan.CraftingLists;
 using Artisan.IPC;
 using Artisan.RawInformation;
 using Dalamud.Interface.Colors;
@@ -183,7 +183,7 @@ namespace Artisan.UI.Tables
                 if (selected)
                 {
                     ImGui.SetClipboardText(item.Data.Name.ToString());
-                    Notify.Success("名称已复制到剪贴板");
+                    Notify.Success("名稱已複製到剪貼簿");
                 }
 
                 if (ImGui.IsItemHovered())
@@ -197,7 +197,7 @@ namespace Artisan.UI.Tables
                         sb.Append($"{usedin.NameOfRecipe()} - {amountUsed}\r\n");
                     }
                     ImGui.BeginTooltip();
-                    ImGui.Text($"用于：\r\n{sb}");
+                    ImGui.Text($"用於：\r\n{sb}");
                     ImGui.EndTooltip();
                 }
             }
@@ -397,7 +397,7 @@ namespace Artisan.UI.Tables
                         if (ImGui.IsItemHovered())
                         {
                             ImGui.BeginTooltip();
-                            ImGui.Text($"点击前往 {server}.");
+                            ImGui.Text($"點擊前往 {server}.");
                             ImGui.EndTooltip();
                         }
 
@@ -411,12 +411,12 @@ namespace Artisan.UI.Tables
                 {
                     if (item.Remaining == 0)
                     {
-                        ImGui.Text($"无需购买");
+                        ImGui.Text($"無需購買");
                         return;
                     }
 
                     using var smallBtnStyle = ImRaii.PushStyle(ImGuiStyleVar.FramePadding, new Vector2(ImGui.GetStyle().FramePadding.X, 0));
-                    if (ImGui.Button($"获取价格"))
+                    if (ImGui.Button($"取得價格"))
                     {
                         P.UniversalsisClient.PlayerWorld = Svc.ClientState.LocalPlayer?.CurrentWorld.RowId;
                         if (P.Config.LimitUnversalisToDC)
@@ -848,7 +848,7 @@ namespace Artisan.UI.Tables
             if (item.Data.RowId == 0)
                 return;
 
-            if (!ImGui.Selectable("Search for Item"))
+            if (!ImGui.Selectable("搜尋物品"))
                 return;
 
             try
@@ -869,7 +869,7 @@ namespace Artisan.UI.Tables
 
             if (GatherBuddy)
             {
-                if (!ImGui.Selectable("Gather Item"))
+                if (!ImGui.Selectable("採集物品"))
                     return;
 
                 try
@@ -886,7 +886,7 @@ namespace Artisan.UI.Tables
             }
             else
             {
-                ImGui.TextDisabled("Gather Item (Please install Gatherbuddy)");
+                ImGui.TextDisabled("採集物品（請安裝 Gatherbuddy）");
             }
         }
     }

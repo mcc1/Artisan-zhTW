@@ -1,4 +1,4 @@
-﻿using Artisan.CraftingLogic.CraftData;
+using Artisan.CraftingLogic.CraftData;
 using Artisan.RawInformation;
 using Artisan.RawInformation.Character;
 using Dalamud.Interface.Components;
@@ -52,11 +52,11 @@ public class ExpertSolverSettings
 
     public bool Draw()
     {
-        ImGui.TextWrapped($"专家配方解算器并不是标准解算器的替代品。它仅用于专家配方。");
-        ImGui.TextWrapped($"该解算器仅适用于制作日志中标记为专家配方的食谱。");
+        ImGui.TextWrapped($"專家配方解算器並不是標準解算器的替代品。它僅用於專家配方。");
+        ImGui.TextWrapped($"該解算器僅適用於製作日誌中標記為專家配方的食譜。");
         bool changed = false;
         ImGui.Indent();
-        if (ImGui.CollapsingHeader("起手设置"))
+        if (ImGui.CollapsingHeader("起手設定"))
         {
             changed |= ImGui.Checkbox($"使用 [{Skills.Reflect.NameOfAction()}] 代替 [{Skills.MuscleMemory.NameOfAction()}] 作为起手", ref UseReflectOpener);
             changed |= ImGui.Checkbox($"如果在使用 [{Skills.MuscleMemory.NameOfAction()}] 后处于 [{Condition.Good.ToLocalizedString()}] {ConditionString}，使用 [{Skills.IntensiveSynthesis.NameOfAction()}]（400%）而不是 [{Skills.RapidSynthesis.NameOfAction()}]（500%）", ref MuMeIntensiveGood);
@@ -71,7 +71,7 @@ public class ExpertSolverSettings
             ImGui.PushItemWidth(250);
             changed |= ImGui.SliderInt("###MuMeMinStepsForVene", ref MuMeMinStepsForVene, 0, 5);
         }
-        if (ImGui.CollapsingHeader("主循环设置"))
+        if (ImGui.CollapsingHeader("主循環設定"))
         {
             ImGui.Text($"[{Buffs.InnerQuiet.NameOfBuff()}] 至少有多少层时才为 [{Skills.PreciseTouch.NameOfAction()}] 使用 [{Skills.HeartAndSoul.NameOfAction()}]（10为禁用）");
             ImGui.PushItemWidth(250);
@@ -93,16 +93,16 @@ public class ExpertSolverSettings
             changed |= ImGui.Checkbox($"在 [{Condition.Good.ToLocalizedString()}] {ConditionString} + {Buffs.Innovation.NameOfBuff()} + {Buffs.GreatStrides.NameOfBuff()} 的情况下，考虑使用 [{Skills.PreparatoryTouch.NameOfAction()}]，假设我们有足够的 {DurabilityString}", ref MidAllowGoodPrep);
             changed |= ImGui.Checkbox($"在 [{Condition.Sturdy.ToLocalizedString()}] {ConditionString} + {Buffs.Innovation.NameOfBuff()} 的情况下，考虑使用 [{Skills.PreparatoryTouch.NameOfAction()}]，假设我们有足够的 {DurabilityString}", ref MidAllowSturdyPrep);
             changed |= ImGui.Checkbox($"在 [{Skills.Innovation.NameOfAction()}] + {QualityString} 组合之前使用 [{Skills.GreatStrides.NameOfAction()}]", ref MidGSBeforeInno);
-            changed |= ImGui.Checkbox($"在开始 {QualityString} 阶段之前完成 {ProgressString}", ref MidFinishProgressBeforeQuality);
+            changed |= ImGui.Checkbox($"在開始 {QualityString} 階段之前完成 {ProgressString}", ref MidFinishProgressBeforeQuality);
             changed |= ImGui.Checkbox($"在 [{Condition.GoodOmen.ToLocalizedString()}] {ConditionString} 下使用 [{Skills.Observe.NameOfAction()}]，如果我们本来会在 [{Condition.Good.ToLocalizedString()}] {ConditionString} 上使用 [{Skills.TricksOfTrade.NameOfAction()}]", ref MidObserveGoodOmenForTricks);
         }
         ImGui.Unindent();
-        changed |= ImGui.Checkbox("充分利用伊修加德重建配方，而不是仅仅达到最大品质断点。", ref MaxIshgardRecipes);
-        ImGuiComponents.HelpMarker("这将尝试最大限度地提高质量，以获得更多的技巧点。");
+        changed |= ImGui.Checkbox("充分利用伊修加德重建配方，而不是僅僅達到最大品質斷點。", ref MaxIshgardRecipes);
+        ImGuiComponents.HelpMarker("這將嘗試最大限度地提高品質，以獲得更多的技巧點。");
         changed |= ImGui.Checkbox($"终结技：使用 {Skills.CarefulObservation.NameOfAction()} 为 {Condition.Good.ToLocalizedString()} {ConditionString} 争取一下 {Skills.ByregotsBlessing.NameOfAction()}", ref FinisherBaitGoodByregot);
         changed |= ImGui.Checkbox($"紧急情况：如果制作力不够用了，使用 {Skills.CarefulObservation.NameOfAction()} 为 [{Condition.Good.ToLocalizedString()} {ConditionString} 争取一下 {Skills.TricksOfTrade.NameOfAction()}", ref EmergencyCPBaitGood);
-        changed |= ImGui.Checkbox($"在宇宙探索中使用材料奇迹", ref UseMaterialMiracle);
-        if (ImGuiEx.ButtonCtrl("重置高难度配方设置到默认状态"))
+        changed |= ImGui.Checkbox($"在宇宙探索中使用材料奇蹟", ref UseMaterialMiracle);
+        if (ImGuiEx.ButtonCtrl("重設高難度配方設定到預設狀態"))
         {
             P.Config.ExpertSolverConfig = new();
             changed |= true;

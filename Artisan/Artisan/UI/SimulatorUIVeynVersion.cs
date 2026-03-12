@@ -1,4 +1,4 @@
-﻿using Artisan.CraftingLogic;
+using Artisan.CraftingLogic;
 using Artisan.GameInterop;
 using Artisan.RawInformation.Character;
 using Dalamud.Interface.Utility.Raii;
@@ -55,7 +55,7 @@ internal static class SimulatorUIVeynVersion
 
         if (_selectedRecipe == null || _selectedCraft == null)
         {
-            ImGui.TextUnformatted($"请选择使用模拟器的配方");
+            ImGui.TextUnformatted($"請選擇使用模擬器的配方");
             return;
         }
 
@@ -70,9 +70,9 @@ internal static class SimulatorUIVeynVersion
         if (!n)
             return;
 
-        if (ImGui.Button("刷新统计信息"))
+        if (ImGui.Button("刷新統計資訊"))
             SetSelectedRecipe(r);
-        ImGui.InputFloat("起手品质百分比", ref _startingQualityPct);
+        ImGui.InputFloat("起手品質百分比", ref _startingQualityPct);
         for (int i = 1; i < craft.CraftConditionProbabilities.Length; ++i)
             ImGui.InputFloat($"Transition probability to {(Condition)i}", ref craft.CraftConditionProbabilities[i]);
     }
@@ -83,14 +83,14 @@ internal static class SimulatorUIVeynVersion
         if (!n)
             return;
 
-        ImGui.InputInt("迭代次数", ref _statsNumIterations);
+        ImGui.InputInt("迭代次數", ref _statsNumIterations);
         ImGui.SameLine();
         if (StatisticsInProgress())
         {
             using var d = ImRaii.Disabled();
-            ImGui.Button("请等待...");
+            ImGui.Button("請等待...");
         }
-        else if (ImGui.Button("运行！"))
+        else if (ImGui.Button("運行！"))
         {
             SetSelectedRecipe(_selectedRecipe);
             _statsCurrent = null;
@@ -104,16 +104,16 @@ internal static class SimulatorUIVeynVersion
         if (_statsCurrent == null || _statsCurrent.NumExperiments == 0)
             return;
 
-        DrawStatistic("运行错误", _statsCurrent.NumOutcomes[0]);
-        DrawStatistic("失败（耐久）", _statsCurrent.NumOutcomes[1]);
-        DrawStatistic("失败（品质）", _statsCurrent.NumOutcomes[2]);
+        DrawStatistic("運行錯誤", _statsCurrent.NumOutcomes[0]);
+        DrawStatistic("失敗（耐久）", _statsCurrent.NumOutcomes[1]);
+        DrawStatistic("失敗（品質）", _statsCurrent.NumOutcomes[2]);
         if (craft.CraftCollectible)
         {
         DrawStatistic("成功 Q1", _statsCurrent.NumOutcomes[3]);
         DrawStatistic("成功 Q2", _statsCurrent.NumOutcomes[4]);
         DrawStatistic("成功 Q3", _statsCurrent.NumOutcomes[5]);
         }
-        DrawStatistic("成功最大品质", _statsCurrent.NumOutcomes[6]);
+        DrawStatistic("成功最大品質", _statsCurrent.NumOutcomes[6]);
         var yieldQ1 = 1;
         var yieldQ2 = yieldQ1 + (craft.CraftQualityMin2 > craft.CraftQualityMin1 ? 1 : 0);
         var yieldQ3 = yieldQ2 + (craft.CraftQualityMin3 > craft.CraftQualityMin2 ? 1 : 0);
@@ -146,7 +146,7 @@ internal static class SimulatorUIVeynVersion
     {
         if (taskRunning)
         {
-            if (ImGui.Button("停止运行"))
+            if (ImGui.Button("停止運行"))
             {
                 _cancelTokenSource.Cancel();
                 taskRunning = false;
@@ -154,24 +154,24 @@ internal static class SimulatorUIVeynVersion
         }
         else
         {
-            if (ImGui.Button("重新启动！"))
+            if (ImGui.Button("重新啟動！"))
             {
                 RestartSimulator(craft, _simRngForSeeds.Next());
             }
             ImGui.SameLine();
-            if (ImGui.Button("重新启动并解算"))
+            if (ImGui.Button("重新啟動並解算"))
             {
                 RestartSimulator(craft, _simRngForSeeds.Next());
                 SolveRestSimulator(craft);
             }
             ImGui.SameLine();
-            if (ImGui.Button("重新启动并解算，直到..."))
+            if (ImGui.Button("重新啟動並解算，直到..."))
             {
                 _cancelTokenSource = new CancellationTokenSource();
                 ImGui.OpenPopup("SolveUntil");
             }
             ImGui.SameLine();
-            if (ImGui.Button($"使用种子重新启动："))
+            if (ImGui.Button($"使用種子重新啟動："))
             {
                 RestartSimulator(craft, _simCurSeed);
             }
@@ -182,42 +182,42 @@ internal static class SimulatorUIVeynVersion
             if (popup)
             {
                 var token = _cancelTokenSource.Token;
-                if (ImGui.MenuItem("解算器错误"))
+                if (ImGui.MenuItem("解算器錯誤"))
                 {
                     Task.Run(() => RestartSimulatorUntil(craft, Simulator.CraftStatus.InProgress), token);
                     ImGui.CloseCurrentPopup();
                 }
-                if (ImGui.MenuItem("耐久耗尽导致故障"))
+                if (ImGui.MenuItem("耐久耗盡導致故障"))
                 {
                     Task.Run(() => RestartSimulatorUntil(craft, Simulator.CraftStatus.FailedDurability), token);
                     ImGui.CloseCurrentPopup();
                 }
-                if (ImGui.MenuItem("由于品质欠缺而导致故障"))
+                if (ImGui.MenuItem("由於品質欠缺而導致故障"))
                 {
                     Task.Run(() => RestartSimulatorUntil(craft, Simulator.CraftStatus.FailedMinQuality), token);
                     ImGui.CloseCurrentPopup();
                 }
-                if (ImGui.MenuItem("断点 1 成功"))
+                if (ImGui.MenuItem("斷點 1 成功"))
                 {
                     Task.Run(() => RestartSimulatorUntil(craft, Simulator.CraftStatus.SucceededQ1), token);
                     ImGui.CloseCurrentPopup();
                 }
-                if (ImGui.MenuItem("断点 2 成功"))
+                if (ImGui.MenuItem("斷點 2 成功"))
                 {
                     Task.Run(() => RestartSimulatorUntil(craft, Simulator.CraftStatus.SucceededQ2), token);
                     ImGui.CloseCurrentPopup();
                 }
-                if (ImGui.MenuItem("断点 3 成功"))
+                if (ImGui.MenuItem("斷點 3 成功"))
                 {
                     Task.Run(() => RestartSimulatorUntil(craft, Simulator.CraftStatus.SucceededQ3), token);
                     ImGui.CloseCurrentPopup();
                 }
-                if (ImGui.MenuItem("最高品质"))
+                if (ImGui.MenuItem("最高品質"))
                 {
                     Task.Run(() => RestartSimulatorUntil(craft, Simulator.CraftStatus.SucceededMaxQuality), token);
                     ImGui.CloseCurrentPopup();
                 }
-                if (ImGui.MenuItem("成功了，一些品质"))
+                if (ImGui.MenuItem("成功了，一些品質"))
                 {
                     Task.Run(() => RestartSimulatorUntil(craft, Simulator.CraftStatus.SucceededSomeQuality), token);
                     ImGui.CloseCurrentPopup();
@@ -228,21 +228,21 @@ internal static class SimulatorUIVeynVersion
 
     private static void DrawSimulatorStepRow(CraftState craft)
     {
-        if (ImGui.Button("求解下一个"))
+        if (ImGui.Button("求解下一個"))
             SolveNextSimulator(craft);
         ImGui.SameLine();
         if (ImGui.Button("全部求解"))
             SolveRestSimulator(craft);
         ImGui.SameLine();
         if (ImGui.Button("Manual..."))
-            ImGui.OpenPopup("Manual");
+            ImGui.OpenPopup("手動");
         ImGui.SameLine();
 
         if (_simCurSteps.Count == 0) return;
 
-        ImGui.TextUnformatted($"状态：{Simulator.Status(craft, _simCurSteps.Last().step)}, Suggestion: {_simNextRec.Action} ({_simNextRec.Comment})");
+        ImGui.TextUnformatted($"狀態：{Simulator.Status(craft, _simCurSteps.Last().step)}, Suggestion: {_simNextRec.Action} ({_simNextRec.Comment})");
 
-        using var popup = ImRaii.Popup("Manual");
+        using var popup = ImRaii.Popup("手動");
         if (popup)
         {
             var step = _simCurSteps.Last().step;

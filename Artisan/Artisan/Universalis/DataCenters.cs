@@ -1,4 +1,4 @@
-﻿using ECommons;
+using ECommons;
 using ECommons.DalamudServices;
 using Lumina.Excel.Sheets;
 using System;
@@ -69,11 +69,11 @@ namespace Artisan.Universalis
             if (Dynamis.ContainsAll(dc))
                 return "Dynamis";
             if (陆行鸟.ContainsAll(dc))
-                return "陆行鸟";
+                return "陸行鳥";
             if (莫古力.ContainsAll(dc))
                 return "莫古力";
             if (猫小胖.ContainsAll(dc))
-                return "猫小胖";
+                return "貓小胖";
             if (한국.ContainsAll(dc))
                 return "한국";
 
@@ -128,7 +128,7 @@ namespace Artisan.Universalis
                 "North-America" => NorthAmerica,
                 "Europe" => Europe,
                 "Oceania" => Oceania,
-                "中国" => 中国,
+"中國" => 中国,
                 _ => null
             };
         }

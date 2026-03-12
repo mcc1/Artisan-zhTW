@@ -1,4 +1,4 @@
-﻿using Artisan.Autocraft;
+using Artisan.Autocraft;
 using Artisan.CraftingLogic.Solvers;
 using Artisan.GameInterop;
 using Artisan.RawInformation;
@@ -125,7 +125,7 @@ public class RecipeConfig
     public bool DrawPotion(bool hasButton = false)
     {
         bool changed = false;
-        ImGuiEx.TextV("药水使用：");
+        ImGuiEx.TextV("藥水使用：");
         ImGui.SameLine(130f.Scale());
         if (hasButton) ImGuiEx.SetNextItemFullWidth(-120);
         if (ImGui.BeginCombo("##potBuff", PotionName))
@@ -207,7 +207,7 @@ public class RecipeConfig
     public bool DrawSquadronManual(bool hasButton = false)
     {
         bool changed = false;
-        ImGuiEx.TextV("军用指南：");
+        ImGuiEx.TextV("軍用指南：");
         ImGui.SameLine(130f.Scale());
         if (hasButton) ImGuiEx.SetNextItemFullWidth(-120);
         if (ImGui.BeginCombo("##squadronManualBuff", SquadronManualName))
@@ -283,15 +283,15 @@ public class RecipeConfig
             var solverHint = Simulator.SimulatorResult(recipe, config, craft, out var hintColor);
             var solver = CraftingProcessor.GetSolverForRecipe(config, craft);
 
-            if (solver.Name != "专家配方求解器")
+            if (solver.Name != "專家配方求解器")
             {
-                if (craft.MissionHasMaterialMiracle && solver.Name == "标准配方求解器" && P.Config.UseMaterialMiracle)
-                    ImGuiEx.TextWrapped($"这将使用材料奇迹，与模拟器不兼容。");
+                if (craft.MissionHasMaterialMiracle && solver.Name == "標準配方求解器" && P.Config.UseMaterialMiracle)
+                    ImGuiEx.TextWrapped($"這將使用材料奇蹟，與模擬器不相容。");
                 else
                     ImGuiEx.TextWrapped(hintColor, solverHint);
             }
             else
-                ImGuiEx.TextWrapped($"请在模拟器中运行此配方以获得结果。");
+                ImGuiEx.TextWrapped($"請先在模擬器中執行此配方以取得結果。");
 
             if (ImGui.IsItemClicked())
             {
@@ -334,7 +334,7 @@ public class RecipeConfig
 
             if (ImGui.IsItemHovered())
             {
-                ImGuiEx.Tooltip($"点击在模拟器中打开");
+                ImGuiEx.Tooltip($"點擊以在模擬器中開啟");
             }
 
 

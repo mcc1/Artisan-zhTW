@@ -1,4 +1,4 @@
-﻿using Artisan.RawInformation;
+using Artisan.RawInformation;
 using Artisan.UI;
 using Dalamud.Interface.Colors;
 using Dalamud.Interface.Components;
@@ -27,18 +27,18 @@ namespace Artisan.CraftingLists
 
         internal static void DrawTeamCraftListButtons()
         {
-            string labelText = "Teamcraft 清单";
+            string labelText = "Teamcraft 清單";
             var labelLength = ImGui.CalcTextSize(labelText);
             ImGui.SetCursorPosX((ImGui.GetContentRegionMax().X - labelLength.X) * 0.5f);
             ImGui.TextColored(ImGuiColors.ParsedGreen, labelText);
-            if (IconButtons.IconTextButton(Dalamud.Interface.FontAwesomeIcon.Download, "导入", new Vector2(ImGui.GetContentRegionAvail().X, 30)))
+            if (IconButtons.IconTextButton(Dalamud.Interface.FontAwesomeIcon.Download, "匯入", new Vector2(ImGui.GetContentRegionAvail().X, 30)))
             {
                 openImportWindow = true;
             }
             OpenTeamcraftImportWindow();
             if (CraftingListUI.selectedList.ID != 0)
             {
-                if (IconButtons.IconTextButton(Dalamud.Interface.FontAwesomeIcon.Upload, "导出", new Vector2(ImGui.GetContentRegionAvail().X, 30), true))
+                if (IconButtons.IconTextButton(Dalamud.Interface.FontAwesomeIcon.Upload, "匯出", new Vector2(ImGui.GetContentRegionAvail().X, 30), true))
                 {
                     ExportSelectedListToTC();
                 }
@@ -118,32 +118,32 @@ namespace Artisan.CraftingLists
             ImGui.SetNextWindowSize(new Vector2(1, 1), ImGuiCond.Appearing);
             if (ImGui.Begin("Teamcraft 导入###TCImport", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.AlwaysAutoResize))
             {
-                ImGui.Text("清单名称");
+                ImGui.Text("清單名稱");
                 ImGui.SameLine();
-                ImGuiComponents.HelpMarker("导入清单指南。\r\n\r\n" +
-                    "步骤 1. 在 Teamcraft 上打开一个包含您想要制作的物品的列表。\r\n\r\n" +
-                    "步骤 2. 找到预制作部分并点击“复制为文本”按钮。\r\n\r\n" +
-                    "步骤 3. 将内容粘贴到此窗口的前置配方物品中。\r\n\r\n" +
-                    "步骤 4. 重复步骤 2 和 3，但用于成品部分。\r\n\r\n" +
-                    "步骤 5. 为您的列表命名并点击导入。");
+                ImGuiComponents.HelpMarker("匯入清單指南。\r\n\r\n" +
+"步驟 1. 在 Teamcraft 上開啟一個包含您想要製作的物品的列表。\r\n\r\n" +
+"步驟 2. 找到預製作區塊並點擊「複製為文字」按鈕。\r\n\r\n" +
+"步驟 3. 將內容黏貼到此視窗的前置配方物品中。\r\n\r\n" +
+"步驟 4. 重複步驟 2 和 3，但用於成品部分。\r\n\r\n" +
+"步驟 5. 為列表命名後點擊匯入。");
                 ImGui.InputText("###ImportListName", ref importListName, 50);
                 ImGui.Text("前置配方物品");
                 ImGui.InputTextMultiline("###PrecraftItems", ref importListPreCraft, 5000000, new Vector2(ImGui.GetContentRegionAvail().X, 100));
 
                 if (!P.Config.DefaultListQuickSynth)
-                    ImGui.Checkbox("导入为简易制作###ImportQSPre", ref precraftQS);
+                    ImGui.Checkbox("匯入為簡易製作###ImportQSPre", ref precraftQS);
                 else
-                    ImGui.TextWrapped($@"由于默认设置已启用，这些物品将尝试被添加为简易制作。");
+                    ImGui.TextWrapped($@"由於已啟用預設設定，這些物品會嘗試加入簡易製作。");
                 ImGui.Text("成品");
                 ImGui.InputTextMultiline("###FinalItems", ref importListItems, 5000000, new Vector2(ImGui.GetContentRegionAvail().X, 100));
                 if (!P.Config.DefaultListQuickSynth)
-                    ImGui.Checkbox("导入为简易制作###ImportQSFinal", ref finalitemQS);
+                    ImGui.Checkbox("匯入為簡易製作###ImportQSFinal", ref finalitemQS);
                 else
-                    ImGui.TextWrapped($@"由于默认设置已启用，这些物品将尝试被添加为简易制作。");
+                    ImGui.TextWrapped($@"由於已啟用預設設定，這些物品會嘗試加入簡易製作。");
 
                 try
                 {
-                    if (ImGui.Button("导入"))
+                    if (ImGui.Button("匯入"))
                     {
                         NewCraftingList? importedList = ParseImport(precraftQS, finalitemQS);
                         if (importedList is not null)

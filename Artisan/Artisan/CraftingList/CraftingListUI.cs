@@ -1,4 +1,4 @@
-﻿using Artisan.Autocraft;
+using Artisan.Autocraft;
 using Artisan.CraftingLogic;
 using Artisan.GameInterop;
 using Artisan.IPC;
@@ -54,11 +54,11 @@ namespace Artisan.CraftingLists
 
         internal static void Draw()
         {
-            ImGui.TextWrapped($"制作清单是将不同的制作品按队列排序依次制作的绝佳方式。请使用底部的按钮导入Teamcraft清单来创建制作清单，或单击“+”图标并命名来创建制作清单。" +
+            ImGui.TextWrapped($"製作清單適合將不同製作品依序排入佇列並逐一製作。請使用底部按鈕匯入 Teamcraft 清單來建立製作清單，或點擊「+」圖示並命名來建立製作清單。" +
                               $" 你也可以右键单击游戏配方菜单中的某个物品，如果未选择它，则将其添加到新清单中，或者如果未选择清单，则将其作为第一个物品创建新清单。");
 
             ImGui.Dummy(new Vector2(0, 14f));
-            ImGui.TextWrapped("左键单击清单打开编辑器。右键单击清单将其选中而不打开编辑器。");
+            ImGui.TextWrapped("左鍵點擊清單會開啟編輯器。右鍵點擊清單只會選取，不會開啟編輯器。");
 
             ImGui.Separator();
 
@@ -78,7 +78,7 @@ namespace Artisan.CraftingLists
                 if (Endurance.Enable || Processing)
                     ImGui.BeginDisabled();
 
-                if (ImGui.Button("启动清单制作", new Vector2(ImGui.GetContentRegionAvail().X, 30)))
+                if (ImGui.Button("啟動清單製作", new Vector2(ImGui.GetContentRegionAvail().X, 30)))
                 {
                     StartList();
                 }
@@ -118,7 +118,7 @@ namespace Artisan.CraftingLists
                     ImGui.EndDisabled();
             }
 
-            if (ImGui.Button("从剪贴板导入清单（Artisan导出）", new Vector2(ImGui.GetContentRegionAvail().X, 30)))
+            if (ImGui.Button("從剪貼簿匯入清單（Artisan導出）", new Vector2(ImGui.GetContentRegionAvail().X, 30)))
             {
                 try
                 {
@@ -132,12 +132,12 @@ namespace Artisan.CraftingLists
                         }
                         else
                         {
-                            Notify.Error("无效的导入字符串。");
+                            Notify.Error("無效的匯入字串。");
                         }
                     }
                     else
                     {
-                        Notify.Error("剪贴板无数据。");
+                        Notify.Error("剪貼簿沒有資料。");
                     }
                 }
                 catch (Exception ex)

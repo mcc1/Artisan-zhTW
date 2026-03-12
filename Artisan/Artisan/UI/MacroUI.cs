@@ -1,4 +1,4 @@
-﻿using Artisan.CraftingLogic;
+using Artisan.CraftingLogic;
 using Artisan.CraftingLogic.Solvers;
 using Artisan.GameInterop;
 using Artisan.RawInformation;
@@ -43,19 +43,19 @@ namespace Artisan.UI
 
         internal static void Draw()
         {
-            ImGui.TextWrapped("此选项卡将允许你添加Artisan可以使用的宏，使用指定的宏而不是内置解算器来制作。创建新宏后，从下面的列表中单击它以打开独立的宏编辑器窗口。");
+            ImGui.TextWrapped("此分頁可讓你加入 Artisan 可使用的巨集，並在製作時使用指定巨集而非內建解算器。建立新巨集後，從下方列表點擊該巨集即可開啟獨立的巨集編輯器視窗。");
             ImGui.Separator();
 
             if (Svc.ClientState.IsLoggedIn && Crafting.CurState is not Crafting.State.IdleNormal and not Crafting.State.IdleBetween)
             {
-                ImGui.Text($"制作正在进行。宏设置将不可用，直到停止制作。");
+                ImGui.Text($"製作正在進行。巨集設定將不可用，直到停止製作。");
                 return;
             }
             ImGui.Spacing();
-            if (ImGui.Button("从剪贴板数据导入宏"))
+            if (ImGui.Button("從剪貼簿數據匯入巨集"))
                 OpenMacroNamePopup(MacroNameUse.FromClipboard);
 
-            if (ImGui.Button("从剪贴板数据导入宏 (Artisan导出的)"))
+            if (ImGui.Button("從剪貼簿匯入巨集（Artisan 匯出）"))
             {
                 try
                 {
@@ -69,11 +69,11 @@ namespace Artisan.UI
                 catch (Exception ex)
                 {
                     ex.Log();
-                    Notify.Error("无法导入");
+                    Notify.Error("無法匯入");
                 }
             }
 
-            if (ImGui.Button("新宏"))
+            if (ImGui.Button("新巨集"))
                 OpenMacroNamePopup(MacroNameUse.NewMacro);
 
             DrawMacroNamePopup(MacroNameUse.FromClipboard);
@@ -82,14 +82,14 @@ namespace Artisan.UI
             if (P.Config.MacroSolverConfig.Macros.Count > 0)
             {
                 if (P.Config.MacroSolverConfig.Macros.Count > 1)
-                    ImGui.Checkbox("排序模式（点击拖拽进行排序）", ref reorderMode);
+                    ImGui.Checkbox("排序模式（點擊並拖曳以重新排序）", ref reorderMode);
                 else
                     reorderMode = false;
 
                 if (reorderMode)
                     ImGuiEx.CenterColumnText("排序模式");
                 else
-                    ImGuiEx.CenterColumnText("宏编辑器选择");
+                    ImGuiEx.CenterColumnText("巨集編輯器選擇");
 
                 if (ImGui.BeginChild("##selector", new Vector2(ImGui.GetContentRegionAvail().X, ImGui.GetContentRegionAvail().Y), true))
                 {
@@ -204,7 +204,7 @@ namespace Artisan.UI
                     _keyboardFocus = false;
                 }
 
-                if (ImGui.InputText("宏名称##macroName", ref _newMacroName, 64, ImGuiInputTextFlags.EnterReturnsTrue) && _newMacroName.Any())
+                if (ImGui.InputText("巨集名稱##macroName", ref _newMacroName, 64, ImGuiInputTextFlags.EnterReturnsTrue) && _newMacroName.Any())
                 {
                     switch (use)
                     {
@@ -230,12 +230,12 @@ namespace Artisan.UI
                                 }
                                 else
                                 {
-                                    DuoLog.Error("无法分析剪贴板。请确保你的剪贴板数据中包含可运行的带职业技能宏。");
+                                    DuoLog.Error("無法分析剪貼簿。請確認剪貼簿內容包含可執行、且帶有職業技能的巨集。");
                                 }
                             }
                             catch (Exception e)
                             {
-                                Svc.Log.Information($"无法从剪贴板保存新宏：\n{e}");
+                                Svc.Log.Information($"無法從剪貼簿保存新巨集：\n{e}");
                             }
 
                             break;
