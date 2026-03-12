@@ -63,7 +63,7 @@ jobs:
         ImGuiScene.dll
         InteropGenerator.Runtime.dll
         FFXIVClientStructs.dll
-      commit_changes: ${{ github.event_name == 'workflow_dispatch' && inputs.workflow_mode == 'sync' }}
+      commit_changes: ${{ github.event_name == 'workflow_dispatch' && inputs.workflow_mode != 'build' }}
       publish_release: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_release }}
 
   publish-dev:
