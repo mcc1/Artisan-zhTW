@@ -301,9 +301,9 @@ namespace Artisan.UI
             ImGui.Spacing();
 
             ImGuiEx.TextWrapped($"Artisan具有\"自動製作模式\"該模式僅接受內建解算器給出的建議並且代替你自動操作。" +
-                                " 默认情况下，它会以游戏允许的间隔速度使用制作技能，这比使用游戏内的宏更快。" +
-                                " 使用它并没有绕过任何形式的游戏限制，但如果你打算制作速度慢一些，你可以设置延迟。" +
-                                " 启用此选项不影响Artisan默认使用的建议生成过程。");
+"預設情况下，它會以游戏允许的间隔速度使用制作技能，這比使用游戏内的宏更快。" +
+"使用它並沒有绕过任何形式的游戏限制，但如果你打算制作速度慢一些，你可以設定延迟。" +
+"啟用此选项不影响Artisan預設使用的建議生成过程。");
 
             var automode = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/AutoMode.png");
 
@@ -316,7 +316,7 @@ namespace Artisan.UI
             }
 
             ImGuiEx.TextWrapped($"若未啟用自動模式，你還可以使用另外兩種模式：「半自動模式」與「全手動模式」。" +
-                                $" \"半自动模式\"将在你开始制作作业时，出现在一个弹出的小窗口中。");
+                                $"\"半自動模式\"將在你開始制作作业時，出现在一個弹出的小視窗中。");
 
             var craftWindowExample = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/ThemeCraftingWindowExample.png");
 
@@ -329,9 +329,9 @@ namespace Artisan.UI
             }
 
             ImGuiEx.TextWrapped($"點擊「執行建議的操作」按鈕後，便會使用插件目前建議的製作技能。" +
-                $" 这被认为是半自动的，因为你仍然需要每一步点击一次操作按钮，但不必去热键栏上找到相应的技能。" +
-                $" \"全手动模式\"是通过正常按下热键栏上的技能来执行的。" +
-                $" 默认情况下，你将得到辅助，如果你将技能放在了热键栏上，Artisan会对相应技能进行高亮提示（可以在设置中禁用）。");
+                $"這被认為是半自動的，因為你仍然需要每一步點擊一次操作按鈕，但不必去快速鍵欄上找到相应的技能。" +
+                $"\"全手動模式\"是通过正常按下快速鍵欄上的技能来执行的。" +
+                $"預設情况下，你將得到辅助，如果你將技能放在了快速鍵欄上，Artisan 會对相应技能进行高亮提示（可以在設定中禁用）。");
 
             var outlineExample = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/OutlineExample.png");
 
@@ -638,7 +638,7 @@ namespace Artisan.UI
                     P.Config.UseTricksExcellent = useTricksExcellent;
                     P.Config.Save();
                 }
-                ImGuiComponents.HelpMarker($"这两个选项允许你在出现“{LuminaSheets.AddonSheet[227].Text.ToString}”或“{LuminaSheets.AddonSheet[228].Text.ToString}”状态时优先使用“{Skills.TricksOfTrade.NameOfAction()}”。\n\n这将替代{Skills.PreciseTouch.NameOfAction()}和{Skills.IntensiveSynthesis.NameOfAction()}的使用时机。\n\n不管如何设置，在学会前或特定状况下仍将使用{Skills.TricksOfTrade.NameOfAction()}。");
+                ImGuiComponents.HelpMarker($"這两個选项允许你在出现「{LuminaSheets.AddonSheet[227].Text.ToString}」或「{LuminaSheets.AddonSheet[228].Text.ToString}」状态時优先使用「{Skills.TricksOfTrade.NameOfAction()}」。 這將替代{Skills.PreciseTouch.NameOfAction()}和{Skills.IntensiveSynthesis.NameOfAction()}的使用時机。 不管如何設定，在学會前或特定状况下仍將使用{Skills.TricksOfTrade.NameOfAction()}。");
                 if (ImGui.Checkbox("使用專家技能", ref useSpecialist))
                 {
                     P.Config.UseSpecialist = useSpecialist;
@@ -683,9 +683,9 @@ namespace Artisan.UI
 
                 //ImGuiComponents.HelpMarker("This swaps out Waste Not II & Groundwork for Prudent Synthesis");
 
-                ImGui.TextWrapped($"{Skills.PreparatoryTouch.NameOfAction()} - 最大{Buffs.InnerQuiet.NameOfBuff()}层数");
+                ImGui.TextWrapped($"{Skills.PreparatoryTouch.NameOfAction()} - 最大{Buffs.InnerQuiet.NameOfBuff()}層数");
                 ImGui.SameLine();
-                ImGuiComponents.HelpMarker($"将仅使用{Skills.PreparatoryTouch.NameOfAction()}来提高{Buffs.InnerQuiet.NameOfBuff()}的层数。这有助于调整制作力用量。");
+                ImGuiComponents.HelpMarker($"將僅使用{Skills.PreparatoryTouch.NameOfAction()}来提高{Buffs.InnerQuiet.NameOfBuff()}的層数。這有助于调整制作力用量。");
                 if (ImGui.SliderInt($"###MaxIQStacksPrepTouch", ref P.Config.MaxIQPrepTouch, 0, 10))
                     P.Config.Save();
 
@@ -887,7 +887,7 @@ namespace Artisan.UI
                 {
                     ImGuiEx.TextWrapped(ImGuiColors.DalamudYellow, $"如果已經查看過清單的素材表，則「所有欄位設定」將不會生效。");
 
-                    if (ImGui.Checkbox($@"默认隐藏""背包"" 列", ref P.Config.DefaultHideInventoryColumn))
+                    if (ImGui.Checkbox($@"預設隐藏""背包"" 列", ref P.Config.DefaultHideInventoryColumn))
                         P.Config.Save();
 
                     if (ImGui.Checkbox($"預設隱藏“雇員”列", ref P.Config.DefaultHideRetainerColumn))

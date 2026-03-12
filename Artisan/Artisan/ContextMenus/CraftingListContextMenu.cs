@@ -1,4 +1,4 @@
-﻿using Artisan.CraftingLists;
+using Artisan.CraftingLists;
 using Artisan.RawInformation;
 using ECommons.DalamudServices;
 using System;
@@ -219,20 +219,20 @@ internal static class CraftingListContextMenu
         var item = args.AddonName switch
         {
             null => HandleNulls(),
-            "Shop" => GetObjectItemId("Shop", ShopContextMenuItemId),
-            "GrandCompanySupplyList" => GetObjectItemId("GrandCompanySupplyList", GrandCompanySupplyListContextItemId),
-            "GrandCompanyExchange" => GetObjectItemId("GrandCompanyExchange", GrandCompanyExchangeContextItemId),
-            "ShopExchangeCurrency" => GetObjectItemId("ShopExchangeCurrency", ShopExchangeCurrencyContextItemId),
-            "SubmarinePartsMenu" => GetObjectItemId("SubmarinePartsMenu", SubmarinePartsMenuContextItemId),
-            "ShopExchangeItem" => GetObjectItemId("ShopExchangeItem", ShopExchangeItemContextItemId),
-            "ContentsInfoDetail" => GetObjectItemId("ContentsInfo", ContentsInfoDetailContextItemId),
-            "RecipeNote" => GetObjectItemId("RecipeNote", RecipeNoteContextItemId),
-            "RecipeTree" => GetObjectItemId(AgentById(AgentId.RecipeItemContext), AgentItemContextItemId),
-            "RecipeMaterialList" => GetObjectItemId(AgentById(AgentId.RecipeItemContext), AgentItemContextItemId),
-            "RecipeProductList" => GetObjectItemId(AgentById(AgentId.RecipeItemContext), AgentItemContextItemId),
-            "GatheringNote" => GetObjectItemId("GatheringNote", GatheringNoteContextItemId),
-            "ItemSearch" => GetObjectItemId(args.AgentPtr, ItemSearchContextItemId),
-            "ChatLog" => GetObjectItemId("ChatLog", ChatLogContextItemId),
+"Shop" => GetObjectItemId("Shop", ShopContextMenuItemId),
+"GrandCompanySupplyList" => GetObjectItemId("GrandCompanySupplyList", GrandCompanySupplyListContextItemId),
+"GrandCompanyExchange" => GetObjectItemId("GrandCompanyExchange", GrandCompanyExchangeContextItemId),
+"ShopExchangeCurrency" => GetObjectItemId("ShopExchangeCurrency", ShopExchangeCurrencyContextItemId),
+"SubmarinePartsMenu" => GetObjectItemId("SubmarinePartsMenu", SubmarinePartsMenuContextItemId),
+"ShopExchangeItem" => GetObjectItemId("ShopExchangeItem", ShopExchangeItemContextItemId),
+"ContentsInfoDetail" => GetObjectItemId("ContentsInfo", ContentsInfoDetailContextItemId),
+"RecipeNote" => GetObjectItemId("RecipeNote", RecipeNoteContextItemId),
+"RecipeTree" => GetObjectItemId(AgentById(AgentId.RecipeItemContext), AgentItemContextItemId),
+"RecipeMaterialList" => GetObjectItemId(AgentById(AgentId.RecipeItemContext), AgentItemContextItemId),
+"RecipeProductList" => GetObjectItemId(AgentById(AgentId.RecipeItemContext), AgentItemContextItemId),
+"GatheringNote" => GetObjectItemId("GatheringNote", GatheringNoteContextItemId),
+"ItemSearch" => GetObjectItemId(args.AgentPtr, ItemSearchContextItemId),
+"ChatLog" => GetObjectItemId("ChatLog", ChatLogContextItemId),
             _ => null,
         };
         if (item == null)

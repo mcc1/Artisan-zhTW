@@ -1,4 +1,4 @@
-﻿using Artisan.IPC;
+using Artisan.IPC;
 using Artisan.RawInformation;
 using Dalamud.Game;
 using Dalamud.Game.ClientState.Conditions;

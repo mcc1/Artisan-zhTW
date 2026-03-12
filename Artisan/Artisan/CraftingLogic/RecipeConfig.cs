@@ -86,7 +86,7 @@ public class RecipeConfig
         {
             if (this != P.Config.DefaultConsumables)
             {
-                if (ImGui.Selectable($"默认 ({P.Config.DefaultConsumables.FoodName})"))
+                if (ImGui.Selectable($"預設 ({P.Config.DefaultConsumables.FoodName})"))
                 {
                     requiredFood = Default;
                     requiredFoodHQ = false;
@@ -132,7 +132,7 @@ public class RecipeConfig
         {
             if (this != P.Config.DefaultConsumables)
             {
-                if (ImGui.Selectable($"默认 ({P.Config.DefaultConsumables.PotionName})"))
+                if (ImGui.Selectable($"預設 ({P.Config.DefaultConsumables.PotionName})"))
                 {
                     requiredPotion = Default;
                     requiredPotionHQ = false;
@@ -178,7 +178,7 @@ public class RecipeConfig
         {
             if (this != P.Config.DefaultConsumables)
             {
-                if (ImGui.Selectable($"默认 ({P.Config.DefaultConsumables.ManualName})"))
+                if (ImGui.Selectable($"預設 ({P.Config.DefaultConsumables.ManualName})"))
                 {
                     requiredManual = Default;
                     changed = true;
@@ -214,7 +214,7 @@ public class RecipeConfig
         {
             if (this != P.Config.DefaultConsumables)
             {
-                if (ImGui.Selectable($"默认 ({P.Config.DefaultConsumables.SquadronManualName})"))
+                if (ImGui.Selectable($"預設 ({P.Config.DefaultConsumables.SquadronManualName})"))
                 {
                     requiredSquadronManual = Default;
                     changed = true;

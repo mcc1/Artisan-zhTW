@@ -1,4 +1,4 @@
-﻿using Artisan.CraftingLogic.CraftData;
+using Artisan.CraftingLogic.CraftData;
 using Artisan.RawInformation.Character;
 using System.Text;
 

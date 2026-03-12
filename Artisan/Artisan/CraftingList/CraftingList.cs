@@ -1,4 +1,4 @@
-﻿using Artisan.Autocraft;
+using Artisan.Autocraft;
 using Artisan.GameInterop;
 using Artisan.GameInterop.CSExt;
 using Artisan.RawInformation;

@@ -1,4 +1,4 @@
-﻿using Artisan.CraftingLists;
+using Artisan.CraftingLists;
 using Artisan.RawInformation;
 using Artisan.Tasks;
 using Dalamud.Game.ClientState.Conditions;

@@ -1,4 +1,4 @@
-﻿using Artisan.Autocraft;
+using Artisan.Autocraft;
 using Artisan.RawInformation.Character;
 using ECommons.DalamudServices;
 using ECommons.ExcelServices;

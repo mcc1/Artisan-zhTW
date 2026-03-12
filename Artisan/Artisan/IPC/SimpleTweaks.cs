@@ -1,4 +1,4 @@
-﻿using ECommons.Logging;
+using ECommons.Logging;
 using ECommons.Reflection;
 
 namespace Artisan.IPC

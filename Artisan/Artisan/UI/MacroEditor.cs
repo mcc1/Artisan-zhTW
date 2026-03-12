@@ -180,7 +180,7 @@ namespace Artisan.UI
 
                     if (selectedStepIndex >= 0)
                     {
-                        if (ImGui.Button($"插入新技能 - 与上一步相同：({SelectedMacro.Steps[selectedStepIndex].Action.NameOfAction()})"))
+                        if (ImGui.Button($"插入新技能 - 與上一步相同：({SelectedMacro.Steps[selectedStepIndex].Action.NameOfAction()})"))
                         {
                             SelectedMacro.Steps.Insert(selectedStepIndex + 1, new() { Action = SelectedMacro.Steps[selectedStepIndex].Action });
                             ++selectedStepIndex;
@@ -206,7 +206,7 @@ namespace Artisan.UI
                         var step = SelectedMacro.Steps[selectedStepIndex];
 
                         ImGui.NextColumn();
-                        ImGuiEx.CenterColumnText($"选中的技能：{(step.Action == Skills.None ? "Artisan 建議" : step.Action.NameOfAction())}", true);
+                        ImGuiEx.CenterColumnText($"選中的技能：{(step.Action == Skills.None ? "Artisan 建議" : step.Action.NameOfAction())}", true);
                         if (selectedStepIndex > 0)
                         {
                             ImGui.SameLine();
@@ -441,11 +441,11 @@ namespace Artisan.UI
                 });
                 ImGuiEx.ImGuiLineCentered("MTimeArtisan", delegate
                 {
-                    ImGuiEx.Text($"Artisan宏耗时：{MacroUI.GetMacroLength(SelectedMacro)} 秒");
+                    ImGuiEx.Text($"Artisan 宏耗時：{MacroUI.GetMacroLength(SelectedMacro)} 秒");
                 });
                 ImGuiEx.ImGuiLineCentered("MTimeTeamcraft", delegate
                 {
-                    ImGuiEx.Text($"普通宏耗时：{MacroUI.GetTeamcraftMacroLength(SelectedMacro)} 秒");
+                    ImGuiEx.Text($"普通宏耗時：{MacroUI.GetTeamcraftMacroLength(SelectedMacro)} 秒");
                 });
             }
             else

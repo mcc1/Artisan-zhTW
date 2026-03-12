@@ -79,7 +79,7 @@ public class ScriptSolverSettings
                 if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
                 {
                     ImGui.BeginTooltip();
-                    ImGui.TextUnformatted($"Compilation output:\n{s.CompilationOutput()}");
+                    ImGui.TextUnformatted($"Compilation output: {s.CompilationOutput()}");
                     ImGui.EndTooltip();
                 }
             }

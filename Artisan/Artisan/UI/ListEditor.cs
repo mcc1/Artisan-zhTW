@@ -334,7 +334,7 @@ internal class ListEditor : Window, IDisposable
                     else
                         SelectedList.Recipes.Add(new ListItem() { Quantity = recipe.Quantity, ID = recipe.ID });
                 }
-                Notify.Success($"将所有物品从{copyList.Name}复制到{SelectedList.Name}。");
+                Notify.Success($"將所有物品從{copyList.Name}複製到{SelectedList.Name}。");
                 RecipeSelector.Items = SelectedList.Recipes.Distinct().ToList();
                 RefreshTable(null, true);
                 P.Config.Save();
@@ -611,7 +611,7 @@ internal class ListEditor : Window, IDisposable
         {
             listTime = CraftingListUI.GetListTimer(SelectedList);
         });
-        string duration = listTime == TimeSpan.Zero ? "未知" : string.Format("{0:D2}d {1:D2}h {2:D2}m {3:D2}s", listTime.Days, listTime.Hours, listTime.Minutes, listTime.Seconds);
+        string duration = listTime == TimeSpan.Zero ? "未知" : string.Format("{0}d {1}h {2}m {3}s", listTime.Days, listTime.Hours, listTime.Minutes, listTime.Seconds);
         ImGui.SameLine();
         ImGui.Text($"大致清單時間：{duration}");
     }
@@ -788,7 +788,7 @@ internal class ListEditor : Window, IDisposable
                         {
                             jobs.AddRange(LuminaSheets.RecipeSheet.Values.Where(x => x.ItemResult.RowId == ingredientRecipe.Value.ItemResult.RowId).Select(x => x.CraftType.RowId + 8));
                             string[]? jobstrings = LuminaSheets.ClassJobSheet.Values.Where(x => jobs.Any(y => y == x.RowId)).Select(x => x.Abbreviation.ToString()).ToArray();
-                            ImGui.Text(string.Join(", ", jobstrings));
+                            ImGui.Text(string.Join(",", jobstrings));
                         }
                         catch (Exception ex)
                         {
@@ -893,7 +893,7 @@ internal class ListEditor : Window, IDisposable
 
         ImGui.Checkbox($"僅顯示HQ製作", ref HQSubcraftsOnly);
 
-        ImGuiComponents.HelpMarker($"对于可以制作的素材，这将只显示HQ物品在背包{(RetainerInfo.ATools ? " 和雇员" : "")} 的计数。");
+        ImGuiComponents.HelpMarker($"对于可以制作的素材，這將只显示HQ物品在背包{(RetainerInfo.ATools ? " 和雇员" : "")} 的计数。");
 
         ImGui.SameLine();
         ImGui.Checkbox("啟用顏色驗證", ref ColourValidation);
@@ -963,7 +963,7 @@ internal class ListEditor : Window, IDisposable
             ImGui.PopStyleColor();
             ImGui.SameLine();
             ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 7);
-            ImGui.Text($" - 库存中拥有所有所需物品，{(SelectedList.SkipIfEnough && SelectedList.SkipLiteral ? "" : "或因拥有使用此材料的成品而不需要")}");
+            ImGui.Text($"- 库存中拥有所有所需物品，{(SelectedList.SkipIfEnough && SelectedList.SkipLiteral ? "" : "或因拥有使用此材料的成品而不需要")}");
 
             if (RetainerInfo.ATools)
             {
@@ -974,7 +974,7 @@ internal class ListEditor : Window, IDisposable
                 ImGui.PopStyleColor();
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 7);
-                ImGui.Text($" - 雇员+背包包含所有必需的物品。");
+                ImGui.Text($"- 雇员+背包包含所有必需的物品。");
             }
 
             ImGui.PushStyleColor(ImGuiCol.Button, ImGuiColors.ParsedBlue);
@@ -984,7 +984,7 @@ internal class ListEditor : Window, IDisposable
             ImGui.PopStyleColor();
             ImGui.SameLine();
             ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 7);
-            ImGui.Text($" - 背包+可制作物品包含所有必需的物品。");
+            ImGui.Text($"- 背包+可制作物品包含所有必需的物品。");
         }
 
 
@@ -1005,8 +1005,8 @@ internal class ListEditor : Window, IDisposable
         ImGui.BulletText($"Right clicking on an ingredient name opens a context menu with further options.");
         ImGui.BulletText($"Clicking and dragging on the space on the headers between columns (as shown by it lighting up) allows you to re-order the columns.");
         ImGui.BulletText($"Don't see any items? Check the table headers for a red heading. This indicates this column is being filtered on. Right clicking the header will clear the filter.");
-        ImGui.BulletText($"You can extend the functionality of the table by installing the following plugins:\n- Allagan Tools (Enables all retainer features)\n- Item Vendor Lookup\n- Gatherbuddy\n- Monster Loot Hunter");
-        ImGui.BulletText($"Tip: Filter on \"Remaining Needed\" and \"Sources\" when gathering to help filter on items missing, along with sorting by gathered zone\nto help reduce travel times.");
+        ImGui.BulletText($"You can extend the functionality of the table by installing the following plugins: - Allagan Tools (Enables all retainer features) - Item Vendor Lookup - Gatherbuddy - Monster Loot Hunter");
+        ImGui.BulletText($"Tip: Filter on \"Remaining Needed\" and \"Sources\" when gathering to help filter on items missing, along with sorting by gathered zone to help reduce travel times.");
 
         ImGui.SetCursorPosY(windowSize.Y - ImGui.GetFrameHeight() - ImGui.GetStyle().WindowPadding.Y);
         if (ImGui.Button("Close Help", -Vector2.UnitX))
@@ -1032,10 +1032,10 @@ internal class ListEditor : Window, IDisposable
                 P.Config.Save();
             }
 
-            ImGuiComponents.HelpMarker("Will continue to craft materials whilst your inventory has less of a material up to the amount the list would craft if starting from zero.\n\n" +
-                "[Recipe Amount Result] x [Number of Crafts] is less than [Inventory Amount].\n\n" +
-                "Use this when crafting materials for items not on your list (eg FC workshop projects)\n\n" +
-                "This will also adjust the ingredient table's remaining column and colour validation to exclude checking for crafted items the ingredient may be used in.");
+            ImGuiComponents.HelpMarker("Will continue to craft materials whilst your inventory has less of a material up to the amount the list would craft if starting from zero." +
+"[Recipe Amount Result] x [Number of Crafts] is less than [Inventory Amount]." +
+"Use this when crafting materials for items not on your list (eg FC workshop projects)" +
+"This will also adjust the ingredient table's remaining column and colour validation to exclude checking for crafted items the ingredient may be used in.");
             ImGui.Unindent();
         }
 

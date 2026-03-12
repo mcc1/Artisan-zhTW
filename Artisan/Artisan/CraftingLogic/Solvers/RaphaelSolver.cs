@@ -288,7 +288,7 @@ namespace Artisan.CraftingLogic.Solvers
                     //Svc.Log.Debug($"{curStats.Craftsmanship}/{craft.StatCraftsmanship} - {curStats.Control}/{craft.StatControl} - {curStats.CP}/{craft.StatCP}");
                     if (liveStats && craft.StatCraftsmanship != curStats.Craftsmanship && solverIsRaph)
                     {
-                        var craftsmanshipError = curStats.Craftsmanship - craft.StatCraftsmanship > 0 ? $"(超出 {curStats.Craftsmanship - craft.StatCraftsmanship}) " : "";
+                        var craftsmanshipError = curStats.Craftsmanship - craft.StatCraftsmanship > 0 ? $"(超出 {curStats.Craftsmanship - craft.StatCraftsmanship})" : "";
                         ImGuiEx.Text(ImGuiColors.DalamudRed, $"您目前的製作力 {craftsmanshipError}與產生的結果不符。\n由於可能提前完成，此求解器在匹配之前不會被使用。\n(您可能需要套用正確的增益效果)");
                     }
 
@@ -432,7 +432,7 @@ namespace Artisan.CraftingLogic.Solvers
 
             ImGuiComponents.HelpMarker($"若解決方案產生時間超過此分鐘數，將取消產生任務。");
 
-            if (ImGui.Button($"清除 raphael 宏缓存 (当前存储 {P.Config.RaphaelSolverCacheV3.Count} 个)"))
+            if (ImGui.Button($"清除 raphael 宏快取 (当前存储 {P.Config.RaphaelSolverCacheV3.Count} 個)"))
             {
                 P.Config.RaphaelSolverCacheV3.Clear();
                 changed |= true;

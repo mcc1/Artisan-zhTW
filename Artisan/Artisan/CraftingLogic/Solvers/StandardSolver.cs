@@ -1,4 +1,4 @@
-﻿using ECommons.DalamudServices;
+using ECommons.DalamudServices;
 using System;
 using System.Collections.Generic;
 using Condition = Artisan.CraftingLogic.CraftData.Condition;

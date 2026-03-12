@@ -124,10 +124,10 @@ namespace Artisan.Universalis
         {
             return region switch
             {
-                "Japan" => Japan,
-                "North-America" => NorthAmerica,
-                "Europe" => Europe,
-                "Oceania" => Oceania,
+"Japan" => Japan,
+"North-America" => NorthAmerica,
+"Europe" => Europe,
+"Oceania" => Oceania,
 "中國" => 中国,
                 _ => null
             };

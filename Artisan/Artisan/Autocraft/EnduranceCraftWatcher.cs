@@ -1,4 +1,4 @@
-﻿using Artisan.CraftingLists;
+using Artisan.CraftingLists;
 using Artisan.CraftingLogic;
 using Artisan.GameInterop;
 using Artisan.Sounds;

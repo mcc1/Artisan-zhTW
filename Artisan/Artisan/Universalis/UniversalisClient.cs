@@ -1,4 +1,4 @@
-﻿using ECommons;
+using ECommons;
 using ECommons.DalamudServices;
 using Newtonsoft.Json;
 using System;
@@ -77,7 +77,7 @@ namespace Artisan.Universalis
             if (result.StatusCode != HttpStatusCode.OK)
             {
                 Svc.Log.Error(
-                    "Failed to retrieve data from Universalis for ItemId {0} / worldId {1} with HttpStatusCode {2}.",
+"Failed to retrieve data from Universalis for ItemId {0} / worldId {1} with HttpStatusCode {2}.",
                     ItemId,
                     region,
                     result.StatusCode);
@@ -88,7 +88,7 @@ namespace Artisan.Universalis
             if (json == null)
             {
                 Svc.Log.Error(
-                    "Failed to deserialize Universalis response for ItemId {0} / worldId {1}.",
+"Failed to deserialize Universalis response for ItemId {0} / worldId {1}.",
                     ItemId,
                     region);
                 return null;
@@ -138,7 +138,7 @@ namespace Artisan.Universalis
             {
                 Svc.Log.Error(
                     ex,
-                    "Failed to parse marketBoard data for ItemId {0} / worldId {1}.",
+"Failed to parse marketBoard data for ItemId {0} / worldId {1}.",
                     ItemId,
                     region);
                 return null;
