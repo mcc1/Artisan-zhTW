@@ -893,7 +893,7 @@ internal class ListEditor : Window, IDisposable
 
         ImGui.Checkbox($"僅顯示HQ製作", ref HQSubcraftsOnly);
 
-        ImGuiComponents.HelpMarker($"对于可以制作的素材，這將只显示HQ物品在背包{(RetainerInfo.ATools ? " 和雇员" : "")} 的计数。");
+        ImGuiComponents.HelpMarker($"对于可以制作的素材，這將只显示HQ物品在背包{(RetainerInfo.ATools ? "和雇员" : "")} 的计数。");
 
         ImGui.SameLine();
         ImGui.Checkbox("啟用顏色驗證", ref ColourValidation);
