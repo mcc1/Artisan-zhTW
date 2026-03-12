@@ -677,7 +677,7 @@ namespace Artisan.UI
                     P.Config.Save();
                 }
 
-                if (ImGui.Checkbox($"提升品质起手，使用 ({Skills.Reflect.NameOfAction()})", ref P.Config.UseQualityStarter))
+                if (ImGui.Checkbox($"提升品質起手，使用 ({Skills.Reflect.NameOfAction()})", ref P.Config.UseQualityStarter))
                     P.Config.Save();
                 ImGuiComponents.HelpMarker($"在耐久度較低的製作中更有利。");
 
@@ -686,13 +686,13 @@ namespace Artisan.UI
 
                 //ImGuiComponents.HelpMarker("This swaps out Waste Not II & Groundwork for Prudent Synthesis");
 
-                ImGui.TextWrapped($"{Skills.PreparatoryTouch.NameOfAction()} - 最大{Buffs.InnerQuiet.NameOfBuff()}層数");
+                ImGui.TextWrapped($"{Skills.PreparatoryTouch.NameOfAction()} - 最大 {Buffs.InnerQuiet.NameOfBuff()} 層數");
                 ImGui.SameLine();
                 ImGuiComponents.HelpMarker($"將僅使用 {Skills.PreparatoryTouch.NameOfAction()} 來提高 {Buffs.InnerQuiet.NameOfBuff()} 的層數。這有助於調整製作力用量。");
                 if (ImGui.SliderInt($"###MaxIQStacksPrepTouch", ref P.Config.MaxIQPrepTouch, 0, 10))
                     P.Config.Save();
 
-                if (ImGui.Checkbox($"Use Material Miracle when available", ref P.Config.UseMaterialMiracle))
+                if (ImGui.Checkbox("可用時使用素材奇蹟", ref P.Config.UseMaterialMiracle))
                     P.Config.Save();
 
                 ImGuiComponents.HelpMarker($"這將在增益持續時間內將標準配方求解器切換到專家求解器。由於這是一個定時增益，而不是具有層數的永久增益，因此不會給您提供正確的模擬器結果，我們無法真正正確模擬它。");
@@ -700,7 +700,7 @@ namespace Artisan.UI
                 if (P.Config.UseMaterialMiracle)
                 {
                     ImGui.Indent();
-                    if (ImGui.Checkbox($"Use more than once per craft.", ref P.Config.MaterialMiracleMulti))
+                    if (ImGui.Checkbox("每次製作可使用超過一次。", ref P.Config.MaterialMiracleMulti))
                         P.Config.Save();
 
                     ImGui.Unindent();

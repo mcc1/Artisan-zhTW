@@ -252,7 +252,7 @@ public class RecipeConfig
                 if (opt == default) continue;
                 if (opt.UnsupportedReason.Length > 0)
                 {
-                    ImGui.Text($"{opt.Name} 不受支持 - {opt.UnsupportedReason}");
+                    ImGui.Text($"{opt.Name} 不受支援 - {opt.UnsupportedReason}");
                 }
                 else
                 {
