@@ -292,7 +292,7 @@ namespace Artisan.UI
 
                     if (ImGui.Button("Test Universalis Marketboard"))
                     {
-                        var itemId = (ulong)Math.Max(DebugValue, 1);
+                        var itemId = (ulong)Math.Max(DebugValue, 5056);
                         P.UniversalsisClient.PlayerWorld = currentWorld == 0 ? null : currentWorld;
 
                         try
