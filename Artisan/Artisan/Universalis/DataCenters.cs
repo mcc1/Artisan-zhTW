@@ -47,7 +47,7 @@ namespace Artisan.Universalis
                 return name;
 
             var fallback = Svc.Data.GetExcelSheet<World>()?.FirstOrDefault(x => x.RowId == world).Name;
-            return fallback?.Value.ExtractText();
+            return fallback?.ExtractText();
         }
 
         internal static string? GetRegionNameByWorld(uint world)
