@@ -8,6 +8,7 @@ using Artisan.IPC;
 using Artisan.QuestSync;
 using Artisan.RawInformation;
 using Artisan.RawInformation.Character;
+using Artisan.Universalis;
 using Dalamud.Interface.Utility.Raii;
 using ECommons;
 using ECommons.DalamudServices;
@@ -39,6 +40,8 @@ namespace Artisan.UI
         internal static bool Debug = false;
         public static int DebugValue = 1;
         static int NQMats, HQMats = 0;
+        private static string universalisMetadataStatus = "Not tested";
+        private static string universalisMarketboardStatus = "Not tested";
 
         private static string FormatQuestDebugLine(ushort questId, byte flags)
         {
@@ -264,6 +267,50 @@ namespace Artisan.UI
                         ImGui.TextWrapped(FormatQuestDebugLine(quest.QuestId, quest.Flags));
                     }
 
+                }
+
+                if (ImGui.CollapsingHeader("Universalis"))
+                {
+                    var currentWorld = Svc.ClientState.LocalPlayer?.CurrentWorld.RowId ?? 0;
+                    var worldName = currentWorld > 0 ? DataCenters.GetWorldName(currentWorld) : null;
+                    var dataCenter = currentWorld > 0 ? DataCenters.GetDataCenterName(currentWorld) : null;
+                    var region = currentWorld > 0 ? Regions.GetRegionByWorld(currentWorld) : null;
+
+                    ImGui.TextWrapped($"Current World ID: {currentWorld}");
+                    ImGui.TextWrapped($"World Name: {worldName ?? "(null)"}");
+                    ImGui.TextWrapped($"Data Center: {dataCenter ?? "(null)"}");
+                    ImGui.TextWrapped($"Region: {region ?? "(null)"}");
+                    ImGui.TextWrapped($"Metadata Test: {universalisMetadataStatus}");
+                    ImGui.TextWrapped($"Marketboard Test: {universalisMarketboardStatus}");
+
+                    if (ImGui.Button("Test Universalis Metadata"))
+                    {
+                        universalisMetadataStatus = currentWorld == 0
+                            ? "No local player world"
+                            : $"OK - {worldName ?? "(null)"} / {dataCenter ?? "(null)"} / {region ?? "(null)"}";
+                    }
+
+                    if (ImGui.Button("Test Universalis Marketboard"))
+                    {
+                        var itemId = (ulong)Math.Max(DebugValue, 1);
+                        P.UniversalsisClient.PlayerWorld = currentWorld == 0 ? null : currentWorld;
+
+                        try
+                        {
+                            MarketboardData marketboardData = new();
+                            var result = P.Config.LimitUnversalisToDC
+                                ? P.UniversalsisClient.GetDCData(itemId, ref marketboardData)
+                                : P.UniversalsisClient.GetRegionData(itemId, ref marketboardData);
+
+                            universalisMarketboardStatus = result == null
+                                ? $"Failed - item {itemId}"
+                                : $"OK - item {itemId}, listings {result.TotalNumberOfListings}, units {result.TotalQuantityOfUnits}, lowest world {result.LowestWorld ?? "(null)"}";
+                        }
+                        catch (Exception ex)
+                        {
+                            universalisMarketboardStatus = $"Exception - {ex.Message}";
+                        }
+                    }
                 }
 
                 if (ImGui.CollapsingHeader("IPC"))
