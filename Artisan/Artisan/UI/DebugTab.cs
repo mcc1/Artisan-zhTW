@@ -53,30 +53,6 @@ namespace Artisan.UI
             return $"Quest ID: {questId}, RowId: {rowId}, Full ID: {fullQuestId}, Sequence: {QuestManager.GetQuestSequence(questId)}, Name: {questId.NameOfQuest()}, Flags: {flags}";
         }
 
-        private static string BuildQuestMappingText(QuestManager* qm)
-        {
-            var lines = new System.Collections.Generic.List<string>();
-            foreach (var quest in qm->DailyQuests)
-            {
-                if (quest.QuestId != 0)
-                    lines.Add(FormatQuestDebugLine(quest.QuestId, quest.Flags));
-            }
-
-            if (lines.Count == 0)
-                return "No active daily quests.";
-
-            return string.Join(Environment.NewLine, lines);
-        }
-
-        private static string BuildSupportedQuestMappingText()
-        {
-            var lines = QuestList.GetSupportedQuestIds()
-                .Select(id => FormatQuestDebugLine(id, 0))
-                .ToList();
-
-            return string.Join(Environment.NewLine, lines);
-        }
-
         internal static void Draw()
         {
             try
@@ -283,15 +259,6 @@ namespace Artisan.UI
                 {
                     QuestManager* qm = QuestManager.Instance();
                     ImGui.TextWrapped($"Client Language: {Svc.ClientState.ClientLanguage}");
-                    if (ImGui.Button("複製任務對照"))
-                    {
-                        ImGui.SetClipboardText(BuildQuestMappingText(qm));
-                    }
-                    ImGui.SameLine();
-                    if (ImGui.Button("複製所有支援任務"))
-                    {
-                        ImGui.SetClipboardText(BuildSupportedQuestMappingText());
-                    }
                     foreach (var quest in qm->DailyQuests)
                     {
                         ImGui.TextWrapped(FormatQuestDebugLine(quest.QuestId, quest.Flags));
