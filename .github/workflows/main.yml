@@ -211,7 +211,7 @@ jobs:
         (needs.publish-dev.result == 'success' || needs.publish-dev.result == 'skipped')
       }}
     with:
-      gitlab_repo_url: https://git.mccma.cc/mcc/dalamudplugins-zhtw.git
+      gitlab_repo_url: https://git.mccma.cc/ffxiv/dalamudplugins-zhtw.git
       gitlab_repo_branch: master
       repo_sources_path: plugins.sources.json
       repo_json_path: repo.json
