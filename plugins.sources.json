@@ -1,0 +1,42 @@
+[
+  {
+    "internal_name": "AutoRetainer",
+    "source_repo": "mcc1/AutoRetainer-zhTW",
+    "manifest_path": "AutoRetainer.json",
+    "asset_name_regex": "^AutoRetainer-.*\\.zip$",
+    "include_prereleases": false
+  },
+  {
+    "internal_name": "AutoRetainer",
+    "source_repo": "mcc1/AutoRetainer-zhTW",
+    "manifest_path": "AutoRetainer.json",
+    "fixed_release_tag": "autoretainer-dev",
+    "asset_name_regex": "^AutoRetainer-dev\\.zip$",
+    "manifest_overrides": {
+      "Name": "AutoRetainer Dev",
+      "Punchline": "AutoRetainer 繁中測試版。",
+      "Description": "AutoRetainer 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。",
+      "RepoUrl": "https://github.com/mcc1/AutoRetainer-zhTW"
+    }
+  },
+  {
+    "internal_name": "Artisan",
+    "source_repo": "mcc1/Artisan-zhTW",
+    "manifest_path": "Artisan.json",
+    "asset_name_regex": "^Artisan-.*-zhTW\\.zip$",
+    "include_prereleases": false
+  },
+  {
+    "internal_name": "Artisan",
+    "source_repo": "mcc1/Artisan-zhTW",
+    "manifest_path": "Artisan.json",
+    "fixed_release_tag": "artisan-dev",
+    "asset_name_regex": "^Artisan-dev\\.zip$",
+    "manifest_overrides": {
+      "Name": "Artisan Dev",
+      "Punchline": "Artisan 繁中測試版。",
+      "Description": "Artisan 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。",
+      "RepoUrl": "https://github.com/mcc1/Artisan-zhTW"
+    }
+  }
+]

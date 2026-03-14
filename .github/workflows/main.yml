@@ -192,8 +192,8 @@ jobs:
             gh release create "$DEV_TAG" "dist/$DEV_ASSET_NAME" --prerelease --title "$DEV_TITLE" --notes "$DEV_NOTES"
           fi
 
-  sync-plugin-source:
-    name: Sync DalamudPlugins-zhTW
+  sync-gitlab-pages:
+    name: Sync GitLab Pages repo.json
     needs:
       - artisan
       - publish-dev
@@ -211,77 +211,25 @@ jobs:
         (needs.publish-dev.result == 'success' || needs.publish-dev.result == 'skipped')
       }}
     runs-on: ubuntu-latest
-    permissions: {}
-    env:
-      TARGET_REPO: mcc1/DalamudPlugins-zhTW
-      TARGET_WORKFLOW: sync-repo.yml
-    steps:
-      - name: Trigger Plugin Source Sync
-        env:
-          GH_TOKEN: ${{ secrets.PLUGIN_SOURCE_SYNC_TOKEN }}
-        run: |
-          if [ -z "$GH_TOKEN" ]; then
-            echo "PLUGIN_SOURCE_SYNC_TOKEN is not configured; skipping plugin source sync."
-            exit 0
-          fi
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            "/repos/$TARGET_REPO/dispatches" \
-            -f event_type='sync-plugin-source' \
-            -F client_payload[source_repo]="$GITHUB_REPOSITORY" \
-            -F client_payload[source_run_id]="$GITHUB_RUN_ID"
-
-  sync-gitlab-pages:
-    name: Sync GitLab Pages repo.json
-    needs:
-      - sync-plugin-source
-    if: ${{ needs.sync-plugin-source.result == 'success' }}
-    runs-on: ubuntu-latest
     permissions:
       contents: read
     env:
-      TARGET_REPO: mcc1/DalamudPlugins-zhTW
-      TARGET_WORKFLOW: sync-repo.yml
       GITLAB_REPO_URL: https://oauth2:${{ secrets.GITLAB_PUSH_TOKEN }}@git.mccma.cc/mcc/dalamudplugins-zhtw.git
       GITLAB_REPO_BRANCH: master
     steps:
-      - name: Wait for Plugin Source Sync run
+      - name: Checkout Consumer Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate repo.json
         env:
-          GH_TOKEN: ${{ secrets.PLUGIN_SOURCE_SYNC_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
-          if [ -z "$GH_TOKEN" ]; then
-            echo "PLUGIN_SOURCE_SYNC_TOKEN is not configured; cannot wait for repo.json sync."
-            exit 1
-          fi
-
-          for attempt in $(seq 1 30); do
-            run_id="$(gh run list \
-              --repo "$TARGET_REPO" \
-              --workflow "$TARGET_WORKFLOW" \
-              --event repository_dispatch \
-              --limit 1 \
-              --json databaseId \
-              --jq '.[0].databaseId')"
-
-            if [ -n "$run_id" ] && [ "$run_id" != "null" ]; then
-              echo "Found sync run: $run_id"
-              gh run watch "$run_id" --repo "$TARGET_REPO" --exit-status
-              exit 0
-            fi
-
-            echo "Waiting for sync workflow run to appear..."
-            sleep 10
-          done
-
-          echo "Timed out waiting for $TARGET_REPO/$TARGET_WORKFLOW repository_dispatch run."
-          exit 1
-
-      - name: Fetch latest repo.json from GitHub
-        env:
-          GH_TOKEN: ${{ secrets.PLUGIN_SOURCE_SYNC_TOKEN }}
-        run: |
-          gh api "repos/$TARGET_REPO/contents/repo.json?ref=master" --jq .content | base64 -d > repo.json
+          python scripts/sync_repo.py
 
       - name: Push repo.json to GitLab Pages repo
         run: |
