@@ -212,7 +212,9 @@ jobs:
       }}
     secrets: inherit
     with:
-      gitlab_repo_url: https://oauth2:${{ secrets.GITLAB_PUSH_TOKEN }}@git.mccma.cc/mcc/dalamudplugins-zhtw.git
+      gitlab_repo_url: https://git.mccma.cc/mcc/dalamudplugins-zhtw.git
       gitlab_repo_branch: master
       repo_sources_path: plugins.sources.json
       repo_json_path: repo.json
+    secrets:
+      gitlab_push_token: ${{ secrets.GITLAB_PUSH_TOKEN }}
