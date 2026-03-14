@@ -210,7 +210,6 @@ jobs:
         needs.artisan.result == 'success' &&
         (needs.publish-dev.result == 'success' || needs.publish-dev.result == 'skipped')
       }}
-    secrets: inherit
     with:
       gitlab_repo_url: https://git.mccma.cc/mcc/dalamudplugins-zhtw.git
       gitlab_repo_branch: master
