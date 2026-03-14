@@ -193,7 +193,7 @@ jobs:
           fi
 
   sync-gitlab-pages:
-    name: Sync GitLab Pages repo.json
+    uses: mcc1/dalamud-mod-localizer/.github/workflows/reusable-sync-repo-json.yml@main
     needs:
       - artisan
       - publish-dev
@@ -210,46 +210,9 @@ jobs:
         needs.artisan.result == 'success' &&
         (needs.publish-dev.result == 'success' || needs.publish-dev.result == 'skipped')
       }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    env:
-      GITLAB_REPO_URL: https://oauth2:${{ secrets.GITLAB_PUSH_TOKEN }}@git.mccma.cc/mcc/dalamudplugins-zhtw.git
-      GITLAB_REPO_BRANCH: master
-    steps:
-      - name: Checkout Consumer Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Generate repo.json
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          python scripts/sync_repo.py
-
-      - name: Push repo.json to GitLab Pages repo
-        run: |
-          if [ -z "${{ secrets.GITLAB_PUSH_TOKEN }}" ]; then
-            echo "GITLAB_PUSH_TOKEN is not configured; skipping GitLab Pages sync."
-            exit 0
-          fi
-
-          git clone --branch "$GITLAB_REPO_BRANCH" "$GITLAB_REPO_URL" gitlab-pages
-          cp repo.json gitlab-pages/repo.json
-
-          cd gitlab-pages
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add repo.json
-
-          if git diff --cached --quiet; then
-            echo "No repo.json changes to push."
-            exit 0
-          fi
-
-          git commit -m "chore: sync repo.json from $GITHUB_REPOSITORY@$GITHUB_SHA"
-          git push origin "$GITLAB_REPO_BRANCH"
+    secrets: inherit
+    with:
+      gitlab_repo_url: https://oauth2:${{ secrets.GITLAB_PUSH_TOKEN }}@git.mccma.cc/mcc/dalamudplugins-zhtw.git
+      gitlab_repo_branch: master
+      repo_sources_path: plugins.sources.json
+      repo_json_path: repo.json
