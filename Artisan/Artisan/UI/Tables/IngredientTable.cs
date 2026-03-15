@@ -54,7 +54,8 @@ namespace Artisan.UI.Tables
         public readonly NumberForSaleColumn _numberForSaleColumn = new() { Label = "出售數量（所有伺服器）" };
 
         private static bool GatherBuddy =>
-            DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var _, false, true);
+            DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var _, false, true) ||
+            DalamudReflector.TryGetDalamudPlugin("GatherbuddyReborn", out _, false, true);
 
         private static bool ItemVendor =>
             DalamudReflector.TryGetDalamudPlugin("ItemVendorLocation", out var _, false, true);
