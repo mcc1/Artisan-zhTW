@@ -168,7 +168,7 @@ internal class ListEditor : Window, IDisposable
 
     private static bool GatherBuddy =>
         DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var gb, false, true) ||
-        DalamudReflector.TryGetDalamudPlugin("GatherbuddyReborn", out gb, false, true);
+        DalamudReflector.TryGetDalamudPlugin("GatherBuddyReborn", out gb, false, true);
 
     private static bool ItemVendor =>
         DalamudReflector.TryGetDalamudPlugin("Item Vendor Location", out var ivl, false, true);

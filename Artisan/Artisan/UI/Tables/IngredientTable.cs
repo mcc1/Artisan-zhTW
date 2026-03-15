@@ -55,7 +55,7 @@ namespace Artisan.UI.Tables
 
         private static bool GatherBuddy =>
             DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var _, false, true) ||
-            DalamudReflector.TryGetDalamudPlugin("GatherbuddyReborn", out _, false, true);
+            DalamudReflector.TryGetDalamudPlugin("GatherBuddyReborn", out _, false, true);
 
         private static bool ItemVendor =>
             DalamudReflector.TryGetDalamudPlugin("ItemVendorLocation", out var _, false, true);
