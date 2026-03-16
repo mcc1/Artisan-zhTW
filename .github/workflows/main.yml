@@ -28,6 +28,9 @@ on:
 permissions:
   contents: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   artisan:
     uses: mcc1/dalamud-mod-localizer/.github/workflows/reusable-build-mod.yml@main
