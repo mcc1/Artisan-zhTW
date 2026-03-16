@@ -120,12 +120,7 @@ namespace Artisan.CraftingLists
             {
                 ImGui.Text("清單名稱");
                 ImGui.SameLine();
-                ImGuiComponents.HelpMarker("导入清单指南。\r\n\r\n" +
-                    "步骤 1. 在 Teamcraft 上打开一个包含您想要制作的物品的列表。\r\n\r\n" +
-                    "步骤 2. 找到预制作部分并点击“复制为文本”按钮。\r\n\r\n" +
-                    "步骤 3. 将内容粘贴到此窗口的前置配方物品中。\r\n\r\n" +
-                    "步骤 4. 重复步骤 2 和 3，但用于成品部分。\r\n\r\n" +
-                    "步骤 5. 为您的列表命名并点击导入。");
+                ImGuiComponents.HelpMarker($"匯入清单指南。步骤 1. 在 Teamcraft 上打开一個包含您想要制作的物品的列表。步骤 2. 找到预制作部分並點擊「複製為文本」按鈕。步骤 3. 將内容粘貼到此視窗的前置配方物品中。步骤 4. 重複步骤 2 和 3，但用于成品部分。步骤 5. 為您的列表命名並點擊匯入。");
                 ImGui.InputText("###ImportListName", ref importListName, 50);
                 ImGui.Text("前置配方物品");
                 ImGui.InputTextMultiline("###PrecraftItems", ref importListPreCraft, 5000000, new Vector2(ImGui.GetContentRegionAvail().X, 100));

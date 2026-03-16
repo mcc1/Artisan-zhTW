@@ -300,10 +300,7 @@ namespace Artisan.UI
             });
             ImGui.Spacing();
 
-            ImGuiEx.TextWrapped($"Artisan具有\"自动制作模式\"该模式仅接受内置解算器给出的建议并且代替你自动操作。" +
-                                " 默认情况下，它会以游戏允许的间隔速度使用制作技能，这比使用游戏内的宏更快。" +
-                                " 使用它并没有绕过任何形式的游戏限制，但如果你打算制作速度慢一些，你可以设置延迟。" +
-                                " 启用此选项不影响Artisan默认使用的建议生成过程。");
+            ImGuiEx.TextWrapped($"Artisan 具有\"自動制作模式\"該模式僅接受內建解算器给出的建議並且代替你自動操作。 預設情况下，它會以游戏允许的间隔速度使用制作技能，這比使用游戏内的宏更快。 使用它並沒有绕过任何形式的游戏限制，但如果你打算制作速度慢一些，你可以設定延迟。 啟用此选项不影响Artisan預設使用的建議生成过程。");
 
             var automode = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/AutoMode.png");
 
@@ -315,8 +312,7 @@ namespace Artisan.UI
                 });
             }
 
-            ImGuiEx.TextWrapped($"如果你没有启用自动模式，你将可以接触另外2种模式：\"半自动模式\"和\"全手动模式\"。" +
-                                $" \"半自动模式\"将在你开始制作作业时，出现在一个弹出的小窗口中。");
+            ImGuiEx.TextWrapped($"如果你沒有啟用自動模式，你將可以接触另外2种模式：\"半自動模式\"和\"全手動模式\"。 \"半自動模式\"將在你開始制作作业時，出现在一個弹出的小視窗中。");
 
             var craftWindowExample = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/ThemeCraftingWindowExample.png");
 
@@ -328,10 +324,7 @@ namespace Artisan.UI
                 });
             }
 
-            ImGuiEx.TextWrapped($"通过点击\"执行建议的操作\"按钮，你将使用插件当前建议的制作技能。" +
-                $" 这被认为是半自动的，因为你仍然需要每一步点击一次操作按钮，但不必去热键栏上找到相应的技能。" +
-                $" \"全手动模式\"是通过正常按下热键栏上的技能来执行的。" +
-                $" 默认情况下，你将得到辅助，如果你将技能放在了热键栏上，Artisan会对相应技能进行高亮提示（可以在设置中禁用）。");
+            ImGuiEx.TextWrapped($"通过點擊\"执行建議的操作\"按鈕，你將使用插件当前建議的制作技能。 這被认為是半自動的，因為你仍然需要每一步點擊一次操作按鈕，但不必去快速鍵欄上找到相应的技能。 \"全手動模式\"是通过正常按下快速鍵欄上的技能来执行的。 預設情况下，你將得到辅助，如果你將技能放在了快速鍵欄上，Artisan 會对相应技能进行高亮提示（可以在設定中禁用）。");
 
             var outlineExample = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/OutlineExample.png");
 
@@ -350,11 +343,7 @@ namespace Artisan.UI
             });
             ImGui.Spacing();
 
-            ImGuiEx.TextWrapped($"默认情况下，Artisan会为你提供下一步制作技能的建议。然而，这个解算器并不完美，它并不能替代一套合适的生产装备。" +
-                $"除了启用Artisan之外，你无需执行任何操作。" +
-                $"\r\n\r\n" +
-                $"如果你正在尝试处理默认解算器无法完成的制作，Artisan允许你构建宏来替代默认解算器。" +
-                $"Artisan宏的好处是不受长度限制，可以在游戏允许的间隔范围内执行宏里的技能，并且还允许设置一些额外的条件在宏运行过程中作出调整。");
+            ImGuiEx.TextWrapped($"預設情况下，Artisan 會為你提供下一步制作技能的建議。然而，這個解算器並不完美，它並不能替代一套合适的生產装备。除了啟用Artisan之外，你无需执行任何操作。\n\n如果你正在尝试处理預設解算器無法完成的制作，Artisan 允许你构建宏来替代預設解算器。Artisan 宏的好处是不受长度限制，可以在游戏允许的间隔范围内执行宏里的技能，並且还允许設定一些额外的条件在宏运行过程中作出调整。");
 
             ImGui.Spacing();
             ImGuiEx.TextUnderlined($"點擊此處前往「巨集」選單。");
@@ -381,8 +370,7 @@ namespace Artisan.UI
             }
 
 
-            ImGuiEx.TextWrapped($"从下拉框中选择已创建的宏。" +
-                $"当你去制作这个物品时，技能建议将被你的宏的内容所取代。");
+            ImGuiEx.TextWrapped($"從下拉選單中選擇已建立的宏。当你去制作這個物品時，技能建議將被你的宏的内容所取代。");
 
 
             ImGui.Spacing();
@@ -392,12 +380,7 @@ namespace Artisan.UI
             });
             ImGui.Spacing();
 
-            ImGuiEx.TextWrapped($"Artisan具有名为\"耐力模式\"的功能，其实就是\"自动重复模式\"文艺一点的说法。" +
-                $"耐力模式的工作原理是从游戏内制作笔记中选择一个配方并启用该功能。" +
-                $"然后，你的角色会尝试在你有素材的情况下制作该物品的许多次。" +
-                $"\r\n\r\n" +
-                $"其他功能应该是不言自明的，因为耐力模式还可以管理你的食物、药水、手册、维修和制作物品之间的素材提取的使用。" +
-                $"装备修理功能仅支持使用暗物质，不支持使用修理NPC。");
+            ImGuiEx.TextWrapped($"Artisan 具有名為\"耐力模式\"的功能，其实就是\"自動重複模式\"文藝一點的说法。耐力模式的工作原理是從游戏内制作笔记中選擇一個配方並啟用該功能。然後，你的角色會尝试在你有素材的情况下制作該物品的许多次。\n\n其他功能应該是不言自明的，因為耐力模式还可以管理你的食物、藥水、手册、修理和制作物品之间的素材提取的使用。装备修理功能僅支持使用暗物质，不支持使用修理 NPC。");
 
             ImGui.Spacing();
             ImGuiEx.TextUnderlined($"點擊此處前往耐力模式。");
@@ -417,9 +400,7 @@ namespace Artisan.UI
             });
             ImGui.Spacing();
 
-            ImGuiEx.TextWrapped($"Artisan还能够生成一个物品清单，并让它开始自动制作清单内的每个物品。" +
-                $"制作清单有很多强大的工具来简化从素材到最终产品的过程。" +
-                $"它还支持在Artisan和Teamcraft之间导入导出。");
+            ImGuiEx.TextWrapped($"Artisan 还能夠生成一個物品清单，並讓它開始自動制作清单内的每個物品。制作清单有很多强大的工具来简化從素材到最终产品的过程。它还支持在Artisan和Teamcraft之间匯入匯出。");
 
             ImGui.Spacing();
             ImGuiEx.TextUnderlined($"點擊此處前往製作清單。");

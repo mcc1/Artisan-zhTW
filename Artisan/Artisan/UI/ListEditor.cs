@@ -601,10 +601,7 @@ internal class ListEditor : Window, IDisposable
 
         if (ImGui.IsItemHovered())
         {
-            ImGuiEx.Tooltip($"将根据配方深度和难度对清单进行排序。配方深度由清单中其他配方所依赖的素材数量定义。\n\n" +
-                $"举例：{LuminaSheets.RecipeSheet[35508].ItemResult.Value.Name.ToDalamudString()} 需要 {LuminaSheets.ItemSheet[36186].Name}，而这反过来又需要 {LuminaSheets.ItemSheet[36189].Name}，如果所有这些物品都在清单中，则此配方的深度为3。\n" +
-                $"没有其他配方依赖项的物品深度为1，因此将转到清单顶部，例如：{LuminaSheets.RecipeSheet[5299].ItemResult.Value.Name.ToDalamudString()}\n\n" +
-                $"最后，根据游戏中制品难度进行排序，希望能将类似的制品组合在一起。");
+            ImGuiEx.Tooltip($"將根据配方深度和难度对清单进行排序。配方深度由清单中其他配方所依赖的素材数量定义。\n\n举例：{LuminaSheets.RecipeSheet[35508].ItemResult.Value.Name.ToDalamudString()} 需要 {LuminaSheets.ItemSheet[36186].Name}，而這反过来又需要 {LuminaSheets.ItemSheet[36189].Name}，如果所有這些物品都在清单中，则此配方的深度為3。\n沒有其他配方依赖项的物品深度為1，因此將转到清单顶部，例如：{LuminaSheets.RecipeSheet[5299].ItemResult.Value.Name.ToDalamudString()}\n\n最後，根据游戏中制品难度进行排序，希望能將类似的制品组合在一起。");
         }
 
         Task.Run(() =>
