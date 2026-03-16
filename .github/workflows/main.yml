@@ -44,6 +44,9 @@ jobs:
       mod_repo_dir: Artisan
       localizer_source_subpaths: Artisan
       localizer_dict_path: zh-TW.json
+      dotnet_sdk_versions: |
+        8.0.x
+        9.0.x
       build_project_path: Artisan/Artisan/Artisan.csproj
       package_build_dir: Artisan/Artisan/bin/Release
       artifact_basename: Artisan
