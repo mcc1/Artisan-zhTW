@@ -77,6 +77,7 @@ jobs:
     permissions:
       contents: write
     env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       DEV_TAG: artisan-dev
       DEV_TITLE: Artisan-zhTW dev
       DEV_NOTES: Latest automated dev build for in-game testing install.
