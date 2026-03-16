@@ -12,7 +12,7 @@ namespace Artisan.UI
 {
     internal class QuestHelper : Window
     {
-        public QuestHelper() : base("Quest Helper###QuestHelper", ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoTitleBar)
+        public QuestHelper() : base("任務助手###QuestHelper", ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoTitleBar)
         {
             IsOpen = true;
             ShowCloseButton = false;

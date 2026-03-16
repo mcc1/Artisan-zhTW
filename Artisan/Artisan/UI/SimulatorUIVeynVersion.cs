@@ -121,7 +121,7 @@ internal static class SimulatorUIVeynVersion
         if (craft.CraftCollectible)
             ImGui.TextUnformatted($"平均收益率：{(double)yield / _statsCurrent.NumExperiments:f3}");
         else
-            ImGui.TextUnformatted($"平均质量：{Math.Round(_statsCurrent.QualityPercents.Average(), 0)}%");
+            ImGui.TextUnformatted($"平均品質：{Math.Round(_statsCurrent.QualityPercents.Average(), 0)}%");
     }
 
     private static void DrawStatistic(string prompt, int count) => ImGui.TextUnformatted($"{prompt}: {count} ({count * 100.0 / _statsCurrent!.NumExperiments:f2}%)");

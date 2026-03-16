@@ -163,7 +163,7 @@ namespace Artisan.UI
             if (!P.Config.DisableToasts)
             {
                 QuestToastOptions options = new() { IconId = action.IconOfAction(CharacterInfo.JobID) };
-                Svc.Toasts.ShowQuest($"使用 {action.NameOfAction()}", options);
+                Svc.Toasts.ShowQuest($"使用{action.NameOfAction()}", options);
             }
         }
 
@@ -179,7 +179,7 @@ namespace Artisan.UI
 
         private void OnSolverFailed(Lumina.Excel.Sheets.Recipe recipe, string reason)
         {
-            var text = $"{reason}。Artisan 不會繼續。";
+            var text = $"{reason}. Artisan不会继续。";
             Svc.Toasts.ShowError(text);
             DuoLog.Error(text);
         }

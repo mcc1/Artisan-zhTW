@@ -60,7 +60,7 @@ namespace Artisan.UI
                         string name = val.NameString;
                         bool materiaDiff = gs->Value.Items.ToArray().Any(x => x.Flags.HasFlag(GearsetItemFlag.MateriaDiffers));
 
-                        return $"{name} (ilvl {val.ItemLevel}){(materiaDiff ? " 警告：偵測到魔晶石配置差異，請更新裝備套裝" : "")}";
+                        return $"{name} (ilvl {val.ItemLevel}){(materiaDiff ? " Warning: Detected Materia difference. Please update gearset" : "")}";
                     }
                 }
             }
@@ -164,7 +164,7 @@ namespace Artisan.UI
 
         private static void DrawIntro()
         {
-            ImGuiEx.TextWrapped("在這個模擬器中，你可以依配方測試不同的解算器，並分析它們的表現。你可以設定 HQ 素材比例、消耗品，甚至指定要使用的裝備套裝。模擬器也可以設為隨機條件，或僅使用「Normal／通常」條件，因此與實際操作的結果可能略有差異。");
+            ImGuiEx.TextWrapped($"在這個模擬器中，你可以根據配方測試不同的解算器，並分析它們的性能。你可以設定你的 HQ 素材配比，設定消耗品，甚至使用哪個裝備套裝。模擬器可以配置為隨機化條件或僅使用\"Normal\"「正常」條件，因此實操效果可能會有所不同。");
         }
 
         private static void DrawSolverMode()
@@ -239,7 +239,7 @@ namespace Artisan.UI
                 ImGuiEx.SetNextItemFullWidth(-120);
                 ImGui.InputText($"###MacroName", ref macroName, 300, ImGuiInputTextFlags.EnterReturnsTrue);
                 ImGui.SameLine();
-                if (ImGui.Button($"導出為巨集"))
+                if (ImGui.Button($"匯出為巨集"))
                 {
                     if (string.IsNullOrEmpty(macroName))
                     {
@@ -502,7 +502,7 @@ namespace Artisan.UI
                         }
                         if (step.Item1 == Simulator.ExecuteResult.Failed)
                         {
-                            Notify.Error($"{action.NameOfAction()} 失败了");
+                            Notify.Error($"{action.NameOfAction()} 失敗了");
                         }
                         if (step.Item1 == Simulator.ExecuteResult.Succeeded)
                         {
@@ -887,7 +887,7 @@ namespace Artisan.UI
                     ImGuiEx.Text($"套裝");
                     ImGui.SameLine(120f);
                     ImGuiEx.SetNextItemFullWidth();
-                    ImGuiEx.Text($"{name} (ilvl {SimGS?.ItemLevel}){(materiaDiff ? " 警告：偵測到魔晶石配置差異，請更新裝備套裝" : "")}");
+                    ImGuiEx.Text($"{name} (ilvl {SimGS?.ItemLevel}){(materiaDiff ? " Warning: Detected Materia difference. Please update gearset" : "")}");
                     return;
                 }
 
@@ -912,7 +912,7 @@ namespace Artisan.UI
 
                     string name = gs.NameString;
                     bool materiaDiff = gs.Items.ToArray().Any(x => x.Flags.HasFlag(GearsetItemFlag.MateriaDiffers));
-                    var selected = ImGui.Selectable($"{name} (ilvl {gs.ItemLevel}){(materiaDiff ? " 警告：偵測到魔晶石配置差異，請更新裝備套裝" : "")}##GS{gs.Id}");
+                    var selected = ImGui.Selectable($"{name} (ilvl {gs.ItemLevel}){(materiaDiff ? " Warning: Detected Materia difference. Please update gearset" : "")}##GS{gs.Id}");
 
                     if (selected)
                     {
@@ -967,11 +967,11 @@ namespace Artisan.UI
 
                 ImGuiEx.ImGuiLineCentered("StartingQuality", () =>
                 {
-                    ImGuiEx.Text($"起手品質：{startingQuality} / {max}（HQ 機率 {hqChance}%，品質 {percentage.ToString("N0")}%）");
+                    ImGuiEx.Text($"起手品質：{startingQuality} / {max} （{hqChance}% HQ 機會, {percentage.ToString("N0")}% 品質）");
                 });
                 ImGuiEx.ImGuiLineCentered("ExpertInfo", () =>
                 {
-                    ImGuiEx.Text($"{(SelectedRecipe.Value.IsExpert ? "高難度配方" : SelectedRecipe.Value.SecretRecipeBook.RowId > 0 ? "秘籍" : "普通配方")}");
+                    ImGuiEx.Text($"{(SelectedRecipe.Value.IsExpert ? "高難度配方" : SelectedRecipe.Value.SecretRecipeBook.RowId > 0 ? "秘笈" : "普通配方")}");
                 });
 
             }

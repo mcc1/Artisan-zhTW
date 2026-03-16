@@ -792,7 +792,7 @@ namespace Artisan
                 {
                     var recipe = LuminaSheets.RecipeSheet!.First(x => x.Key == Endurance.RecipeID).Value;
                     ImGui.BeginTooltip();
-                    ImGui.Text($"無法開始耐力模式，沒有足够的材料来制作這個配方。 缺少：{string.Join("，", PreCrafting.MissingIngredients(recipe))}");
+                    ImGui.Text($"無法開始耐力模式，沒有足夠的材料來製作這個配方。 缺少：{string.Join("，", PreCrafting.MissingIngredients(recipe))}");
                     ImGui.EndTooltip();
                 }
             }
@@ -844,7 +844,7 @@ namespace Artisan
 
                 if (SimpleTweaks.IsFocusTweakEnabled())
                 {
-                    ImGuiEx.TextWrapped(ImGuiColors.DalamudRed, $@"警告：您啟用了 SimpleTweak 中的 ""Auto Focus Recipe Search"" 功能。這與 Artisan 有极大冲突，建議禁用它。");
+                    ImGuiEx.TextWrapped(ImGuiColors.DalamudRed, $@"警告：您啟用了 SimpleTweak 中的 ""Auto Focus Recipe Search"" 功能。這與 Artisan 有極大衝突，建議禁用它。");
                 }
                 if (Endurance.RecipeID != 0)
                 {
@@ -933,7 +933,7 @@ namespace Artisan
                 ImGui.SameLine();
                 if (P.Config.CraftX > 0)
                 {
-                    if (ImGui.Button($"制作{P.Config.CraftX}"))
+                    if (ImGui.Button($"製作{P.Config.CraftX}"))
                     {
                         P.Config.CraftingX = true;
                         Endurance.ToggleEndurance(true);

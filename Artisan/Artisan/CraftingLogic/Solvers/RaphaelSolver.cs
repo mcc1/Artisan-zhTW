@@ -65,7 +65,7 @@ namespace Artisan.CraftingLogic.Solvers
 
                 if (config.EnsureReliability)
                 {
-                    Svc.Log.Error("已啟用可靠性保障，這可能需要較長時間。啟用後將不提供任何支援。");
+                    Svc.Log.Error("已启用确保可靠性，这可能需要较长时间。启用后不提供任何支持。");
                     extraArgsBuilder.Append($"--adversarial "); // must always have a space after
                 }
 
@@ -144,10 +144,10 @@ namespace Artisan.CraftingLogic.Solvers
                     cts.Token.ThrowIfCancellationRequested();
                     if (P.Config.RaphaelSolverCacheV3[key] == null || P.Config.RaphaelSolverCacheV3[key].Steps.Count == 0)
                     {
-                        Svc.Log.Error($"Raphael 無法產生有效的巨集。可能原因如下：" +
-                            $"\n- 如果你不是在 Windows 上執行，Raphael 可能與你的作業系統不相容。" +
-                            $"\n- 你取消了產生流程。" +
-                            $"\n- Raphael 在找不到結果後放棄。{(P.Config.RaphaelSolverConfig.AutoGenerate ? "\n因此將停用自動產生功能。" : "")}");
+                        Svc.Log.Error($"Raphael 无法生成有效的宏。这可能是以下原因之一：" +
+                            $"\n- 如果您不在运行 Windows，Raphael 可能与您的操作系统不兼容。" +
+                            $"\n- 您取消了生成过程。" +
+                            $"\n- Raphael 在找不到结果后放弃了。{(P.Config.RaphaelSolverConfig.AutoGenerate ? "\n自动生成将因此被禁用。" : "")}");
                         P.Config.RaphaelSolverConfig.AutoGenerate = false;
                         cts.Cancel();
                         return;
@@ -158,7 +158,7 @@ namespace Artisan.CraftingLogic.Solvers
                     {
                         if (!P.Config.RaphaelSolverConfig.AutoSwitchOnAll)
                         {
-                            Svc.Log.Debug("切換到 Raphael 解算器");
+                            Svc.Log.Debug("切换到 Raphael 求解器");
                             var opt = CraftingProcessor.GetAvailableSolversForRecipe(craft, true).FirstOrNull(x => x.Name == $"Raphael 配方求解器");
                             if (opt is not null)
                             {
@@ -171,7 +171,7 @@ namespace Artisan.CraftingLogic.Solvers
                         else
                         {
                             var crafts = AllValidCrafts(key, craft.Recipe.CraftType.RowId).ToList();
-                            Svc.Log.Debug($"將解算器套用到 {crafts.Count()} 個配方。");
+                            Svc.Log.Debug($"将求解器应用到 {crafts.Count()} 个配方。");
                             var opt = CraftingProcessor.GetAvailableSolversForRecipe(craft, true).FirstOrNull(x => x.Name == $"Raphael 配方求解器");
                             if (opt is not null)
                             {
@@ -180,7 +180,7 @@ namespace Artisan.CraftingLogic.Solvers
                                 config.SolverFlavour = (int)(opt?.Flavour);
                                 foreach (var c in crafts)
                                 {
-                                    Svc.Log.Debug($"將 {c.Recipe.RowId} ({c.Recipe.ItemResult.Value.Name}) 切換到 Raphael 解算器");
+                                    Svc.Log.Debug($"将 {c.Recipe.RowId} ({c.Recipe.ItemResult.Value.Name}) 切换到 Raphael 求解器");
                                     P.Config.RecipeConfigs[c.Recipe.RowId] = config;
                                 }
                             }
@@ -432,7 +432,7 @@ namespace Artisan.CraftingLogic.Solvers
 
             ImGuiComponents.HelpMarker($"若解決方案產生時間超過此分鐘數，將取消產生任務。");
 
-            if (ImGui.Button($"清除 Raphael 巨集快取（目前儲存 {P.Config.RaphaelSolverCacheV3.Count} 個）"))
+            if (ImGui.Button($"清除 raphael 巨集快取 (當前儲存 {P.Config.RaphaelSolverCacheV3.Count} 個)"))
             {
                 P.Config.RaphaelSolverCacheV3.Clear();
                 changed |= true;

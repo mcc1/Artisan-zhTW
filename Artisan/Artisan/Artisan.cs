@@ -66,18 +66,18 @@ public unsafe class Artisan : IDalamudPlugin
 
         Svc.Commands.AddHandler(commandName, new CommandInfo(OnCommand)
         {
-            HelpMessage = "開啟Artisan主視窗。\n" +
-"/artisan lists → 開啟製作清單設定視窗。\n" +
-"/artisan lists <ID> → 按ID開啟指定的製作清單。\n" +
-"/artisan lists <ID> start → 按ID開始指定的製作清單。\n" +
-"/artisan macros → 開啟巨集設定視窗。\n" +
-"/artisan macros <ID> → 按ID開啟指定的巨集。\n" +
-"/artisan endurance → 開啟耐力模式設定視窗。\n" +
-"/artisan endurance start|stop → 開始或停止耐力模式。\n" +
-"/artisan settings → 開啟插件設定視窗。\n" +
-"/artisan workshops → 開啟部隊工房設定視窗。\n" +
-"/artisan builder → 開啟清單生成器視窗。\n" +
-"/artisan automode → 開關自動製作模式。",
+            HelpMessage = "打开Artisan主窗口。\n" +
+            "/artisan lists → 打开制作清单设置窗口。\n" +
+            "/artisan lists <ID> → 按ID打开指定的制作清单。\n" +
+            "/artisan lists <ID> start → 按ID开始指定的制作清单。\n" +
+            "/artisan macros → 打开宏设置窗口。\n" +
+            "/artisan macros <ID> → 按ID打开指定的宏。\n" +
+            "/artisan endurance → 打开耐力模式设置窗口。\n" +
+            "/artisan endurance start|stop → 开始或停止耐力模式。\n" +
+            "/artisan settings → 打开插件设置窗口。\n" +
+            "/artisan workshops → 打开部队工房设置窗口。\n" +
+            "/artisan builder → 打开清单生成器窗口。\n" +
+            "/artisan automode → 开关自动制作模式。",
             ShowInHelp = true,
         });
 

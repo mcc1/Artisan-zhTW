@@ -5,10 +5,8 @@ using Artisan.CraftingLogic.Solvers;
 using Artisan.GameInterop;
 using Artisan.GameInterop.CSExt;
 using Artisan.IPC;
-using Artisan.QuestSync;
 using Artisan.RawInformation;
 using Artisan.RawInformation.Character;
-using Artisan.Universalis;
 using Dalamud.Interface.Utility.Raii;
 using ECommons;
 using ECommons.DalamudServices;
@@ -40,27 +38,12 @@ namespace Artisan.UI
         internal static bool Debug = false;
         public static int DebugValue = 1;
         static int NQMats, HQMats = 0;
-        private static string universalisMetadataStatus = "Not tested";
-        private static string universalisMarketboardStatus = "Not tested";
-
-        private static string FormatQuestDebugLine(ushort questId, byte flags)
-        {
-            if (questId == 0)
-                return $"Quest ID: 0, Sequence: 0, Name: , Flags: {flags}";
-
-            var digits = questId.ToString().Length;
-            var questRow = LuminaSheets.QuestSheet?
-                .FirstOrDefault(x => Convert.ToInt32(x.Value.Id.ToString().GetLast(digits)) == questId);
-            var rowId = questRow?.Key ?? 0;
-            var fullQuestId = questRow?.Value.Id.ToString() ?? "";
-            return $"Quest ID: {questId}, RowId: {rowId}, Full ID: {fullQuestId}, Sequence: {QuestManager.GetQuestSequence(questId)}, Name: {questId.NameOfQuest()}, Flags: {flags}";
-        }
 
         internal static void Draw()
         {
             try
             {
-                ImGui.Checkbox("Debug logging", ref Debug);
+                ImGui.Checkbox("除錯紀錄", ref Debug);
                 if (ImGui.CollapsingHeader("Crafter's food"))
                 {
                     foreach (var x in ConsumableChecker.GetFood())
@@ -261,56 +244,11 @@ namespace Artisan.UI
                 if (ImGui.CollapsingHeader("Quests"))
                 {
                     QuestManager* qm = QuestManager.Instance();
-                    ImGui.TextWrapped($"Client Language: {Svc.ClientState.ClientLanguage}");
                     foreach (var quest in qm->DailyQuests)
                     {
-                        ImGui.TextWrapped(FormatQuestDebugLine(quest.QuestId, quest.Flags));
+                        ImGui.TextWrapped($"Quest ID: {quest.QuestId}, Sequence: {QuestManager.GetQuestSequence(quest.QuestId)}, Name: {quest.QuestId.NameOfQuest()}, Flags: {quest.Flags}");
                     }
 
-                }
-
-                if (ImGui.CollapsingHeader("Universalis"))
-                {
-                    var currentWorld = Svc.ClientState.LocalPlayer?.CurrentWorld.RowId ?? 0;
-                    var worldName = currentWorld > 0 ? DataCenters.GetWorldName(currentWorld) : null;
-                    var dataCenter = currentWorld > 0 ? DataCenters.GetDataCenterName(currentWorld) : null;
-                    var region = currentWorld > 0 ? Regions.GetRegionByWorld(currentWorld) : null;
-
-                    ImGui.TextWrapped($"Current World ID: {currentWorld}");
-                    ImGui.TextWrapped($"World Name: {worldName ?? "(null)"}");
-                    ImGui.TextWrapped($"Data Center: {dataCenter ?? "(null)"}");
-                    ImGui.TextWrapped($"Region: {region ?? "(null)"}");
-                    ImGui.TextWrapped($"Metadata Test: {universalisMetadataStatus}");
-                    ImGui.TextWrapped($"Marketboard Test: {universalisMarketboardStatus}");
-
-                    if (ImGui.Button("Test Universalis Metadata"))
-                    {
-                        universalisMetadataStatus = currentWorld == 0
-                            ? "No local player world"
-                            : $"OK - {worldName ?? "(null)"} / {dataCenter ?? "(null)"} / {region ?? "(null)"}";
-                    }
-
-                    if (ImGui.Button("Test Universalis Marketboard"))
-                    {
-                        var itemId = (ulong)Math.Max(DebugValue, 5056);
-                        P.UniversalsisClient.PlayerWorld = currentWorld == 0 ? null : currentWorld;
-
-                        try
-                        {
-                            MarketboardData marketboardData = new();
-                            var result = P.Config.LimitUnversalisToDC
-                                ? P.UniversalsisClient.GetDCData(itemId, ref marketboardData)
-                                : P.UniversalsisClient.GetRegionData(itemId, ref marketboardData);
-
-                            universalisMarketboardStatus = result == null
-                                ? $"Failed - item {itemId}"
-                                : $"OK - item {itemId}, listings {result.TotalNumberOfListings}, units {result.TotalQuantityOfUnits}, lowest world {result.LowestWorld ?? "(null)"}";
-                        }
-                        catch (Exception ex)
-                        {
-                            universalisMarketboardStatus = $"Exception - {ex.Message}";
-                        }
-                    }
                 }
 
                 if (ImGui.CollapsingHeader("IPC"))
@@ -327,11 +265,11 @@ namespace Artisan.UI
 
                     ImGui.Text($"Endurance IPC: {Svc.PluginInterface.GetIpcSubscriber<bool>("Artisan.GetEnduranceStatus").InvokeFunc()}");
                     ImGui.Text($"List IPC: {Svc.PluginInterface.GetIpcSubscriber<bool>("Artisan.IsListRunning").InvokeFunc()}");
-                    if (ImGui.Button("Enable"))
+                    if (ImGui.Button("啟用"))
                     {
                         Svc.PluginInterface.GetIpcSubscriber<bool, object>("Artisan.SetEnduranceStatus").InvokeAction(true);
                     }
-                    if (ImGui.Button("Disable"))
+                    if (ImGui.Button("停用"))
                     {
                         Svc.PluginInterface.GetIpcSubscriber<bool, object>("Artisan.SetEnduranceStatus").InvokeAction(false);
                     }
@@ -379,7 +317,7 @@ namespace Artisan.UI
                     if (recipes != null && recipes->Recipes != null)
                     {
                         if (recipes->SelectedIndex < recipes->RecipesCount)
-                            DrawRecipeEntry($"Selected", recipes->Recipes + recipes->SelectedIndex);
+                            DrawRecipeEntry($"已選取", recipes->Recipes + recipes->SelectedIndex);
                         for (int i = 0; i < recipes->RecipesCount; ++i)
                             DrawRecipeEntry(i.ToString(), recipes->Recipes + i);
                     }
@@ -389,7 +327,7 @@ namespace Artisan.UI
                     }
                 }
 
-                if (ImGui.CollapsingHeader("Gear"))
+                if (ImGui.CollapsingHeader("裝備"))
                 {
                     ImGui.TextUnformatted($"In-game stats: {CharacterInfo.Craftsmanship}/{CharacterInfo.Control}/{CharacterInfo.MaxCP}/{CharacterInfo.FCCraftsmanshipbuff}");
                     DrawEquippedGear();
@@ -397,9 +335,9 @@ namespace Artisan.UI
                         DrawGearset(ref gs);
                 }
 
-                if (ImGui.CollapsingHeader("Repairs"))
+                if (ImGui.CollapsingHeader("修理"))
                 {
-                    if (ImGui.Button("Repair all"))
+                    if (ImGui.Button("全部修理"))
                     {
                         RepairManager.ProcessRepair();
                     }
@@ -431,7 +369,7 @@ namespace Artisan.UI
                 }
 
                 ImGui.InputInt("Debug Value", ref DebugValue);
-                if (ImGui.Button($"Open Recipe"))
+                if (ImGui.Button($"開啟配方"))
                 {
                     PreCrafting.TaskSelectRecipe(Svc.Data.GetExcelSheet<Recipe>().GetRow((uint)DebugValue));
                 }

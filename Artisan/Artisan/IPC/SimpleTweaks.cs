@@ -56,7 +56,7 @@ namespace Artisan.IPC
                 if (baseTweak == null) return;
                 baseTweak.SetFoP("Enabled", false);
 
-                DuoLog.Information($"Improved Crafting Log Tweak is disabled whilst using Artisan.");
+                DuoLog.Information($"使用 Artisan 時，Improved Crafting Log Tweak 會被停用。");
             }
         }
     }

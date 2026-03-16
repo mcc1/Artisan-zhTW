@@ -144,7 +144,7 @@ namespace Artisan.Autocraft
                 P.Config.Repair = repairs;
                 P.Config.Save();
             }
-            ImGuiComponents.HelpMarker($"如果啟用，當任一部位的裝備達到設定的修理閾值時，Artisan 將自動修理你的裝備。\n\n目前裝備的最低耐久度為 {RepairManager.GetMinEquippedPercent()}%，在修理工處修理的價格為 {RepairManager.GetNPCRepairPrice()} 金幣。\n\n如果無法使用暗物質修理，將嘗試使用附近的修理 NPC。");
+            ImGuiComponents.HelpMarker($"如果啟用，當任一部位的裝備達到設定的修理閾值時，Artisan 將自動修理你的裝備。\n\n目前裝備的最低耐久度為 {RepairManager.GetMinEquippedPercent()}%，在修理商處修理的價格為 {RepairManager.GetNPCRepairPrice()} 金幣。\n\n如果無法使用暗物質修理，將嘗試使用附近的修理 NPC。");
             if (P.Config.Repair)
             {
                 //ImGui.SameLine();
@@ -174,7 +174,7 @@ namespace Artisan.Autocraft
                 ImGuiComponents.HelpMarker("此角色尚未解鎖精製魔晶石。此設定將被忽略。");
             }
             else
-                ImGuiComponents.HelpMarker("一旦裝備的精鍊度達到100%，就會自動從裝備中精緻魔晶石。");
+                ImGuiComponents.HelpMarker("一旦裝備的精鍊度達到100%，就會自動從裝備中精製魔晶石。");
 
             ImGui.Checkbox("指定製作次數", ref P.Config.CraftingX);
             if (P.Config.CraftingX)
@@ -202,7 +202,7 @@ namespace Artisan.Autocraft
             }
 
             bool stopIfNQ = P.Config.EnduranceStopNQ;
-            if (ImGui.Checkbox("製作出NQ裝備時自動停止耐力模式。", ref stopIfNQ))
+            if (ImGui.Checkbox("製作出 NQ 裝備時自動停止耐力模式。", ref stopIfNQ))
             {
                 P.Config.EnduranceStopNQ = stopIfNQ;
                 P.Config.Save();

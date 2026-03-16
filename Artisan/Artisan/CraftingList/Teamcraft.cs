@@ -79,7 +79,7 @@ namespace Artisan.CraftingLists
 
             Svc.Log.Debug($"{baseUrl}{base64}");
             ImGui.SetClipboardText($"{baseUrl}{base64}");
-            Notify.Success("連結已複製到剪貼簿");
+            Notify.Success("链接已复制到剪贴板");
         }
 
         private static void ExtractRecipes(List<ListItem> sublist, Recipe recipe)
@@ -116,16 +116,16 @@ namespace Artisan.CraftingLists
 
             ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(0.2f, 0.1f, 0.2f, 1f));
             ImGui.SetNextWindowSize(new Vector2(1, 1), ImGuiCond.Appearing);
-            if (ImGui.Begin("Teamcraft 匯入###TCImport", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.AlwaysAutoResize))
+            if (ImGui.Begin("Teamcraft 导入###TCImport", ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.AlwaysAutoResize))
             {
                 ImGui.Text("清單名稱");
                 ImGui.SameLine();
-                ImGuiComponents.HelpMarker("匯入清單指南。\r\n\r\n" +
-"步驟 1. 在 Teamcraft 上開啟一個包含您想要製作的物品的列表。\r\n\r\n" +
-"步驟 2. 找到預製作區塊並點擊「複製為文字」按鈕。\r\n\r\n" +
-"步驟 3. 將內容黏貼到此視窗的前置配方物品中。\r\n\r\n" +
-"步驟 4. 重複步驟 2 和 3，但用於成品部分。\r\n\r\n" +
-"步驟 5. 為列表命名後點擊匯入。");
+                ImGuiComponents.HelpMarker("导入清单指南。\r\n\r\n" +
+                    "步骤 1. 在 Teamcraft 上打开一个包含您想要制作的物品的列表。\r\n\r\n" +
+                    "步骤 2. 找到预制作部分并点击“复制为文本”按钮。\r\n\r\n" +
+                    "步骤 3. 将内容粘贴到此窗口的前置配方物品中。\r\n\r\n" +
+                    "步骤 4. 重复步骤 2 和 3，但用于成品部分。\r\n\r\n" +
+                    "步骤 5. 为您的列表命名并点击导入。");
                 ImGui.InputText("###ImportListName", ref importListName, 50);
                 ImGui.Text("前置配方物品");
                 ImGui.InputTextMultiline("###PrecraftItems", ref importListPreCraft, 5000000, new Vector2(ImGui.GetContentRegionAvail().X, 100));
@@ -160,7 +160,7 @@ namespace Artisan.CraftingLists
                         }
                         else
                         {
-                            Notify.Error("此匯入清單沒有物品，請檢查後再試一次。");
+                            Notify.Error("此导入清单没有物品，请检查并重试。");
                         }
 
                     }

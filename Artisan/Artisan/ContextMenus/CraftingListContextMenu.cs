@@ -59,7 +59,7 @@ internal static class CraftingListContextMenu
 
         var recipeId = LuminaSheets.RecipeSheet.Values.First(x => x.ItemResult.RowId == ItemId).RowId;
 
-        if (ImGui.Selectable($"Open Recipe Log"))
+        if (ImGui.Selectable($"開啟配方筆記"))
         {
             CraftingListFunctions.OpenRecipeByID(recipeId);
         }

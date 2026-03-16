@@ -97,7 +97,7 @@ namespace Artisan.UI
                     {
                         var m = P.Config.MacroSolverConfig.Macros[i];
                         int cpCost = GetCPCost(m);
-                        var selected = ImGui.Selectable($"{m.Name} (制作力消耗： {cpCost}) (ID: {m.ID})###{m.ID}");
+                        var selected = ImGui.Selectable($"{m.Name} (製作力消耗： {cpCost}) (ID: {m.ID})###{m.ID}");
 
                         if (ImGui.IsItemActive() && !ImGui.IsItemHovered() && reorderMode)
                         {
@@ -294,7 +294,7 @@ namespace Artisan.UI
                         act = Enum.GetValues(typeof(Skills)).Cast<Skills>().FirstOrDefault(s => s.NameOfAction(raphParseEN).Replace(" ", "").Replace("'", "").Equals(action, StringComparison.CurrentCultureIgnoreCase));
                         if (act == default)
                         {
-                            DuoLog.Error($"無法解析技能：{action}");
+                            DuoLog.Error($"无法解析技能：{action}");
                             continue;
                         }
                     }

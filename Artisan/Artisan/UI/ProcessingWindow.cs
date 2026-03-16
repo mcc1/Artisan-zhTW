@@ -10,7 +10,7 @@ namespace Artisan.UI
 {
     internal class ProcessingWindow : Window
     {
-        public ProcessingWindow() : base("Processing List###ProcessingList", ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoCollapse)
+        public ProcessingWindow() : base("處理清單###ProcessingList", ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoCollapse)
         {
             IsOpen = true;
             ShowCloseButton = false;
@@ -60,12 +60,12 @@ namespace Artisan.UI
                 ImGui.Spacing();
                 if (CraftingListUI.CurrentProcessedItem != 0)
                 {
-                    ImGuiEx.TextV($"Crafting: {LuminaSheets.RecipeSheet[CraftingListUI.CurrentProcessedItem].ItemResult.Value.Name.ToDalamudString().ToString()}");
-                    ImGuiEx.TextV($"Current Item Progress: {CraftingListUI.CurrentProcessedItemCount} / {CraftingListUI.CurrentProcessedItemListCount}");
-                    ImGuiEx.TextV($"Overall List Progress: {CraftingListFunctions.CurrentIndex + 1} / {CraftingListUI.selectedList.ExpandedList.Count}");
+                    ImGuiEx.TextV($"製作中：{LuminaSheets.RecipeSheet[CraftingListUI.CurrentProcessedItem].ItemResult.Value.Name.ToDalamudString().ToString()}");
+                    ImGuiEx.TextV($"目前項目進度：{CraftingListUI.CurrentProcessedItemCount} / {CraftingListUI.CurrentProcessedItemListCount}");
+                    ImGuiEx.TextV($"整體清單進度：{CraftingListFunctions.CurrentIndex + 1} / {CraftingListUI.selectedList.ExpandedList.Count}");
 
-                    string duration = CraftingListFunctions.ListEndTime == TimeSpan.Zero ? "Unknown" : string.Format("{0}d {1}h {2}m {3}s", CraftingListFunctions.ListEndTime.Days, CraftingListFunctions.ListEndTime.Hours, CraftingListFunctions.ListEndTime.Minutes, CraftingListFunctions.ListEndTime.Seconds);
-                    ImGuiEx.TextV($"Approximate Remaining Duration: {duration}");
+                    string duration = CraftingListFunctions.ListEndTime == TimeSpan.Zero ? "未知" : string.Format("{0}d {1}h {2}m {3}s", CraftingListFunctions.ListEndTime.Days, CraftingListFunctions.ListEndTime.Hours, CraftingListFunctions.ListEndTime.Minutes, CraftingListFunctions.ListEndTime.Seconds);
+                    ImGuiEx.TextV($"預估剩餘時間：{duration}");
 
                 }
 

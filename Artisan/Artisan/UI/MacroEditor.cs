@@ -123,10 +123,10 @@ namespace Artisan.UI
                 }
 
                 ImGui.SameLine();
-                var exportButton = ImGuiHelpers.GetButtonSize("導出巨集");
+                var exportButton = ImGuiHelpers.GetButtonSize("匯出巨集");
                 ImGui.SetCursorPosX(ImGui.GetContentRegionMax().X - exportButton.X);
 
-                if (ImGui.Button("導出巨集###ExportButton"))
+                if (ImGui.Button("匯出巨集###ExportButton"))
                 {
                     ImGui.SetClipboardText(JsonConvert.SerializeObject(SelectedMacro));
                     Notify.Success("巨集已複製到剪貼簿");
@@ -206,7 +206,7 @@ namespace Artisan.UI
                         var step = SelectedMacro.Steps[selectedStepIndex];
 
                         ImGui.NextColumn();
-                        ImGuiEx.CenterColumnText($"選中的技能：{(step.Action == Skills.None ? "Artisan 建議" : step.Action.NameOfAction())}", true);
+                        ImGuiEx.CenterColumnText($"選中的技能：{(step.Action == Skills.None ? "Artisan 建议" : step.Action.NameOfAction())}", true);
                         if (selectedStepIndex > 0)
                         {
                             ImGui.SameLine();
@@ -268,15 +268,15 @@ namespace Artisan.UI
 
                         if (step.HasExcludeCondition)
                         {
-                            ImGuiEx.CenterColumnText($"Exclude options", true);
-                            if (ImGui.Checkbox($"Instead of skipping replace with:", ref step.ReplaceOnExclude))
+                            ImGuiEx.CenterColumnText($"排除選項", true);
+                            if (ImGui.Checkbox($"不要略過時，改為使用：", ref step.ReplaceOnExclude))
                                 P.Config.Save();
 
                             if (step.ReplaceOnExclude)
                             {
                                 if (ImGui.BeginCombo("###Select Replacement", step.ReplacementAction.NameOfAction()))
                                 {
-                                    if (ImGui.Selectable($"Artisan Recommendation"))
+                                    if (ImGui.Selectable($"Artisan 建議"))
                                     {
                                         step.ReplacementAction = Skills.None;
                                         P.Config.Save();
@@ -284,21 +284,21 @@ namespace Artisan.UI
 
                                     ImGuiComponents.HelpMarker("使用適合的預設解算器建議，也就是一般配方使用標準配方解算器，專家配方使用專家配方解算器。");
 
-                                    if (ImGui.Selectable($"Touch Combo"))
+                                    if (ImGui.Selectable($"加工連段"))
                                     {
                                         step.ReplacementAction = Skills.TouchCombo;
                                         P.Config.Save();
                                     }
 
-                                    ImGuiComponents.HelpMarker("This will use the appropriate step of the 3-step touch combo, depending on the last action actually used. Useful if upgrading quality actions or skipping on conditions.");
+                                    ImGuiComponents.HelpMarker("會根據實際上一個使用的技能，自動接上三段式加工連段中適合的步驟。對於升級品質技能或依條件略過時特別有用。");
 
-                                    if (ImGui.Selectable($"Touch Combo (Refined Touch Route)"))
+                                    if (ImGui.Selectable($"加工連段（精修加工路線）"))
                                     {
                                         step.ReplacementAction = Skills.TouchComboRefined;
                                         P.Config.Save();
                                     }
 
-                                    ImGuiComponents.HelpMarker($"Similar to the other touch combo, this will alternate between Basic Touch & Refined Touch depending on the previous action used.");
+                                    ImGuiComponents.HelpMarker($"與另一種加工連段類似，會根據前一個使用的技能，在基本加工與精修加工之間切換。");
 
                                     ImGui.Separator();
 
@@ -343,13 +343,13 @@ namespace Artisan.UI
 
                             ImGuiComponents.HelpMarker("這將根據最後實際使用的技能使用3步加工連攜的適當步驟。對於提高品質的技能或跳過條件非常有用。");
 
-                            if (ImGui.Selectable($"Touch Combo (Refined Touch Route)"))
+                            if (ImGui.Selectable($"加工連段（精修加工路線）"))
                             {
                                 step.Action = Skills.TouchComboRefined;
                                 P.Config.Save();
                             }
 
-                            ImGuiComponents.HelpMarker($"Similar to the other touch combo, this will alternate between Basic Touch & Refined Touch depending on the previous action used.");
+                            ImGuiComponents.HelpMarker($"與另一種加工連段類似，會根據前一個使用的技能，在基本加工與精修加工之間切換。");
 
                             ImGui.Separator();
 
@@ -400,7 +400,7 @@ namespace Artisan.UI
                 else
                 {
                     ImGui.Text($"巨集操作（一個操作一行）");
-                    ImGuiComponents.HelpMarker("您可以像複製普通遊戲巨集一樣直接複製/黏貼巨集，也可以每行單獨列出每個動作。\n例如：\n/ac 堅信\n等同於\n堅信\n您也可以使用 *（星號）或“Artisan Recommendation”插入Artisan建議作為步驟。");
+                    ImGuiComponents.HelpMarker("您可以像複製普通遊戲巨集一樣直接複製/黏貼巨集，也可以每行單獨列出每個動作。\n例如：\n/ac 堅信\n等同於\n堅信\n您也可以使用 *（星號）或「Artisan Recommendation」插入 Artisan 建議作為步驟。");
                     ImGui.InputTextMultiline("###MacroEditor", ref _rawMacro, 10000000, new Vector2(ImGui.GetContentRegionAvail().X - 30f, ImGui.GetContentRegionAvail().Y - 30f));
                     if (ImGui.Button("保存"))
                     {
@@ -410,7 +410,7 @@ namespace Artisan.UI
                             selectedStepIndex = steps.Count - 1;
                             SelectedMacro.Steps = steps;
                             P.Config.Save();
-                            DuoLog.Information($"Macro Updated");
+                            DuoLog.Information($"巨集已更新");
                         }
                     }
                     ImGui.SameLine();
@@ -441,11 +441,11 @@ namespace Artisan.UI
                 });
                 ImGuiEx.ImGuiLineCentered("MTimeArtisan", delegate
                 {
-                    ImGuiEx.Text($"Artisan 宏耗時：{MacroUI.GetMacroLength(SelectedMacro)} 秒");
+                    ImGuiEx.Text($"Artisan 巨集耗時：{MacroUI.GetMacroLength(SelectedMacro)} 秒");
                 });
                 ImGuiEx.ImGuiLineCentered("MTimeTeamcraft", delegate
                 {
-                    ImGuiEx.Text($"普通宏耗時：{MacroUI.GetTeamcraftMacroLength(SelectedMacro)} 秒");
+                    ImGuiEx.Text($"普通巨集耗時：{MacroUI.GetTeamcraftMacroLength(SelectedMacro)} 秒");
                 });
             }
             else

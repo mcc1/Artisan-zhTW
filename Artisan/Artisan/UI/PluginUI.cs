@@ -94,7 +94,7 @@ namespace Artisan.UI
                 ImGui.GetIO().FontGlobalScale = scale * 1.5f;
                 using (var f = ImRaii.PushFont(ImGui.GetFont()))
                 {
-                    ImGuiEx.TextWrapped($"聽著，兄弟，你現在用的是Dalamud的測試版，遇到任何問題都可能是在Dalamud測試版上特有的，跟Artisan無關。這個插件不是為測試版開發的，所以除非問題出現在Dalamud正式版中，否則別指望我會修復。");
+                    ImGuiEx.TextWrapped($"聽著，兄弟，你現在用的是 Dalamud 的測試版，遇到任何問題都可能是在 Dalamud 測試版上特有的，跟 Artisan 無關。這個插件不是為測試版開發的，所以除非問題出現在 Dalamud 正式版中，否則別指望我會修復。");
                     ImGui.Separator();
 
                     ImGui.Spacing();
@@ -200,12 +200,15 @@ namespace Artisan.UI
                             OpenWindow = OpenWindow.About;
                         }
 
+
+#if DEBUG
                         ImGui.Spacing();
                         if (ImGui.Selectable("调试", OpenWindow == OpenWindow.Debug))
                         {
                             OpenWindow = OpenWindow.Debug;
                         }
                         ImGui.Spacing();
+#endif
 
                     }
 
@@ -285,10 +288,10 @@ namespace Artisan.UI
             });
             ImGui.Spacing();
 
-            ImGuiEx.TextWrapped($"首先感謝你下載我的這個小小的生產插件。自2022年6月以來，我一直在開發Artisan，這是我的一系列插件中的代表作。");
+            ImGuiEx.TextWrapped($"首先感謝你下載我的這個小小的生產插件。自2022年6月以來，我一直在開發 Artisan，這是我的一系列插件中的代表作。");
             ImGuiEx.TextWrapped($"這是免費內容，不應該透過其他管道花錢取得。");
             ImGui.Spacing();
-            ImGuiEx.TextWrapped($"在開始使用Artisan之前，我們應該先了解一下插件的工作原理。一旦你了解了幾個關鍵因素，Artisan就很容易使用。");
+            ImGuiEx.TextWrapped($"在開始使用 Artisan 之前，我們應該先了解一下插件的工作原理。一旦你了解了幾個關鍵因素，Artisan 就很容易使用。");
 
             ImGui.Spacing();
             ImGuiEx.LineCentered("###ArtisanModes", () =>
@@ -297,10 +300,10 @@ namespace Artisan.UI
             });
             ImGui.Spacing();
 
-            ImGuiEx.TextWrapped($"Artisan 具有\"自動製作模式\"，該模式僅接受內建解算器給出的建議，並代替你自動操作。" +
-"預設情況下，它會以遊戲允許的間隔速度使用製作技能，這比使用遊戲內的巨集更快。" +
-"使用它並沒有繞過任何形式的遊戲限制，但如果你打算讓製作速度慢一些，也可以設定延遲。" +
-"啟用此選項不影響 Artisan 預設使用的建議生成過程。");
+            ImGuiEx.TextWrapped($"Artisan具有\"自动制作模式\"该模式仅接受内置解算器给出的建议并且代替你自动操作。" +
+                                " 默认情况下，它会以游戏允许的间隔速度使用制作技能，这比使用游戏内的宏更快。" +
+                                " 使用它并没有绕过任何形式的游戏限制，但如果你打算制作速度慢一些，你可以设置延迟。" +
+                                " 启用此选项不影响Artisan默认使用的建议生成过程。");
 
             var automode = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/AutoMode.png");
 
@@ -312,8 +315,8 @@ namespace Artisan.UI
                 });
             }
 
-            ImGuiEx.TextWrapped($"若未啟用自動模式，你還可以使用另外兩種模式：「半自動模式」與「全手動模式」。" +
-                                $"\"半自動模式\"將在你開始製作作業時，出現在一個彈出的小視窗中。");
+            ImGuiEx.TextWrapped($"如果你没有启用自动模式，你将可以接触另外2种模式：\"半自动模式\"和\"全手动模式\"。" +
+                                $" \"半自动模式\"将在你开始制作作业时，出现在一个弹出的小窗口中。");
 
             var craftWindowExample = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/ThemeCraftingWindowExample.png");
 
@@ -325,10 +328,10 @@ namespace Artisan.UI
                 });
             }
 
-            ImGuiEx.TextWrapped($"點擊「執行建議的操作」按鈕後，便會使用插件目前建議的製作技能。" +
-                $"這被認為是半自動的，因為你仍然需要每一步點擊一次操作按鈕，但不必去快速鍵欄上找到相應的技能。" +
-                $"\"全手動模式\"是透過正常按下快速鍵欄上的技能來執行的。" +
-                $"預設情況下，你將得到輔助；如果你將技能放在快速鍵欄上，Artisan 也會對相應技能進行高亮提示（可在設定中停用）。");
+            ImGuiEx.TextWrapped($"通过点击\"执行建议的操作\"按钮，你将使用插件当前建议的制作技能。" +
+                $" 这被认为是半自动的，因为你仍然需要每一步点击一次操作按钮，但不必去热键栏上找到相应的技能。" +
+                $" \"全手动模式\"是通过正常按下热键栏上的技能来执行的。" +
+                $" 默认情况下，你将得到辅助，如果你将技能放在了热键栏上，Artisan会对相应技能进行高亮提示（可以在设置中禁用）。");
 
             var outlineExample = Path.Combine(Svc.PluginInterface.AssemblyLocation.DirectoryName!, "Images/OutlineExample.png");
 
@@ -347,11 +350,11 @@ namespace Artisan.UI
             });
             ImGui.Spacing();
 
-            ImGuiEx.TextWrapped($"預設情況下，Artisan 會為你提供下一步製作技能的建議。然而，這個解算器並不完美，無法取代一套合適的生產裝備。" +
-                $"除了啟用Artisan之外，你無需執行任何操作。" +
+            ImGuiEx.TextWrapped($"默认情况下，Artisan会为你提供下一步制作技能的建议。然而，这个解算器并不完美，它并不能替代一套合适的生产装备。" +
+                $"除了启用Artisan之外，你无需执行任何操作。" +
                 $"\r\n\r\n" +
-                $"若你正在嘗試處理預設解算器無法完成的製作，Artisan 可讓你建立巨集來取代預設解算器。" +
-                $"Artisan 巨集的好處是不受長度限制，可以在遊戲允許的間隔範圍內執行巨集中的技能，並且還能設定一些額外條件，在巨集運行過程中作出調整。");
+                $"如果你正在尝试处理默认解算器无法完成的制作，Artisan允许你构建宏来替代默认解算器。" +
+                $"Artisan宏的好处是不受长度限制，可以在游戏允许的间隔范围内执行宏里的技能，并且还允许设置一些额外的条件在宏运行过程中作出调整。");
 
             ImGui.Spacing();
             ImGuiEx.TextUnderlined($"點擊此處前往「巨集」選單。");
@@ -378,8 +381,8 @@ namespace Artisan.UI
             }
 
 
-            ImGuiEx.TextWrapped($"從下拉框中選擇已建立的巨集。" +
-                $"當你製作這個物品時，技能建議會改為使用你巨集中的內容。");
+            ImGuiEx.TextWrapped($"从下拉框中选择已创建的宏。" +
+                $"当你去制作这个物品时，技能建议将被你的宏的内容所取代。");
 
 
             ImGui.Spacing();
@@ -389,12 +392,12 @@ namespace Artisan.UI
             });
             ImGui.Spacing();
 
-            ImGuiEx.TextWrapped($"Artisan具有名為\"耐力模式\"的功能，其實就是\"自動重複模式\"文藝一點的說法。" +
-                $"耐力模式的工作原理是從遊戲內製作筆記中選擇一個配方並啟用該功能。" +
-                $"接著，只要素材足夠，你的角色就會嘗試連續製作該物品多次。" +
+            ImGuiEx.TextWrapped($"Artisan具有名为\"耐力模式\"的功能，其实就是\"自动重复模式\"文艺一点的说法。" +
+                $"耐力模式的工作原理是从游戏内制作笔记中选择一个配方并启用该功能。" +
+                $"然后，你的角色会尝试在你有素材的情况下制作该物品的许多次。" +
                 $"\r\n\r\n" +
-                $"其餘功能應該都很直觀，因為耐力模式還能管理食物、藥水、手冊、修理，以及製作過程中的素材提取。" +
-                $"裝備修理功能僅支援使用暗物質，不支援使用修理 NPC。");
+                $"其他功能应该是不言自明的，因为耐力模式还可以管理你的食物、药水、手册、维修和制作物品之间的素材提取的使用。" +
+                $"装备修理功能仅支持使用暗物质，不支持使用修理NPC。");
 
             ImGui.Spacing();
             ImGuiEx.TextUnderlined($"點擊此處前往耐力模式。");
@@ -414,9 +417,9 @@ namespace Artisan.UI
             });
             ImGui.Spacing();
 
-            ImGuiEx.TextWrapped($"Artisan還能夠生成一個物品清單，並讓它開始自動製作清單內的每個物品。" +
-                $"製作清單有很多強大的工具來簡化從素材到最終產品的過程。" +
-                $"它還支援在 Artisan 和 Teamcraft 之間匯入匯出。");
+            ImGuiEx.TextWrapped($"Artisan还能够生成一个物品清单，并让它开始自动制作清单内的每个物品。" +
+                $"制作清单有很多强大的工具来简化从素材到最终产品的过程。" +
+                $"它还支持在Artisan和Teamcraft之间导入导出。");
 
             ImGui.Spacing();
             ImGuiEx.TextUnderlined($"點擊此處前往製作清單。");
@@ -619,7 +622,7 @@ namespace Artisan.UI
                 if (ImGui.Checkbox("若無法使用該技能，則跳過該步驟。", ref P.Config.SkipMacroStepIfUnable))
                     P.Config.Save();
 
-                if (ImGui.Checkbox($"阻止Artisan在巨集完成後繼續。", ref P.Config.DisableMacroArtisanRecommendation))
+                if (ImGui.Checkbox($"阻止 Artisan 在巨集完成後繼續。", ref P.Config.DisableMacroArtisanRecommendation))
                     P.Config.Save();
             }
             if (ImGui.CollapsingHeader("解算器設定"))
@@ -635,10 +638,7 @@ namespace Artisan.UI
                     P.Config.UseTricksExcellent = useTricksExcellent;
                     P.Config.Save();
                 }
-                ImGuiComponents.HelpMarker(
-                    $"這兩個選項允許你在出現「{LuminaSheets.AddonSheet[227].Text.ToString()}」或「{LuminaSheets.AddonSheet[228].Text.ToString()}」狀態時，優先使用「{Skills.TricksOfTrade.NameOfAction()}」。" +
-                    $"這會取代「{Skills.PreciseTouch.NameOfAction()}」與「{Skills.IntensiveSynthesis.NameOfAction()}」的使用時機。" +
-                    $"無論如何設定，在尚未學會前或特定狀況下，仍會使用「{Skills.TricksOfTrade.NameOfAction()}」。");
+                ImGuiComponents.HelpMarker($"這兩個選項允許你在出現「{LuminaSheets.AddonSheet[227].Text.ToString}」或「{LuminaSheets.AddonSheet[228].Text.ToString}」狀態時優先使用「{Skills.TricksOfTrade.NameOfAction()}」。 這將替代{Skills.PreciseTouch.NameOfAction()}和{Skills.IntensiveSynthesis.NameOfAction()}的使用時機。 不管如何設定，在學會前或特定狀況下仍將使用{Skills.TricksOfTrade.NameOfAction()}。");
                 if (ImGui.Checkbox("使用專家技能", ref useSpecialist))
                 {
                     P.Config.UseSpecialist = useSpecialist;
@@ -646,7 +646,7 @@ namespace Artisan.UI
                 }
                 ImGuiComponents.HelpMarker("若目前職業具備專家資格，便可使用會消耗「能工巧匠圖紙」的技能。\n「設計變動」會取代「觀察」。");
                 ImGui.TextWrapped("最大品質%%");
-                ImGuiComponents.HelpMarker($"一旦品質達到以下百分比，Artisan將會專注於推動進展。");
+                ImGuiComponents.HelpMarker($"一旦品質達到以下百分比，Artisan 將會專注於推動進展。");
                 if (ImGui.SliderInt("###SliderMaxQuality", ref maxQuality, 0, 100, $"%d%%"))
                 {
                     P.Config.MaxPercentage = maxQuality;
@@ -683,13 +683,13 @@ namespace Artisan.UI
 
                 //ImGuiComponents.HelpMarker("This swaps out Waste Not II & Groundwork for Prudent Synthesis");
 
-                ImGui.TextWrapped($"{Skills.PreparatoryTouch.NameOfAction()} - 最大 {Buffs.InnerQuiet.NameOfBuff()} 層數");
+                ImGui.TextWrapped($"{Skills.PreparatoryTouch.NameOfAction()} - 最大{Buffs.InnerQuiet.NameOfBuff()}層數");
                 ImGui.SameLine();
-                ImGuiComponents.HelpMarker($"將僅使用 {Skills.PreparatoryTouch.NameOfAction()} 來提高 {Buffs.InnerQuiet.NameOfBuff()} 的層數。這有助於調整製作力用量。");
+                ImGuiComponents.HelpMarker($"將僅使用{Skills.PreparatoryTouch.NameOfAction()}來提高{Buffs.InnerQuiet.NameOfBuff()}的層數。這有助於調整製作力用量。");
                 if (ImGui.SliderInt($"###MaxIQStacksPrepTouch", ref P.Config.MaxIQPrepTouch, 0, 10))
                     P.Config.Save();
 
-                if (ImGui.Checkbox("可用時使用素材奇蹟", ref P.Config.UseMaterialMiracle))
+                if (ImGui.Checkbox($"可用時使用素材奇蹟", ref P.Config.UseMaterialMiracle))
                     P.Config.Save();
 
                 ImGuiComponents.HelpMarker($"這將在增益持續時間內將標準配方求解器切換到專家求解器。由於這是一個定時增益，而不是具有層數的永久增益，因此不會給您提供正確的模擬器結果，我們無法真正正確模擬它。");
@@ -697,7 +697,7 @@ namespace Artisan.UI
                 if (P.Config.UseMaterialMiracle)
                 {
                     ImGui.Indent();
-                    if (ImGui.Checkbox("每次製作可使用超過一次。", ref P.Config.MaterialMiracleMulti))
+                    if (ImGui.Checkbox($"每次製作可使用超過一次。", ref P.Config.MaterialMiracleMulti))
                         P.Config.Save();
 
                     ImGui.Unindent();
@@ -797,7 +797,7 @@ namespace Artisan.UI
                 if (ImGui.Checkbox("停用 Allagan Tools 插件與清單的整合", ref P.Config.DisableAllaganTools))
                     P.Config.Save();
 
-                if (ImGui.Checkbox("禁用Artisan上下文選單選項", ref P.Config.HideContextMenus))
+                if (ImGui.Checkbox("禁用 Artisan 上下文選單選項", ref P.Config.HideContextMenus))
                     P.Config.Save();
 
                 ImGuiComponents.HelpMarker("若未停用，當你右鍵點擊製作筆記中的配方時，彈出的右鍵選單中會出現額外選項。");
@@ -858,7 +858,7 @@ namespace Artisan.UI
                     P.Config.Save();
                 }
 
-                if (ImGui.Checkbox($@"加入到列表後重設“加入次數”。", ref P.Config.ResetTimesToAdd))
+                if (ImGui.Checkbox($@"加入到列表後重設「加入次數」。", ref P.Config.ResetTimesToAdd))
                     P.Config.Save();
 
                 ImGui.PushItemWidth(100);
@@ -887,37 +887,37 @@ namespace Artisan.UI
                 {
                     ImGuiEx.TextWrapped(ImGuiColors.DalamudYellow, $"如果已經查看過清單的素材表，則「所有欄位設定」將不會生效。");
 
-                    if (ImGui.Checkbox($@"預設隐藏""背包"" 列", ref P.Config.DefaultHideInventoryColumn))
+                    if (ImGui.Checkbox($@"預設隱藏""背包"" 列", ref P.Config.DefaultHideInventoryColumn))
                         P.Config.Save();
 
-                    if (ImGui.Checkbox($"預設隱藏“雇員”列", ref P.Config.DefaultHideRetainerColumn))
+                    if (ImGui.Checkbox($"預設隱藏「雇員」列", ref P.Config.DefaultHideRetainerColumn))
                         P.Config.Save();
 
-                    if (ImGui.Checkbox($"預設隱藏“剩餘需求”列", ref P.Config.DefaultHideRemainingColumn))
+                    if (ImGui.Checkbox($"預設隱藏「剩餘需求」列", ref P.Config.DefaultHideRemainingColumn))
                         P.Config.Save();
 
-                    if (ImGui.Checkbox($"預設隱藏“來源”列", ref P.Config.DefaultHideCraftableColumn))
+                    if (ImGui.Checkbox($"預設隱藏「來源」列", ref P.Config.DefaultHideCraftableColumn))
                         P.Config.Save();
 
-                    if (ImGui.Checkbox($"預設隱藏“可製作數量”列", ref P.Config.DefaultHideCraftableCountColumn))
+                    if (ImGui.Checkbox($"預設隱藏「可製作數量」列", ref P.Config.DefaultHideCraftableCountColumn))
                         P.Config.Save();
 
-                    if (ImGui.Checkbox($"預設隱藏“製作目標”列", ref P.Config.DefaultHideCraftItemsColumn))
+                    if (ImGui.Checkbox($"預設隱藏「製作目標」列", ref P.Config.DefaultHideCraftItemsColumn))
                         P.Config.Save();
 
-                    if (ImGui.Checkbox($"預設隱藏“類型”列", ref P.Config.DefaultHideCategoryColumn))
+                    if (ImGui.Checkbox($"預設隱藏「類型」列", ref P.Config.DefaultHideCategoryColumn))
                         P.Config.Save();
 
-                    if (ImGui.Checkbox($"預設隱藏“採集區域”列", ref P.Config.DefaultHideGatherLocationColumn))
+                    if (ImGui.Checkbox($"預設隱藏「採集區域」列", ref P.Config.DefaultHideGatherLocationColumn))
                         P.Config.Save();
 
-                    if (ImGui.Checkbox($"預設隱藏“ID”列", ref P.Config.DefaultHideIdColumn))
+                    if (ImGui.Checkbox($"預設隱藏「ID」列", ref P.Config.DefaultHideIdColumn))
                         P.Config.Save();
 
-                    if (ImGui.Checkbox($"預設啟用“僅顯示HQ製作”", ref P.Config.DefaultHQCrafts))
+                    if (ImGui.Checkbox($"預設啟用「僅顯示 HQ 製作」", ref P.Config.DefaultHQCrafts))
                         P.Config.Save();
 
-                    if (ImGui.Checkbox($"預設啟用“顏色驗證”", ref P.Config.DefaultColourValidation))
+                    if (ImGui.Checkbox($"預設啟用「顏色驗證」", ref P.Config.DefaultColourValidation))
                         P.Config.Save();
 
                     if (ImGui.Checkbox($"從 Universalis 取得價格（載入時間較慢）", ref P.Config.UseUniversalis))

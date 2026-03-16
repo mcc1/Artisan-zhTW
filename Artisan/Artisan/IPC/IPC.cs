@@ -99,9 +99,9 @@ namespace Artisan.IPC
         static void SetStopRequest(bool s)
         {
             if (s)
-                DuoLog.Information("Artisan has been requested to stop by an external plugin.");
+                DuoLog.Information("外部插件已要求停止 Artisan。");
             else
-                DuoLog.Information("Artisan has been requested to restart by an external plugin.");
+                DuoLog.Information("外部插件已要求重新啟動 Artisan。");
 
             StopCraftingRequest = s;
         }

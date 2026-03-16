@@ -47,20 +47,18 @@ namespace Artisan.CraftingLists
         public static int CurrentProcessedItemListCount;
         private static readonly ListFolders ListsUI = new();
 
-        private static bool GatherBuddy =>
-            DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var gb, false, true) ||
-            DalamudReflector.TryGetDalamudPlugin("GatherBuddyReborn", out gb, false, true);
+        private static bool GatherBuddy => DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var gb, false, true);
         private static bool ItemVendor => DalamudReflector.TryGetDalamudPlugin("Item Vendor Location", out var ivl, false, true);
 
         private static bool MonsterLookup => DalamudReflector.TryGetDalamudPlugin("Monster Loot Hunter", out var mlh, false, true);
 
         internal static void Draw()
         {
-            ImGui.TextWrapped($"製作清單適合將不同製作品依序排入佇列並逐一製作。請使用底部按鈕匯入 Teamcraft 清單來建立製作清單，或點擊「+」圖示並命名來建立製作清單。" +
-                              $"你也可以右鍵點擊遊戲配方選單中的某個物品；若尚未選取清單，則會以它作為第一個物品建立新清單，否則會將它加入目前選取的清單。");
+            ImGui.TextWrapped($"制作清单是将不同的制作品按队列排序依次制作的绝佳方式。请使用底部的按钮导入Teamcraft清单来创建制作清单，或单击“+”图标并命名来创建制作清单。" +
+                              $" 你也可以右键单击游戏配方菜单中的某个物品，如果未选择它，则将其添加到新清单中，或者如果未选择清单，则将其作为第一个物品创建新清单。");
 
             ImGui.Dummy(new Vector2(0, 14f));
-            ImGui.TextWrapped("左鍵點擊清單會開啟編輯器。右鍵點擊清單只會選取，不會開啟編輯器。");
+            ImGui.TextWrapped("左鍵點擊清單會開啟編輯器。右鍵點擊清單隻會選取，不會開啟編輯器。");
 
             ImGui.Separator();
 
@@ -109,10 +107,10 @@ namespace Artisan.CraftingLists
                 else
                 {
                     if (!RetainerInfo.AToolsInstalled)
-                        ImGuiEx.TextCentered(ImGuiColors.DalamudYellow, $"Please install Allagan Tools for retainer features.");
+                        ImGuiEx.TextCentered(ImGuiColors.DalamudYellow, $"若要使用雇員功能，請安裝 Allagan Tools。");
 
                     if (RetainerInfo.AToolsInstalled && !RetainerInfo.AToolsEnabled)
-                        ImGuiEx.TextCentered(ImGuiColors.DalamudYellow, $"Please enable Allagan Tools for retainer features.");
+                        ImGuiEx.TextCentered(ImGuiColors.DalamudYellow, $"若要使用雇員功能，請啟用 Allagan Tools。");
                 }
 
 
@@ -120,7 +118,7 @@ namespace Artisan.CraftingLists
                     ImGui.EndDisabled();
             }
 
-            if (ImGui.Button("從剪貼簿匯入清單（Artisan導出）", new Vector2(ImGui.GetContentRegionAvail().X, 30)))
+            if (ImGui.Button("從剪貼簿匯入清單（Artisan 匯出）", new Vector2(ImGui.GetContentRegionAvail().X, 30)))
             {
                 try
                 {
@@ -258,7 +256,7 @@ namespace Artisan.CraftingLists
                     keyboardFocus = false;
                 }
 
-                if (ImGui.InputText("List Name###listName", ref newListName, 100, ImGuiInputTextFlags.EnterReturnsTrue) && newListName.Any())
+                if (ImGui.InputText("清單名稱###listName", ref newListName, 100, ImGuiInputTextFlags.EnterReturnsTrue) && newListName.Any())
                 {
                     NewCraftingList newList = new();
                     newList.Name = newListName;

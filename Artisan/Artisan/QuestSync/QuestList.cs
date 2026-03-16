@@ -10,11 +10,6 @@ namespace Artisan.QuestSync
 {
     internal class QuestList
     {
-        public static readonly ushort[] SayQuests =
-        {
-            2295, 3909, 4700, 1497, 3104, 1515, 1507, 1501, 1568,
-        };
-
         public static readonly Dictionary<uint, RecipeConverter> Quests = new()
         {
             //Ixal Quests
@@ -178,16 +173,6 @@ namespace Artisan.QuestSync
             { 9998, new() { NPCDataId = 1017624, Emote = "/psych" } }, //2318
             { 9999, new() { NPCDataId = 1017625, Emote = "/slap" } }, //2318
         };
-
-        public static IEnumerable<ushort> GetSupportedQuestIds()
-        {
-            return Quests.Keys
-                .Select(x => (ushort)x)
-                .Concat(SayQuests)
-                .Concat(EmoteQuests.Keys.Select(x => (ushort)x))
-                .Distinct()
-                .OrderBy(x => x);
-        }
 
         public unsafe static bool HasIngredientsForAny()
         {
@@ -355,8 +340,6 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
-                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
-                        return "有咕波果哦"; // TODO(TW): 2295 / BanMog202_02295
                     case Dalamud.Game.ClientLanguage.English:
                         return "free kupo nuts";
                     case Dalamud.Game.ClientLanguage.French:
@@ -372,8 +355,6 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
-                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
-                        return "啦里吼"; // TODO(TW): 3909
                     case Dalamud.Game.ClientLanguage.French:
                     case Dalamud.Game.ClientLanguage.English:
                         return "lali-ho";
@@ -387,8 +368,6 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
-                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
-                        return "夢想加倍"; // TODO(TW): 4700
                     case Dalamud.Game.ClientLanguage.English:
                         return "dream bigger";
                     case Dalamud.Game.ClientLanguage.Japanese:
@@ -403,8 +382,6 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
-                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
-                        return "乘風而起";
                     case Dalamud.Game.ClientLanguage.English:
                         return "With the Wind";
                     case Dalamud.Game.ClientLanguage.French:
@@ -419,8 +396,6 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
-                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
-                        return "大鯰魚保佑"; // TODO(TW): 3104
                     case Dalamud.Game.ClientLanguage.English:
                         return "his whiskers";
                     case Dalamud.Game.ClientLanguage.French:
@@ -435,8 +410,6 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
-                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
-                        return "翱翔天際"; // TODO(TW): 1515
                     case Dalamud.Game.ClientLanguage.English:
                         return "Now Fall";
                     case Dalamud.Game.ClientLanguage.French:
@@ -451,8 +424,6 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
-                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
-                        return "展翅高飛"; // TODO(TW): 1507
                     case Dalamud.Game.ClientLanguage.English:
                         return "High as Honor";
                     case Dalamud.Game.ClientLanguage.French:
@@ -467,8 +438,6 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
-                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
-                        return "不屈之翼"; // TODO(TW): 1501
                     case Dalamud.Game.ClientLanguage.English:
                         return "Wings Unbending";
                     case Dalamud.Game.ClientLanguage.French:
@@ -483,8 +452,6 @@ namespace Artisan.QuestSync
             {
                 switch (Svc.ClientState.ClientLanguage)
                 {
-                    case Dalamud.Game.ClientLanguage.ChineseSimplified:
-                        return "追夢無限"; // TODO(TW): 1568
                     case Dalamud.Game.ClientLanguage.English:
                         return "Amid the Flowers";
                     case Dalamud.Game.ClientLanguage.French:
