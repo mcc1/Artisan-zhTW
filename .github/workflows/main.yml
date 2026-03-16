@@ -84,10 +84,10 @@ jobs:
       DEV_ASSET_NAME: Artisan-dev.zip
     steps:
       - name: Checkout Consumer Repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Download Build Artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           pattern: ${{ env.ARTIFACT_PATTERN }}
           path: dist
