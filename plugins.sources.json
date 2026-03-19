@@ -24,7 +24,10 @@
     "source_repo": "mcc1/Artisan-zhTW",
     "manifest_path": "Artisan.json",
     "asset_name_regex": "^Artisan-.*-zhTW\\.zip$",
-    "include_prereleases": false
+    "include_prereleases": false,
+    "manifest_overrides": {
+      "IconUrl": "https://s3.puni.sh/media/plugin/6/icon-3h8wd5b9qr.png"
+    }
   },
   {
     "internal_name": "Artisan",
@@ -36,7 +39,8 @@
       "Name": "Artisan Dev",
       "Punchline": "Artisan 繁中測試版。",
       "Description": "Artisan 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。",
-      "RepoUrl": "https://github.com/mcc1/Artisan-zhTW"
+      "RepoUrl": "https://github.com/mcc1/Artisan-zhTW",
+      "IconUrl": "https://s3.puni.sh/media/plugin/6/icon-3h8wd5b9qr.png"
     }
   }
 ]
