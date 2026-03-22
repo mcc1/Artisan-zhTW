@@ -496,7 +496,7 @@ namespace Artisan
             craftingList.SetID();
             craftingList.Save(true);
 
-            Notify.Success("制作清单已创建");
+            Notify.Success("製作清單已建立");
         }
 
         private static uint TextureIdToJob(int textureId)
@@ -554,7 +554,7 @@ namespace Artisan
             craftingList.SetID();
             craftingList.Save(true);
 
-            Notify.Success("制作清单已创建");
+            Notify.Success("製作清單已建立");
         }
 
         private unsafe void DrawWorkshopOverlay()
@@ -616,7 +616,7 @@ namespace Artisan
                             var phase = part.CompanyCraftProcess[phaseNum - 1];
 
                             FCWorkshopUI.CreatePhaseList(phase.Value!, part.CompanyCraftType.Value.Name.ExtractText(), phaseNum, false, null, project);
-                            Notify.Success("部隊工房清單已建立");
+                            Notify.Success("公會工坊清單已建立");
                         }
                         else
                         {
@@ -629,7 +629,7 @@ namespace Artisan
                                 var phase = part.CompanyCraftProcess[phaseNum - 1];
 
                                 FCWorkshopUI.CreatePhaseList(phase.Value!, part.CompanyCraftType.Value.Name.ExtractText(), phaseNum, false, null, project);
-                                Notify.Success("部隊工房清單已建立");
+                                Notify.Success("公會工坊清單已建立");
                             }
                         }
                     }
@@ -651,7 +651,7 @@ namespace Artisan
                             var phase = part.CompanyCraftProcess[phaseNum - 1];
 
                             FCWorkshopUI.CreatePhaseList(phase.Value!, part.CompanyCraftType.Value.Name.ExtractText(), phaseNum, true, null, project);
-                            Notify.Success("部隊工房清單已建立");
+                            Notify.Success("公會工坊清單已建立");
                         }
                         else
                         {

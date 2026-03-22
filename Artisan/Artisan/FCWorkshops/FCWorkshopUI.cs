@@ -28,7 +28,7 @@ namespace Artisan.FCWorkshops
                 NumberOfLoops = 1;
             }
 
-            ImGui.TextWrapped($"在此分頁中, 你可以浏览游戏内所有的部队工房制作项目。 包含3個部分. 第一部分展示项目信息概览。 第二部分展示每個部件.第三個部分展示每個阶段。在每個部分，你可以點擊「建立制作清单」按鈕来建立一個制作清单，其中包含制作該部分所需要的一切素材的清单。");
+            ImGui.TextWrapped($"在此分頁中, 你可以浏览游戏内所有的公會工坊制作项目。 包含3個部分. 第一部分展示项目信息概览。 第二部分展示每個部件.第三個部分展示每個阶段。在每個部分，你可以點擊「建立制作清单」按鈕来建立一個制作清单，其中包含制作該部分所需要的一切素材的清单。");
 
 
             ImGui.Separator();
@@ -142,13 +142,13 @@ namespace Artisan.FCWorkshops
                     if (ImGui.Button($"為此項目建立製作清單", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                     {
                         Notify.Info($"正在建立清單，請等待...");
-                        Task.Run(() => CreateProjectList(project, false)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
+                        Task.Run(() => CreateProjectList(project, false)).ContinueWith((_) => Notify.Success("公會工坊清單已建立"));
                     }
 
                     if (ImGui.Button($"為此項目建立製作清單（包含前置配方）", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                     {
                         Notify.Info($"正在建立清單，請等待...");
-                        Task.Run(() => CreateProjectList(project, true)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
+                        Task.Run(() => CreateProjectList(project, true)).ContinueWith((_) => Notify.Success("公會工坊清單已建立"));
                     }
                 }
                 if (ImGui.CollapsingHeader("項目部件"))
@@ -236,13 +236,13 @@ namespace Artisan.FCWorkshops
                             if (ImGui.Button($"為此部件建立製作清單", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                             {
                                 Notify.Info($"正在建立清單，請等待...");
-                                Task.Run(() => CreatePartList(part, partNum, false)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
+                                Task.Run(() => CreatePartList(part, partNum, false)).ContinueWith((_) => Notify.Success("公會工坊清單已建立"));
                             }
 
                             if (ImGui.Button($"為此項目建立製作清單（包含前置配方）", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                             {
                                 Notify.Info($"正在建立清單，請等待...");
-                                Task.Run(() => CreatePartList(part, partNum, true)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
+                                Task.Run(() => CreatePartList(part, partNum, true)).ContinueWith((_) => Notify.Success("公會工坊清單已建立"));
                             }
                         }
                     }
@@ -316,13 +316,13 @@ namespace Artisan.FCWorkshops
                                 if (ImGui.Button($"為此階段建立製作清單###PhaseButton{phaseNum}", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                                 {
                                     Notify.Info($"正在建立清單，請等待...");
-                                    Task.Run(() => CreatePhaseList(phase.Value!, pNum, phaseNum, false)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
+                                    Task.Run(() => CreatePhaseList(phase.Value!, pNum, phaseNum, false)).ContinueWith((_) => Notify.Success("公會工坊清單已建立"));
                                 }
 
                                 if (ImGui.Button($"為此階段建立製作清單（包含前置配方）###PhaseButtonPC{phaseNum}", new Vector2(ImGui.GetContentRegionAvail().X, 24f.Scale())))
                                 {
                                     Notify.Info($"正在建立清單，請等待...");
-                                    Task.Run(() => CreatePhaseList(phase.Value!, pNum, phaseNum, true)).ContinueWith((_) => Notify.Success("部隊工房清單已建立"));
+                                    Task.Run(() => CreatePhaseList(phase.Value!, pNum, phaseNum, true)).ContinueWith((_) => Notify.Success("公會工坊清單已建立"));
                                 }
 
                             }

@@ -79,7 +79,7 @@ namespace Artisan.CraftingLists
 
             Svc.Log.Debug($"{baseUrl}{base64}");
             ImGui.SetClipboardText($"{baseUrl}{base64}");
-            Notify.Success("链接已复制到剪贴板");
+            Notify.Success("連結已複製到剪貼簿");
         }
 
         private static void ExtractRecipes(List<ListItem> sublist, Recipe recipe)
@@ -155,7 +155,7 @@ namespace Artisan.CraftingLists
                         }
                         else
                         {
-                            Notify.Error("此导入清单没有物品，请检查并重试。");
+                            Notify.Error("此匯入清單沒有物品，請檢查並重試。");
                         }
 
                     }

@@ -294,7 +294,7 @@ namespace Artisan.UI
                         act = Enum.GetValues(typeof(Skills)).Cast<Skills>().FirstOrDefault(s => s.NameOfAction(raphParseEN).Replace(" ", "").Replace("'", "").Equals(action, StringComparison.CurrentCultureIgnoreCase));
                         if (act == default)
                         {
-                            DuoLog.Error($"无法解析技能：{action}");
+                            DuoLog.Error($"無法解析技能：{action}");
                             continue;
                         }
                     }

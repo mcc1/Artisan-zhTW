@@ -410,7 +410,7 @@ namespace Artisan.CraftingLists
         {
             if (result.Result)
             {
-                Notify.Success($"{listName} 已成功创建。");
+                Notify.Success($"{listName} 已成功建立。");
                 return true;
             }
             return false;
@@ -650,7 +650,7 @@ namespace Artisan.CraftingLists
 
             if (recipes.Count == 0)
             {
-                Notify.Error("你的清单没有任何项目");
+                Notify.Error("你的清單沒有任何項目");
                 return false;
             }
 

@@ -185,7 +185,7 @@ namespace Artisan.UI
                             OpenWindow = OpenWindow.SpecialList;
                         }
                         ImGui.Spacing();
-                        if (ImGui.Selectable("部隊工房", OpenWindow == OpenWindow.FCWorkshop))
+                        if (ImGui.Selectable("公會工坊", OpenWindow == OpenWindow.FCWorkshop))
                         {
                             OpenWindow = OpenWindow.FCWorkshop;
                         }
