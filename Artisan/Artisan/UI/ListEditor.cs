@@ -881,7 +881,7 @@ internal class ListEditor : Window, IDisposable
             ImGui.ProgressBar((float)a / b, new(ImGui.GetContentRegionAvail().X, default), $"{a * 100.0f / b:f2}% ({a}/{b})");
             return;
         }
-        ImGui.BeginChild("###IngredientsListTable", new Vector2(ImGui.GetContentRegionAvail().X, ImGui.GetContentRegionAvail().Y - (ColourValidation ? (RetainerInfo.ATools ? 90f.Scale() : 60f.Scale()) : 30f.Scale())));
+        ImGui.BeginChild("###IngredientsListTable", new Vector2(ImGui.GetContentRegionAvail().X, ImGui.GetContentRegionAvail().Y - (ColourValidation ? (RetainerInfo.ATools ? 120f.Scale() : 90f.Scale()) : 30f.Scale())));
         Table._nameColumn.ShowColour = ColourValidation;
         Table._inventoryColumn.HQOnlyCrafts = HQSubcraftsOnly;
         Table._retainerColumn.HQOnlyCrafts = HQSubcraftsOnly;
@@ -891,7 +891,7 @@ internal class ListEditor : Window, IDisposable
 
         ImGui.Checkbox($"僅顯示 HQ 製作", ref HQSubcraftsOnly);
 
-        ImGuiComponents.HelpMarker($"對於可以製作的素材，這將只顯示 HQ 物品在背包{(RetainerInfo.ATools ? " 和雇员" : "")} 的計數。");
+        ImGuiComponents.HelpMarker($"對於可以製作的素材，這將只顯示 HQ 物品在背包{(RetainerInfo.ATools ? " 和雇員" : "")} 的計數。");
 
         ImGui.SameLine();
         ImGui.Checkbox("啟用顏色驗證", ref ColourValidation);
@@ -961,7 +961,7 @@ internal class ListEditor : Window, IDisposable
             ImGui.PopStyleColor();
             ImGui.SameLine();
             ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 7);
-            ImGui.Text($"- 庫存中擁有所有所需物品，{(SelectedList.SkipIfEnough && SelectedList.SkipLiteral ? "" : "或因拥有使用此材料的成品而不需要")}");
+            ImGui.Text($"- 庫存中擁有所有所需物品，{(SelectedList.SkipIfEnough && SelectedList.SkipLiteral ? "" : "或因擁有使用此材料的成品而不需要")}");
 
             if (RetainerInfo.ATools)
             {
