@@ -1,9 +1,8 @@
 diff --git a/Artisan/Artisan/CraftingList/CraftingListUI.cs b/Artisan/Artisan/CraftingList/CraftingListUI.cs
-index 6e090f1..c0c7f02 100644
+index ad4e1ad..37b6e31 100644
 --- a/Artisan/Artisan/CraftingList/CraftingListUI.cs
 +++ b/Artisan/Artisan/CraftingList/CraftingListUI.cs
-@@ -47,7 +47,9 @@ internal class CraftingListUI
-         public static int CurrentProcessedItemListCount;
+@@ -48,5 +48,7 @@ namespace Artisan.CraftingLists
          private static readonly ListFolders ListsUI = new();
  
 -        private static bool GatherBuddy => DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var gb, false, true);
@@ -12,13 +11,11 @@ index 6e090f1..c0c7f02 100644
 +            DalamudReflector.TryGetDalamudPlugin("GatherBuddyReborn", out gb, false, true);
          private static bool ItemVendor => DalamudReflector.TryGetDalamudPlugin("Item Vendor Location", out var ivl, false, true);
  
-         private static bool MonsterLookup => DalamudReflector.TryGetDalamudPlugin("Monster Loot Hunter", out var mlh, false, true);
 diff --git a/Artisan/Artisan/UI/ListEditor.cs b/Artisan/Artisan/UI/ListEditor.cs
-index a9c8a0e..ec42f1e 100644
+index 99eaf17..34360a3 100644
 --- a/Artisan/Artisan/UI/ListEditor.cs
 +++ b/Artisan/Artisan/UI/ListEditor.cs
-@@ -167,7 +167,8 @@ public override void PostDraw()
-     }
+@@ -168,5 +168,6 @@ internal class ListEditor : Window, IDisposable
  
      private static bool GatherBuddy =>
 -        DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var gb, false, true);
@@ -26,13 +23,11 @@ index a9c8a0e..ec42f1e 100644
 +        DalamudReflector.TryGetDalamudPlugin("GatherBuddyReborn", out gb, false, true);
  
      private static bool ItemVendor =>
-         DalamudReflector.TryGetDalamudPlugin("Item Vendor Location", out var ivl, false, true);
 diff --git a/Artisan/Artisan/UI/Tables/IngredientTable.cs b/Artisan/Artisan/UI/Tables/IngredientTable.cs
-index 7a6ee18..a2676a1 100644
+index ce70485..b122252 100644
 --- a/Artisan/Artisan/UI/Tables/IngredientTable.cs
 +++ b/Artisan/Artisan/UI/Tables/IngredientTable.cs
-@@ -54,7 +54,8 @@ internal class IngredientTable : Table<Ingredient>, IDisposable
-         public readonly NumberForSaleColumn _numberForSaleColumn = new() { Label = "出售數量（所有伺服器）" };
+@@ -55,5 +55,6 @@ namespace Artisan.UI.Tables
  
          private static bool GatherBuddy =>
 -            DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var _, false, true);
@@ -40,4 +35,3 @@ index 7a6ee18..a2676a1 100644
 +            DalamudReflector.TryGetDalamudPlugin("GatherBuddyReborn", out _, false, true);
  
          private static bool ItemVendor =>
-             DalamudReflector.TryGetDalamudPlugin("ItemVendorLocation", out var _, false, true);
