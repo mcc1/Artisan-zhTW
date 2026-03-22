@@ -1,0 +1,45 @@
+diff --git a/Artisan/Artisan/UI/Tables/IngredientTable.cs b/Artisan/Artisan/UI/Tables/IngredientTable.cs
+index 397b1dc..1f17462 100644
+--- a/Artisan/Artisan/UI/Tables/IngredientTable.cs
++++ b/Artisan/Artisan/UI/Tables/IngredientTable.cs
+@@ -341,7 +341,7 @@ public override int Compare(Ingredient lhs, Ingredient rhs)
+ 
+             public override string ToName(Ingredient item)
+             {
+-                if (item.Remaining == 0) return $"无需购买";
++                if (item.Remaining == 0) return $"無需購買";
+                 if (item.MarketboardData != null && !CheapestListings.ContainsKey(item.Data.RowId))
+                 {
+                     double totalCost = 0;
+@@ -380,11 +380,11 @@ public override string ToName(Ingredient item)
+                 {
+                     var listing = CheapestListings[item.Data.RowId];
+ 
+-                    return $"{listing.World} - 价格 {listing.Cost.ToString("N0")}, 数量 {listing.Qty}";
++                    return $"{listing.World} - 價格 {listing.Cost.ToString("N0")}，數量 {listing.Qty}";
+ 
+                 }
+ 
+-                return "错误 - 无物品列表（可能是 Universalis 连接问题）";
++                return "錯誤 - 沒有物品列表（可能是 Universalis 連線問題）";
+             }
+ 
+             public override void DrawColumn(Ingredient item, int _)
+@@ -404,7 +404,7 @@ public override void DrawColumn(Ingredient item, int _)
+ 
+                         if (ImGui.IsItemClicked())
+                         {
+-                            Chat.Instance.SendMessage($"/li {server} mb");
++                            Chat.Instance.SendMessage($"/li {server}, mb");
+                         }
+                     }
+                 }
+@@ -451,7 +451,7 @@ public override string ToName(Ingredient item)
+                     var qty = item.MarketboardData.TotalQuantityOfUnits;
+                     var listings = item.MarketboardData.TotalNumberOfListings;
+ 
+-                    return $"{listings:N0} 个列表 - 共 {qty:N0} 件物品";
++                    return $"{listings:N0} 個列表 - 共 {qty:N0} 件物品";
+                 }
+                 return "";
+             }
