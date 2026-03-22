@@ -32,7 +32,7 @@ index 7a6ee18..a2676a1 100644
 --- a/Artisan/Artisan/UI/Tables/IngredientTable.cs
 +++ b/Artisan/Artisan/UI/Tables/IngredientTable.cs
 @@ -54,7 +54,8 @@ internal class IngredientTable : Table<Ingredient>, IDisposable
-         public readonly NumberForSaleColumn _numberForSaleColumn = new() { Label = "出售数量（所有服务器）" };
+         public readonly NumberForSaleColumn _numberForSaleColumn = new() { Label = "出售數量（所有伺服器）" };
  
          private static bool GatherBuddy =>
 -            DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var _, false, true);
