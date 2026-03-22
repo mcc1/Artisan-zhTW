@@ -47,7 +47,9 @@ namespace Artisan.CraftingLists
         public static int CurrentProcessedItemListCount;
         private static readonly ListFolders ListsUI = new();
 
-        private static bool GatherBuddy => DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var gb, false, true);
+        private static bool GatherBuddy =>
+            DalamudReflector.TryGetDalamudPlugin("GatherBuddy", out var gb, false, true) ||
+            DalamudReflector.TryGetDalamudPlugin("GatherBuddyReborn", out gb, false, true);
         private static bool ItemVendor => DalamudReflector.TryGetDalamudPlugin("Item Vendor Location", out var ivl, false, true);
 
         private static bool MonsterLookup => DalamudReflector.TryGetDalamudPlugin("Monster Loot Hunter", out var mlh, false, true);
