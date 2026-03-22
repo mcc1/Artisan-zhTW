@@ -1,4 +1,4 @@
-﻿using Artisan.RawInformation;
+using Artisan.RawInformation;
 using ECommons.DalamudServices;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;

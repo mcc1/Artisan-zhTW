@@ -175,7 +175,7 @@ public unsafe static class PreCrafting
             {
                 List<string> missingIngredients = MissingIngredients(recipe);
 
-                DuoLog.Error($"Not all ingredients for {recipe.ItemResult.Value.Name.ToDalamudString()} found.\r\nMissing: {string.Join(", ", missingIngredients)}");
+                DuoLog.Error($"Not all ingredients for {recipe.ItemResult.Value.Name.ToDalamudString()} found.\nMissing: {string.Join(", ", missingIngredients)}");
                 return;
             }
 
