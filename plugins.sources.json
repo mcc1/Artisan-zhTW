@@ -32,15 +32,15 @@
     "internal_name": "Lifestream",
     "source_repo": "mcc1/Lifestream-zhTW",
     "manifest_path": "Lifestream.json",
-    "fixed_release_tag": "lifestream-dev",
-    "asset_name_regex": "^Lifestream-dev\\.zip$",
+    "asset_name_regex": "^Lifestream-.*\\.zip$",
+    "include_prereleases": false,
     "manifest_overrides": {
       "Author": "NightmareXIV, mcc",
-      "Punchline": "Lifestream 繁中測試版。",
-      "Description": "Lifestream 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。",
-      "RepoUrl": "https://github.com/mcc1/Lifestream-zhTW",
-      "IconUrl": "https://raw.githubusercontent.com/NightmareXIV/Lifestream/main/Lifestream/images/icon.png",
-      "IsTestingExclusive": "True"
+      "IconUrl": "https://raw.githubusercontent.com/NightmareXIV/Lifestream/main/Lifestream/images/icon.png"
+    },
+    "testing": {
+      "fixed_release_tag": "lifestream-dev",
+      "asset_name_regex": "^Lifestream-dev\\.zip$"
     }
   }
 ]
