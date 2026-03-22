@@ -1,0 +1,24 @@
+diff --git a/Artisan/Artisan/Artisan.cs b/Artisan/Artisan/Artisan.cs
+index b84e9e8..4e02eba 100644
+--- a/Artisan/Artisan/Artisan.cs
++++ b/Artisan/Artisan/Artisan.cs
+@@ -66,7 +66,18 @@ public unsafe class Artisan : IDalamudPlugin
+ 
+         Svc.Commands.AddHandler(commandName, new CommandInfo(OnCommand)
+         {
+-            HelpMessage = $"打开Artisan主視窗。/artisan lists → 打开制作清单設定視窗。/artisan lists <ID> → 按ID打开指定的制作清单。/artisan lists <ID> start → 按ID開始指定的制作清单。/artisan macros → 打开宏設定視窗。/artisan macros <ID> → 按ID打开指定的宏。/artisan endurance → 打开耐力模式設定視窗。/artisan endurance start|stop → 開始或停止耐力模式。/artisan settings → 打开插件設定視窗。/artisan workshops → 打开公會工坊設定視窗。/artisan builder → 打开清单生成器視窗。/artisan automode → 开关自動制作模式。",
++            HelpMessage = "打開 Artisan 主視窗。
++/artisan lists → 打開製作清單設定視窗。
++/artisan lists <ID> → 按 ID 開啟指定的製作清單。
++/artisan lists <ID> start → 按 ID 開始指定的製作清單。
++/artisan macros → 打開巨集設定視窗。
++/artisan macros <ID> → 按 ID 開啟指定的巨集。
++/artisan endurance → 打開耐力模式設定視窗。
++/artisan endurance start|stop → 開始或停止耐力模式。
++/artisan settings → 打開插件設定視窗。
++/artisan workshops → 打開公會工坊設定視窗。
++/artisan builder → 打開清單生成器視窗。
++/artisan automode → 開關自動製作模式。",
+             ShowInHelp = true,
+         });
+ 
