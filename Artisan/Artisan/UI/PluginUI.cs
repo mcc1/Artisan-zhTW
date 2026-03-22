@@ -201,14 +201,12 @@ namespace Artisan.UI
                         }
 
 
-#if DEBUG
                         ImGui.Spacing();
-                        if (ImGui.Selectable("调试", OpenWindow == OpenWindow.Debug))
+                        if (ImGui.Selectable("除錯", OpenWindow == OpenWindow.Debug))
                         {
                             OpenWindow = OpenWindow.Debug;
                         }
                         ImGui.Spacing();
-#endif
 
                     }
 

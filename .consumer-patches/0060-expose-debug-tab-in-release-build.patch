@@ -1,0 +1,20 @@
+diff --git a/Artisan/Artisan/UI/PluginUI.cs b/Artisan/Artisan/UI/PluginUI.cs
+index 9b0c668..456ede3 100644
+--- a/Artisan/Artisan/UI/PluginUI.cs
++++ b/Artisan/Artisan/UI/PluginUI.cs
+@@ -201,14 +201,12 @@ public override void Draw()
+                         }
+ 
+ 
+-#if DEBUG
+                         ImGui.Spacing();
+-                        if (ImGui.Selectable("调试", OpenWindow == OpenWindow.Debug))
++                        if (ImGui.Selectable("除錯", OpenWindow == OpenWindow.Debug))
+                         {
+                             OpenWindow = OpenWindow.Debug;
+                         }
+                         ImGui.Spacing();
+-#endif
+ 
+                     }
+ 
