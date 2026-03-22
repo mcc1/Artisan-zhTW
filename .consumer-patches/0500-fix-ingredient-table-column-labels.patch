@@ -1,5 +1,5 @@
 diff --git a/Artisan/Artisan/UI/Tables/IngredientTable.cs b/Artisan/Artisan/UI/Tables/IngredientTable.cs
-index b122252..e1ce8df 100644
+index 65f1a11..8f55b97 100644
 --- a/Artisan/Artisan/UI/Tables/IngredientTable.cs
 +++ b/Artisan/Artisan/UI/Tables/IngredientTable.cs
 @@ -40,18 +40,18 @@ namespace Artisan.UI.Tables
@@ -37,8 +37,8 @@ index b122252..e1ce8df 100644
              {
                  Flags -= ImGuiTableColumnFlags.NoResize;
                  SetFlags(ItemFilter.GatherZone, ItemFilter.NoGatherZone, ItemFilter.TimedNode, ItemFilter.NonTimedNode);
--                SetNames("采集区域","無採集區域","定時節點","非定時節點");
-+                SetNames("採集區域","無採集區域","定時節點","非定時節點");
+-                SetNames("采集区域", "无采集区域", "定时节点", "非定时节点");
++                SetNames("採集區域", "無採集區域", "定時節點", "非定時節點");
  
              }
              public override float Width
