@@ -7,21 +7,10 @@
     "include_prereleases": false,
     "manifest_overrides": {
       "Author": "кайт машина (Puni.sh), mcc"
-    }
-  },
-  {
-    "internal_name": "AutoRetainer",
-    "source_repo": "mcc1/AutoRetainer-zhTW",
-    "manifest_path": "AutoRetainer.json",
-    "fixed_release_tag": "autoretainer-dev",
-    "asset_name_regex": "^AutoRetainer-dev\\.zip$",
-    "manifest_overrides": {
-      "Name": "AutoRetainer Dev",
-      "Author": "кайт машина (Puni.sh), mcc",
-      "Punchline": "AutoRetainer 繁中測試版。",
-      "Description": "AutoRetainer 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。",
-      "RepoUrl": "https://github.com/mcc1/AutoRetainer-zhTW",
-      "IsTestingExclusive": true
+    },
+    "testing": {
+      "fixed_release_tag": "autoretainer-dev",
+      "asset_name_regex": "^AutoRetainer-dev\\.zip$"
     }
   },
   {
@@ -33,22 +22,10 @@
     "manifest_overrides": {
       "Author": "Taurenkey (Puni.sh), mcc",
       "IconUrl": "https://s3.puni.sh/media/plugin/6/icon-3h8wd5b9qr.png"
-    }
-  },
-  {
-    "internal_name": "Artisan",
-    "source_repo": "mcc1/Artisan-zhTW",
-    "manifest_path": "Artisan.json",
-    "fixed_release_tag": "artisan-dev",
-    "asset_name_regex": "^Artisan-dev\\.zip$",
-    "manifest_overrides": {
-      "Name": "Artisan Dev",
-      "Author": "Taurenkey (Puni.sh), mcc",
-      "Punchline": "Artisan 繁中測試版。",
-      "Description": "Artisan 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。",
-      "RepoUrl": "https://github.com/mcc1/Artisan-zhTW",
-      "IconUrl": "https://s3.puni.sh/media/plugin/6/icon-3h8wd5b9qr.png",
-      "IsTestingExclusive": true
+    },
+    "testing": {
+      "fixed_release_tag": "artisan-dev",
+      "asset_name_regex": "^Artisan-dev\\.zip$"
     }
   },
   {
@@ -58,13 +35,12 @@
     "fixed_release_tag": "lifestream-dev",
     "asset_name_regex": "^Lifestream-dev\\.zip$",
     "manifest_overrides": {
-      "Name": "Lifestream Dev",
       "Author": "NightmareXIV, mcc",
       "Punchline": "Lifestream 繁中測試版。",
       "Description": "Lifestream 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。",
       "RepoUrl": "https://github.com/mcc1/Lifestream-zhTW",
       "IconUrl": "https://raw.githubusercontent.com/NightmareXIV/Lifestream/main/Lifestream/images/icon.png",
-      "IsTestingExclusive": true
+      "IsTestingExclusive": "True"
     }
   }
 ]
