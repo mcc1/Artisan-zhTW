@@ -20,7 +20,8 @@
       "Author": "кайт машина (Puni.sh), mcc",
       "Punchline": "AutoRetainer 繁中測試版。",
       "Description": "AutoRetainer 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。",
-      "RepoUrl": "https://github.com/mcc1/AutoRetainer-zhTW"
+      "RepoUrl": "https://github.com/mcc1/AutoRetainer-zhTW",
+      "IsTestingExclusive": true
     }
   },
   {
@@ -46,7 +47,8 @@
       "Punchline": "Artisan 繁中測試版。",
       "Description": "Artisan 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。",
       "RepoUrl": "https://github.com/mcc1/Artisan-zhTW",
-      "IconUrl": "https://s3.puni.sh/media/plugin/6/icon-3h8wd5b9qr.png"
+      "IconUrl": "https://s3.puni.sh/media/plugin/6/icon-3h8wd5b9qr.png",
+      "IsTestingExclusive": true
     }
   },
   {
@@ -61,7 +63,8 @@
       "Punchline": "Lifestream 繁中測試版。",
       "Description": "Lifestream 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。",
       "RepoUrl": "https://github.com/mcc1/Lifestream-zhTW",
-      "IconUrl": "https://raw.githubusercontent.com/NightmareXIV/Lifestream/main/Lifestream/images/icon.png"
+      "IconUrl": "https://raw.githubusercontent.com/NightmareXIV/Lifestream/main/Lifestream/images/icon.png",
+      "IsTestingExclusive": true
     }
   }
 ]
