@@ -7,10 +7,18 @@
     "include_prereleases": false,
     "manifest_overrides": {
       "Author": "кайт машина (Puni.sh), mcc"
-    },
-    "testing": {
-      "fixed_release_tag": "autoretainer-dev",
-      "asset_name_regex": "^AutoRetainer-dev\\.zip$"
+    }
+  },
+  {
+    "internal_name": "AutoRetainer-dev",
+    "source_repo": "mcc1/AutoRetainer-zhTW",
+    "manifest_path": "AutoRetainer.json",
+    "fixed_release_tag": "autoretainer-dev",
+    "asset_name_regex": "^AutoRetainer-dev\\.zip$",
+    "manifest_overrides": {
+      "Author": "кайт машина (Puni.sh), mcc",
+      "Name": "AutoRetainer Dev",
+      "Punchline": "躺在床上也能輕鬆收取並指派雇員探險。此條目會追蹤固定更新的 dev prerelease。"
     }
   },
   {
@@ -22,10 +30,19 @@
     "manifest_overrides": {
       "Author": "Taurenkey (Puni.sh), mcc",
       "IconUrl": "https://s3.puni.sh/media/plugin/6/icon-3h8wd5b9qr.png"
-    },
-    "testing": {
-      "fixed_release_tag": "artisan-dev",
-      "asset_name_regex": "^Artisan-dev\\.zip$"
+    }
+  },
+  {
+    "internal_name": "Artisan-dev",
+    "source_repo": "mcc1/Artisan-zhTW",
+    "manifest_path": "Artisan.json",
+    "fixed_release_tag": "artisan-dev",
+    "asset_name_regex": "^Artisan-dev\\.zip$",
+    "manifest_overrides": {
+      "Author": "Taurenkey (Puni.sh), mcc",
+      "IconUrl": "https://s3.puni.sh/media/plugin/6/icon-3h8wd5b9qr.png",
+      "Name": "Artisan Dev",
+      "Punchline": "Artisan 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。"
     }
   },
   {
@@ -37,10 +54,19 @@
     "manifest_overrides": {
       "Author": "NightmareXIV, mcc",
       "IconUrl": "https://raw.githubusercontent.com/NightmareXIV/Lifestream/main/Lifestream/images/icon.png"
-    },
-    "testing": {
-      "fixed_release_tag": "lifestream-dev",
-      "asset_name_regex": "^Lifestream-dev\\.zip$"
+    }
+  },
+  {
+    "internal_name": "Lifestream-dev",
+    "source_repo": "mcc1/Lifestream-zhTW",
+    "manifest_path": "Lifestream.json",
+    "fixed_release_tag": "lifestream-dev",
+    "asset_name_regex": "^Lifestream-dev\\.zip$",
+    "manifest_overrides": {
+      "Author": "NightmareXIV, mcc",
+      "IconUrl": "https://raw.githubusercontent.com/NightmareXIV/Lifestream/main/Lifestream/images/icon.png",
+      "Name": "Lifestream Dev",
+      "Punchline": "Lifestream 繁體中文測試版。此條目會追蹤固定更新的 dev prerelease。"
     }
   }
 ]
